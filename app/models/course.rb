@@ -1,4 +1,5 @@
 class Course < Sequel::Model
+    seedable with_junction: :requirement
     many_to_many :requirements
     many_to_one :department
 

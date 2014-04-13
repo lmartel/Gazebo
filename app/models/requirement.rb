@@ -1,4 +1,5 @@
 class Requirement < Sequel::Model
+    seedable with_junction: :course
     many_to_many :courses
     many_to_one :track
 

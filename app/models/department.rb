@@ -1,4 +1,5 @@
 class Department < Sequel::Model
+    seedable
     one_to_many :tracks
     one_to_many :courses
 
