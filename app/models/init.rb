@@ -1,5 +1,5 @@
 require 'sequel'
-require_relative '../seeds'
+require_relative 'seeds/init'
 Sequel::Model.plugin :schema
 
 # Connect to database
@@ -24,14 +24,19 @@ class Sequel::Model
             end
         end
 
-        def search(value)
+        def search(value, try_with:nil)
             model = nil # avoids extra database call at end
-            self.columns.find { |attr| model = self[attr => value] }
+            cols = self.columns
+            if try_with && try_with.keys.all? { |attr| cols.include?(attr) }
+                cols.find { |attr| model = self[{ attr => value.to_s }.merge try_with] } if try_with
+                return model if model
+            end
+            cols.find { |attr| model = self[attr => value.to_s] }
             model
         end
 
-        def search!(value)
-            search(value) || raise("[#{self.to_s}.search! ] Error: no model with attribute '#{value}' found.")
+        def search!(value, try_with:nil)
+            search(value, try_with:try_with) || raise("[#{self.to_s}.search! ] Error: no model with attribute '#{value}' found.")
         end
 
         def seedable(with_junction:nil)
@@ -70,16 +75,16 @@ class Sequel::Model
 end
 
 # Load models
+require_relative 'term'
 require_relative 'department'
 require_relative 'track'
 require_relative 'requirement'
 require_relative 'course'
-require_relative 'course_requirement'
+require_relative 'requirements_course'
+require_relative 'courses_term'
 
 # Initialize and seed DB if necessary
 new_tables = []
-[Department, Track, Course, Requirement, Course_Requirement].map { |klass|
+t = [Term, Department, Track, Course, Requirement, Requirements_Course, Courses_Term].map { |klass|
     klass.class_eval { self if !table_exists? and create_table and self.respond_to?(:seed) }
 }.compact.each { |new_table| new_table.seed }
-
-Course_Requirement.dump

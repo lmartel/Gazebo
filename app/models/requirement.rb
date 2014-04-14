@@ -5,9 +5,10 @@ class Requirement < Sequel::Model
 
     set_schema do
         primary_key :id
-        String :name, unique: true, null: false
+        String :name, null: false
 
         foreign_key :track_id, :tracks
+        unique [:name, :track_id]
     end
 
     case_insensitive_attr :name

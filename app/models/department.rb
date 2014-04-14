@@ -6,7 +6,8 @@ class Department < Sequel::Model
     set_schema do 
         primary_key :id
         String :name, unique: true, null: false
+        String :abbreviation, unique: true, null: false
     end
     
-    case_insensitive_attr :name
+    case_insensitive_attrs :name, :abbreviation
 end
