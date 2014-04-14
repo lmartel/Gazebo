@@ -8,8 +8,9 @@ class Course < Sequel::Model
         primary_key :id
         String :name, null: false
         String :number, null: false
-        Integer :units_min
-        Integer :units_max
+        Integer :units_min, null: false
+        Integer :units_max, null: false
+        String :description
 
         foreign_key :department_id, :departments
         unique [:name, :number, :department_id]

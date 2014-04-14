@@ -83,8 +83,10 @@ require_relative 'course'
 require_relative 'requirements_course'
 require_relative 'courses_term'
 
-# Initialize and seed DB if necessary
-new_tables = []
-t = [Term, Department, Track, Course, Requirement, Requirements_Course, Courses_Term].map { |klass|
-    klass.class_eval { self if !table_exists? and create_table and self.respond_to?(:seed) }
-}.compact.each { |new_table| new_table.seed }
+# Initialize DB if necessary
+def DB.init
+    [Term, Department, Track, Course, Requirement, Requirements_Course, Courses_Term].each do |klass|
+        klass.create_table?
+    end
+end
+DB.init

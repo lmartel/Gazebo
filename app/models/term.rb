@@ -6,7 +6,7 @@ class Term < Sequel::Model
         primary_key :id
 
         String :name, unique: true, null: false
-        String :abbreviation, unique: true
+        String :abbreviation, unique: true, null: true
     end
 
     case_insensitive_attrs :name, :abbreviation
