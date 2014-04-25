@@ -8,7 +8,10 @@ module Seeds
             end
 
             within :math_undergrad_minor do
-                # TODO
+                make("The Minor", 6, 24)
+                make("Math 51").includes 51, "51H"
+                make("Math 52").includes 52, "52H"
+                make("Math 53").includes 53, "53H"
             end
         end
     end

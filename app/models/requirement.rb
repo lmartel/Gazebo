@@ -6,6 +6,8 @@ class Requirement < Sequel::Model
     set_schema do
         primary_key :id
         String :name, null: false
+        Integer :min_count, default: 1
+        Integer :min_units, default: 0
 
         foreign_key :track_id, :tracks
         unique [:name, :track_id]

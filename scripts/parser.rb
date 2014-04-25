@@ -16,11 +16,12 @@ module ExploreCoursesParser
                     attrs = result.css('.courseAttributes').first.content.split('|').map { |s|  # Extract attributes
                         s.split(':', 2).map(&:strip)
                     }.keep_if { |k, v| ["Terms", "Units"].include?(k) }.to_h # TODO: repeatable, GERs
-                    terms = attrs["Terms"].split(', ')
+                    terms = attrs["Terms"].split(', ') if attrs["Terms"]
                     units = attrs["Units"].split('-')
 
                     Seeds.seed_course dept do
-                        make(name, number, units.first, units.last, desc).includes terms
+                        course = make(name, number, units.first, units.last, desc)
+                        course.includes terms if terms
                     end
                     out.puts "make(%q(#{name}), '#{number}', #{units.first}, #{units.last}).includes #{terms}" # Output for reference with description omitted
                 end

@@ -15,6 +15,8 @@ class Course < Sequel::Model
         foreign_key :department_id, :departments
         unique [:name, :number, :department_id]
     end
+    
+    case_insensitive_attrs :name, :number
 
     def full_name
         "#{name} #{number}"
@@ -33,5 +35,4 @@ class Course < Sequel::Model
         end
     end
 
-    case_insensitive_attrs :name, :number
 end
