@@ -8,7 +8,7 @@ module Seeds
             end
 
             within :math_undergrad_minor do
-                make("Track Requirement A").includes 143
+                # TODO
             end
         end
     end
