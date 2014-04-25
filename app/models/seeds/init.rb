@@ -30,8 +30,14 @@ module Seedable
                     partner = Object.const_get(partner_name)
                     junction = Object.const_get("#{klass.class_name}s_#{partner_name}")
                     args.each do |arg|
-                        within = klass.within_instance
-                        params = { "#{within.class.class_name.downcase}_id".to_sym => within.id } if within
+                        within = klass.within_model
+                        if within
+                            owners = [ within ].concat(within.owners).flatten
+                            params = {}
+                            owners.each do |owner|
+                                params[(owner.class.class_name.downcase + "_id").to_sym] = owner.id
+                            end
+                        end
                         
                         found = partner.search! arg, try_with:params
                         junction.create "#{klass.class_name.downcase}_id".to_sym => self.id, "#{partner_name.downcase}_id".to_sym => found.id
@@ -42,12 +48,7 @@ module Seedable
     end
 
     module ClassMethods
-
-        @within = nil
-
-        def within_instance
-            @within
-        end
+        attr_reader :within_model
 
         def seed
             name = class_name.downcase
@@ -76,9 +77,9 @@ module Seedable
                 args << nil until args.length == columns.length - 2 # Pad nils for optional fields. -2 => -1 for :id, -1 to leave room for foreign key
                 mk.call(*args, found.id) 
             end
-            @within = found
+            @within_model = found
             yield
-            @within = nil
+            @within_model = nil
             self.define_singleton_method :make, mk
         end
 

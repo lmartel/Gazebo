@@ -22,14 +22,14 @@ class Course < Sequel::Model
 
     class << self
 
-        def search(value, try_with:nil)
+        def search(value, **args)
             if value.kind_of?(String) && value.include?(' ')
                 dept, number = value.split 
                 dept = Department.search(dept)
                 match = self[department_id: dept.id, number: number]
                 return match if match
             end
-            super(value, try_with:try_with)
+            super(value, **args)
         end
     end
 

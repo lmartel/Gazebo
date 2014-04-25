@@ -15,6 +15,16 @@ end
 # Apply Sequel monkey patches
 class Sequel::Model
 
+    # Return an array of models this model belongs to, the models those belong to, etc (if any)
+    def owners
+        foreign_keys = self.class.columns.select { |col_name| col_name.to_s.end_with? "_id" }
+        foreign_keys.flat_map do |key|
+            parent_model_klass = Object.const_get(key.to_s.capitalize.sub("_id", ""))
+            parent_model = parent_model_klass[id:self[key]]
+            [parent_model, parent_model.owners]
+        end
+    end
+
     class << self
 
         def dump
@@ -24,19 +34,43 @@ class Sequel::Model
             end
         end
 
+        # Find a model with some value of an unknown attribute (could be a name, course number, etc)
         def search(value, try_with:nil)
-            model = nil # avoids extra database call at end
-            cols = self.columns
-            if try_with && try_with.keys.all? { |attr| cols.include?(attr) }
-                cols.find { |attr| model = self[{ attr => value.to_s }.merge try_with] } if try_with
+
+            # Don't search ids (primary and foreign keys), just semantic columns
+            col_names = self.columns.select do |col_name|
+                !col_name.to_s.end_with? "id"
+            end
+
+            try_with_params = Proc.new do |params|
+                col_names.each do |attr|
+                    model = self[{ attr => value.to_s }.merge params]
+                    return model if model
+                end
+            end
+
+            if try_with
+                # First, check for a group of additional params to try at once
+                if try_with.keys.all? { |attr| self.columns.include?(attr) }
+                    try_with_params.call try_with
+                end
+
+                # Then, try searching with suggested additional params one-by-one
+                try_with.each do |k,v|
+                    try_with_params.call(k => v) if self.columns.include?(k)
+                end
+            end
+
+            # Finally, search only for given value.
+            col_names.each do |attr| 
+                model = self[attr => value.to_s]
                 return model if model
             end
-            cols.find { |attr| model = self[attr => value.to_s] }
-            model
+            nil
         end
 
-        def search!(value, try_with:nil)
-            search(value, try_with:try_with) || raise("[#{self.to_s}.search! ] Error: no model with attribute '#{value}' found.")
+        def search!(value, **args)
+            search(value, **args) || raise("[#{self.to_s}.search! ] Error: no model with attribute '#{value}' found.")
         end
 
         def seedable(with_junction:nil)
