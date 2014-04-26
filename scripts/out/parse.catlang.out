@@ -1,0 +1,5 @@
+make([%q(ACCELERATED FIRST-YEAR CATALAN, PART 1), %q(1A), %q(5), %q(5)]).includes ["AUT", "SPR"]
+make([%q(ACCELERATED FIRST-YEAR CATALAN, PART 2), %q(2A), %q(5), %q(5)]).includes ["WIN"]
+make([%q(ACCELERATED SECOND-YEAR CATALAN, PART A), %q(11A), %q(4), %q(5)]).includes ["SPR"]
+make([%q(INDIVIDUAL WORK), %q(199), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR"]
+make([%q(GRADUATE STUDIES IN CATALAN), %q(395), %q(2), %q(5)]).includes ["AUT", "WIN", "SPR"]

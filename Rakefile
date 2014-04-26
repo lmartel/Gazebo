@@ -16,16 +16,27 @@ namespace :db do
   task :init do
     DB.init
   end
-  
-  desc "Seed the database"
+
+  desc "Seed database, scraping departments and classes from ExploreCourses"
   task :seed do
-    exec_ruby('scripts/seed_all.rb', 'scripts/out')
+    `rm scripts/out/*`
+    Term.seed unless Term.count > 0
+    exec_ruby('scripts/scrape_and_seed.rb', 'scripts/out')
+    `cp test.db test.db.bak`
+    [Department, Track, Course, Requirement].each { |klass| klass.seed }
+  end
+
+  desc "Clear and re-seed the manual seeds, without re-scraping."
+  task :reseed do
+    Term.seed unless Term.count > 0
+    `cp test.db.bak test.db`
+    [Department, Track, Course, Requirement].each { |klass| klass.seed }
   end
 
   desc "Reset the database"
   task :reset do
     `rm test.db`
-    # TODO figure out a way to reset the database from Sequel
+    # TODO figure out a way to reset the database from Sequel (start using migrations)
   end
 end
 

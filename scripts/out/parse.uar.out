@@ -1,0 +1,6 @@
+make([%q(INTELLECTUAL JOURNEYS), %q(10), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
+make([%q(LSP FIRST YEAR SEMINAR), %q(42A), %q(1), %q(1)]).includes ["AUT"]
+make([%q(LSP FIRST YEAR SEMINAR B), %q(42B), %q(1), %q(1)]).includes ["WIN"]
+make([%q(CHALLENGES FACING FIRST-GEN STUDENTS IN THEIR TRANSITION TO COLLEGE), %q(46), %q(2), %q(2)]).includes ["WIN"]
+make([%q(BUILDING A SUCCESSFUL ACADEMIC CAREER), %q(56), %q(1), %q(1)]).includes ["AUT", "WIN"]
+make([%q(ENGAGING, EXPLORING, AND REFLECTING ON ALUMNI CAREER WORLDS), %q(60), %q(1), %q(1)]).includes ["SPR"]

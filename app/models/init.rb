@@ -18,11 +18,13 @@ class Sequel::Model
     # Return an array of models this model belongs to, the models those belong to, etc (if any)
     def owners
         foreign_keys = self.class.columns.select { |col_name| col_name.to_s.end_with? "_id" }
-        foreign_keys.flat_map do |key|
-            parent_model_klass = Object.const_get(key.to_s.capitalize.sub("_id", ""))
+        foreign_keys.flat_map { |key|
+            klass_name = key.to_s.capitalize.sub("_id", "")
+            next unless Object.const_defined?(klass_name) # skip columns with nonstandard names (not "klass_id")
+            parent_model_klass = Object.const_get klass_name
             parent_model = parent_model_klass[id:self[key]]
             [parent_model, parent_model.owners]
-        end
+        }.compact
     end
 
     class << self
@@ -52,12 +54,12 @@ class Sequel::Model
             if try_with
                 # First, check for a group of additional params to try at once
                 if try_with.keys.all? { |attr| self.columns.include?(attr) }
-                    try_with_params.call try_with
+                    try_with_params[try_with]
                 end
 
                 # Then, try searching with suggested additional params one-by-one
                 try_with.each do |k,v|
-                    try_with_params.call(k => v) if self.columns.include?(k)
+                    try_with_params[k => v] if self.columns.include?(k)
                 end
             end
 
@@ -114,12 +116,13 @@ require_relative 'department'
 require_relative 'track'
 require_relative 'requirement'
 require_relative 'course'
+require_relative 'departments_requirement'
 require_relative 'requirements_course'
 require_relative 'courses_term'
 
 # Initialize DB if necessary
 def DB.init
-    [Term, Department, Track, Course, Requirement, Requirements_Course, Courses_Term].each do |klass|
+    [Term, Department, Track, Course, Requirement, Departments_Requirement, Requirements_Course, Courses_Term].each do |klass|
         klass.create_table?
     end
 end

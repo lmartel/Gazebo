@@ -1,0 +1,4 @@
+make([%q(INTRODUCTION TO PHILOSOPHY OF SCIENCE (PHIL 60)), %q(60), %q(5), %q(5)]).includes ["AUT"]
+make([%q(SCIENCE, RELIGION, AND THE BIRTH OF MODERN PHILOSOPHY (PHIL 61)), %q(61), %q(5), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
+make([%q(DIRECTED READING), %q(199), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(GRADUATE INDIVIDUAL WORK), %q(299), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]

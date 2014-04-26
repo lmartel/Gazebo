@@ -1,0 +1,7 @@
+make([%q(MOBILE HEALTH WITHOUT BORDERS), %q(204), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
+make([%q(HUMAN TRAFFICKING: HISTORICAL, LEGAL, AND MEDICAL PERSPECTIVES (FEMGEN 5C, HISTORY 5C, HUMBIO 178T)), %q(205), %q(3), %q(3)]).includes ["SPR"]
+make([%q(EMPOWERING EMERGING SCIENTISTS I), %q(210A), %q(1), %q(1)]).includes ["AUT"]
+make([%q(EMPOWERING EMERGING SCIENTISTS II), %q(210B), %q(1), %q(1)]).includes ["WIN"]
+make([%q(LEADERSHIP AND STRATEGIES FOR HEALTH CARE DELIVERY INNOVATION), %q(275), %q(1), %q(2)]).includes ["AUT"]
+make([%q(THE STARTUP GARAGE: DESIGN (CHEMENG 482)), %q(282), %q(4), %q(4)]).includes ["AUT"]
+make([%q(THE STARTUP GARAGE: TESTING AND LAUNCH (CHEMENG 484)), %q(284), %q(4), %q(4)]).includes ["WIN"]

@@ -1,0 +1,2 @@
+make([%q(CURRICULAR PRACTICAL TRAINING), %q(398), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(ADVANCED READING AND RESEARCH), %q(499), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]

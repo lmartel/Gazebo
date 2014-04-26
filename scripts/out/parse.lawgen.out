@@ -1,0 +1,7 @@
+make([%q(DEPTH PSYCHOLOGY), %q(103Q), %q(3), %q(3)]).includes ["AUT"]
+make([%q(LAW AND POPULAR CULTURE), %q(105Q), %q(3), %q(3)]).includes ["WIN"]
+make([%q(INTRODUCTION TO INTERNATIONAL HUMAN RIGHTS), %q(111Q), %q(3), %q(3)]).includes []
+make([%q(LAW AND INEQUALITY), %q(112Q), %q(3), %q(3)]).includes ["WIN"]
+make([%q(ETHICS, LEADERSHIP AND PUBLIC POLICY), %q(120), %q(3), %q(3)]).includes ["SPR"]
+make([%q(THINKING LIKE A LAWYER), %q(206Q), %q(3), %q(4)]).includes ["WIN"]
+make([%q(COMMUNITY POLICE ACADEMY), %q(209Q), %q(1), %q(1)]).includes ["SPR"]

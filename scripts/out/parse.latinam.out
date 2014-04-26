@@ -1,0 +1,5 @@
+make([%q(DIRECTED INDIVIDUAL RESEARCH), %q(197), %q(1), %q(10)]).includes ["AUT", "WIN", "SPR"]
+make([%q(HONORS THESIS), %q(198), %q(1), %q(10)]).includes ["AUT", "WIN", "SPR"]
+make([%q(SEMINAR ON CONTEMPORARY ISSUES IN LATIN AMERICAN STUDIES), %q(200), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
+make([%q(MASTER'S THESIS), %q(398), %q(1), %q(10)]).includes ["AUT", "WIN", "SPR"]
+make([%q(TGR PROJECT), %q(801), %q(0), %q(0)]).includes []

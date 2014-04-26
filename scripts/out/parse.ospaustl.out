@@ -1,0 +1,5 @@
+make([%q(CORAL REEF ECOSYSTEMS), %q(10), %q(3), %q(3)]).includes ["AUT"]
+make([%q(FRESHWATER SYSTEMS), %q(25), %q(3), %q(3)]).includes ["AUT"]
+make([%q(COASTAL FOREST ECOSYSTEMS), %q(30), %q(3), %q(3)]).includes ["AUT"]
+make([%q(AUSTRALIAN STUDIES), %q(40), %q(3), %q(3)]).includes ["AUT"]
+make([%q(TARGETED RESEARCH PROJECT), %q(50), %q(4), %q(4)]).includes ["AUT"]

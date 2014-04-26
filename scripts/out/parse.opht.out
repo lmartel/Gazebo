@@ -1,0 +1,8 @@
+make([%q(UNDERGRADUATE RESEARCH), %q(199), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(CLINICAL TOPICS IN OPHTHALMOLOGY), %q(201), %q(1), %q(1)]).includes ["AUT", "SPR"]
+make([%q(CLINICAL TOPICS IN OPHTHALMOLOGY), %q(202), %q(1), %q(1)]).includes ["SPR"]
+make([%q(INTRODUCTION TO OPHTHALMOLOGY), %q(203), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
+make([%q(EARLY CLINICAL EXPERIENCE IN OPHTHALMOLOGY), %q(280), %q(1), %q(2)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(DIRECTED READING IN OPHTHALMOLOGY), %q(299), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(MEDICAL SCHOLARS RESEARCH), %q(370), %q(4), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(GRADUATE RESEARCH), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]

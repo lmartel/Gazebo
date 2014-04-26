@@ -1,0 +1,7 @@
+make([%q(EDGEWORK: NEW DIRECTIONS IN THE STUDY OF CULTURE), %q(299), %q(1), %q(3)]).includes ["SPR"]
+make([%q(CONCEPTS OF MODERNITY I: PHILOSOPHICAL FOUNDATIONS (ENGLISH 334A)), %q(334A), %q(5), %q(5)]).includes ["AUT"]
+make([%q(CONCEPTS OF MODERNITY II: THE STUDY OF CULTURE IN THE AGE OF GLOBALIZATION (COMPLIT 334B, ENGLISH 334B)), %q(334B), %q(5), %q(5)]).includes ["WIN"]
+make([%q(QUALIFYING PAPER), %q(390), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(GRADUATE INDEPENDENT STUDY), %q(398), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(READING FOR ORALS), %q(399), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(TGR DISSERTATION), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
