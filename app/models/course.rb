@@ -3,19 +3,7 @@ class Course < Sequel::Model
     many_to_many :terms
     many_to_many :requirements, join_table: :requirements_courses
     many_to_one :department
-
-    set_schema do
-        primary_key :id
-        String :name, null: false
-        String :number, null: false
-        Integer :units_min, null: false
-        Integer :units_max, null: false
-        String :description
-
-        foreign_key :department_id, :departments
-        unique [:name, :number, :department_id]
-    end
-    
+        
     case_insensitive_attrs :name, :number
 
     def full_name

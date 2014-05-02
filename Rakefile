@@ -1,9 +1,10 @@
-def exec_ruby(script, *args)
+def exec_ruby(script, *args) # Execute ruby script with live stdout
   system("ruby", script, *args, out: $stdout, err: :out)
 end
 
 namespace :db do
   require_relative 'app/models/init' # opens DB connection, loads Sequel models
+  Sequel.extension :migration
 
   desc "Opens ruby console with database connection"
   task :console do
@@ -12,32 +13,55 @@ namespace :db do
     IRB.start
   end
 
-  desc "Initialize the database"
-  task :init do
-    DB.init
-  end
-
   desc "Seed database, scraping departments and classes from ExploreCourses"
   task :seed do
     `rm scripts/out/*`
     Term.seed unless Term.count > 0
     exec_ruby('scripts/scrape_and_seed.rb', 'scripts/out')
-    `cp test.db test.db.bak`
+    # `cp test.db test.db.bak`
     [Department, Track, Course, Requirement].each { |klass| klass.seed }
   end
 
-  desc "Clear and re-seed the manual seeds, without re-scraping."
+  desc "Clear and re-seed requirements and tracks, without re-scraping departments and courses."
   task :reseed do
     Term.seed unless Term.count > 0
-    `cp test.db.bak test.db`
-    [Department, Track, Course, Requirement].each { |klass| klass.seed }
+    [Departments_Requirement, Requirements_Course, Requirement, Track].each do |klass| 
+        klass.each { |m| m.delete }
+    end
+    [Track, Requirement].each do |klass| 
+        klass.seed
+    end
   end
 
-  desc "Reset the database"
-  task :reset do
-    `rm test.db`
-    # TODO figure out a way to reset the database from Sequel (start using migrations)
+  desc "Prints current schema version"
+  task :version do    
+    version = if DB.tables.include?(:schema_info)
+      DB[:schema_info].first[:version]
+    end || 0
+ 
+    puts "Schema Version: #{version}"
   end
+ 
+  desc "Perform migration up to latest migration available"
+  task :migrate do
+    Sequel::Migrator.run(DB, "migrations")
+    Rake::Task['db:version'].execute
+  end
+    
+  desc "Perform rollback to specified target or full rollback as default"
+  task :rollback, :target do |t, args|
+    args.with_defaults(:target => 0)
+ 
+    Sequel::Migrator.run(DB, "migrations", :target => args[:target].to_i)
+    Rake::Task['db:version'].execute
+  end
+ 
+  desc "Perform migration reset (full rollback and migration)"
+  task :reset do
+    Sequel::Migrator.run(DB, "migrations", :target => 0)
+    Sequel::Migrator.run(DB, "migrations")
+    Rake::Task['db:version'].execute
+  end    
 end
 
 namespace :secret do

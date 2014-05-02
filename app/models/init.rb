@@ -1,6 +1,5 @@
 require 'sequel'
 require_relative 'seeds/init'
-Sequel::Model.plugin :schema
 
 # Connect to database
 if defined?(TrackTracker)
@@ -119,11 +118,3 @@ require_relative 'course'
 require_relative 'departments_requirement'
 require_relative 'requirements_course'
 require_relative 'courses_term'
-
-# Initialize DB if necessary
-def DB.init
-    [Term, Department, Track, Course, Requirement, Departments_Requirement, Requirements_Course, Courses_Term].each do |klass|
-        klass.create_table?
-    end
-end
-DB.init

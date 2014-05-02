@@ -75,9 +75,7 @@ module Seedable
         # Ex: within(:math_undergrad_minor) searches for math classes before looking at other departments' classes.
         def within(name)
             name = name.to_s
-            found = MODELS.select { |klass| 
-                klass.table_exists? 
-            }.map { |klass| 
+            found = MODELS.map { |klass| 
                 klass[name: name] || (klass.columns.include?(:abbreviation) and klass[abbreviation: name]) || nil
             }.compact
             raise "[Seeds::make::in] Error: model '#{name}' does not exist." if found.empty?
