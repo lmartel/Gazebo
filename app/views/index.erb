@@ -1,1 +1,9 @@
-HELLO WORLD
+<h1>HELLO WORLD</h1>
+<table>
+<% @tracks.each do |t| %>
+    <tr>
+        <td><%= pp t %></td>
+        <td><%= pp t.department %></td>
+    </tr>
+<% end %>
+</table>

@@ -115,6 +115,8 @@ require_relative 'department'
 require_relative 'track'
 require_relative 'requirement'
 require_relative 'course'
-require_relative 'departments_requirement'
-require_relative 'requirements_course'
-require_relative 'courses_term'
+
+require_relative 'user'
+require_relative 'path'
+
+require_relative 'junctions'

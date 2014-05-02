@@ -8,6 +8,7 @@ class TrackTracker < Sinatra::Base
 	DB_URL = 'sqlite://test.db'
 
 	get '/' do
+        @tracks = Track.all
 		erb :index
 	end
 end
