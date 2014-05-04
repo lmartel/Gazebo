@@ -70,6 +70,7 @@ function loadDepartmentSearch(){
         $(SEARCH).select2({
             width: 'resolve',
             createSearchChoice: function() { return null; }, // Forbid custom tags
+            matcher: function(term, text, opts) { return text.match('^' + term.toUpperCase()); }, // Force start-of-word matching
             tags: state.departments
         });
 
@@ -118,7 +119,7 @@ function bindEvents(departmentSelected){
 
 function initSearch(){
     loadDepartmentSearch();
-    
+
     // Blur input field when dropdown is closed. From http://stackoverflow.com/questions/21157181/blur-select2-input-after-close
     $(SEARCH).on("select2-close", function (){
         setTimeout(function() {
