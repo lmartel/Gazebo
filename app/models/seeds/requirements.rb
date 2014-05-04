@@ -86,8 +86,11 @@ module Seeds
     # Define MATH(41, 42) => ["MATH 41", "MATH 42"] etc for each department
     # Remove after the block returns to avoid cluttering namespace.
     def self.with_helpers
-        departments = Department.map { |dept_obj| dept_obj.abbreviation.upcase.to_sym }
+        departments = Department.map do |dept_obj| 
+            abbr = dept_obj.abbreviation.upcase.to_sym 
+        end
         departments.each do |dept|
+            dept
             Seeds.const_set dept, lambda { |*course_numbers|
                 course_numbers.map { |num| "#{dept} #{num}" }
             }

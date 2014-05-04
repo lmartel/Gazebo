@@ -2,10 +2,134 @@
 <html>
 <head>
     <title>oh god I need to fill out a program sheet</title>
+    <%= css :app %>
+    <style type="text/css">
+        #course-search {
+            width: 50%;
+        }
+
+        .department-choice {
+            padding: 4px 8px;
+            margin: 3px -5px 3px 5px;
+            position: relative;
+
+            line-height: 13px;
+            color: #333;
+            cursor: default;
+            border: 1px solid #aaaaaa;
+
+            border-radius: 3px;
+
+            -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+                    box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+
+            background-clip: padding-box;
+
+            -webkit-touch-callout: none;
+              -webkit-user-select: none;
+                 -moz-user-select: none;
+                  -ms-user-select: none;
+                      user-select: none;
+
+            background-color: #e4e4e4;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+            background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+            background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+            background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+            background-image: linear-gradient(to top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+        }
+    </style>
 </head>
 <body>
 
 <%= yield %>
 
+<%= js :app %>
+<script type="text/javascript">
+
+var SEARCH = '#course-search';
+var INPUT = '.select2-input';
+var DEPARTMENTS = '/departments.json';
+var state = {};
+
+$(SEARCH).select2({
+    width: 'resolve',
+    data: []
+});
+
+function cachedGet(url, key){
+    if(state[key]) return $.when(state[key]);
+    return $.get(url).done(function(result){
+        state[key] = JSON.parse(result);
+    });
+}
+
+function loadDepartmentSearch(){
+    cachedGet(DEPARTMENTS, 'departments').done(function(){
+        $(SEARCH).prop('placeholder', 'Choose a department and start adding classes').prop('disabled', false).select2('val', '');
+        $(SEARCH).select2({
+            width: 'resolve',
+            createSearchChoice: function() { return null; }, // Forbid custom tags
+            tags: state.departments
+        });
+
+        bindEvents(false);
+    });
+};
+
+
+function departmentChosen(e){
+    e.preventDefault();
+    state.dept = e.object.text;
+    cachedGet('/courses.json?department=' + e.object.id, state.dept).done(function(){
+        $(SEARCH).prop('placeholder', 'Adding classes to X');
+
+        $(SEARCH).select2({
+            width: 'resolve',
+            data: state[state.dept]
+        });
+        $(SEARCH).select2('open');
+        var deptNode = $('<span class="department-choice">' + state.dept + '</span>').insertBefore(INPUT);
+        $(INPUT).css('width', 'calc(100% - ' + deptNode.outerWidth(true) + 'px)')
+
+        bindEvents(true);
+    });
+}
+
+function checkForDepartmentDeleted(e){
+    var content = $(INPUT).val();
+    if(e.which == 8 && content.length == 0){
+        e.preventDefault();
+        loadDepartmentSearch();
+        $(SEARCH).select2('open');
+        $(INPUT).val(content.slice(0, -1));
+    }
+}
+
+function bindEvents(departmentSelected){
+    if(departmentSelected){
+        $(SEARCH).off('select2-selecting.local');
+        $(INPUT).on('keydown.local', checkForDepartmentDeleted);
+    } else {
+        $(SEARCH).on('select2-selecting.local', departmentChosen);
+        $(INPUT).off('keydown.local');
+    }
+}
+
+function initSearch(){
+    loadDepartmentSearch();
+    
+    // Blur input field when dropdown is closed. From http://stackoverflow.com/questions/21157181/blur-select2-input-after-close
+    $(SEARCH).on("select2-close", function (){
+        setTimeout(function() {
+            $('.select2-container-active').removeClass('select2-container-active');
+            $(':focus').blur();
+        }, 1);
+    });
+}
+
+initSearch();
+
+</script>
 </body>
 </html>

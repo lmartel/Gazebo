@@ -4,7 +4,7 @@ module Seeds
         make Course do
             # Courses seeded by parser; manual seeds for special cases only.
             within :math do
-                make("MATH 52 AND MATH 53", "5253", 10, 10, "See Math 52 and Math 53")
+                make("MATH 52 and MATH 53", "5253", 10, 10, "See Math 52 and Math 53")
             end
         end
     end

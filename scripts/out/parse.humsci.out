@@ -1,1 +1,1 @@
-make([%q(GRADUATE ENVIRONMENT OF SUPPORT), %q(201), %q(1), %q(1)]).includes ["AUT"]
+make([%q(Graduate Environment of Support), %q(201), %q(1), %q(1)]).includes ["AUT"]

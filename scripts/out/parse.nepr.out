@@ -1,4 +1,4 @@
-make([%q(DIRECTED READING IN NEUROSCIENCES), %q(299), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(GRADUATE RESEARCH), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(TGR PROJECT), %q(801), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(TGR DISSERTATION), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Directed Reading in Neurosciences), %q(299), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Graduate Research), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(TGR Project), %q(801), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(TGR Dissertation), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

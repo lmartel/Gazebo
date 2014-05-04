@@ -1,4 +1,9 @@
 module Helpers
+
+    def titleize(str)
+        str.split(' ').map { |word| word.downcase.capitalize }.join(' ')
+    end
+
     def pp(model)
         case model
         when Track
@@ -9,11 +14,13 @@ module Helpers
                 dept = Department.search abbr[0]
                 s.sub! fst, (dept.name + ':') if dept
             end
+            titleize s.gsub('_', ' ')
+        when Course::Summary
+            model.department + ' ' + model.number + ': ' + model.name
         when Department
-            s = model.name
+            model.name
         else
-            s = nil
+            model.name
         end
-        s.split(/_| /).map { |word| word.downcase.capitalize }.join(' ')
     end
 end

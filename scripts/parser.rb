@@ -48,7 +48,7 @@ module ExploreCoursesParser
                     terms = attrs["Terms"].split(', ') if attrs["Terms"]
                     units = attrs["Units"].split('-')
 
-                    key = [name.upcase, number]
+                    key = [name, number]
                     unless all_params.has_key?(key) # Ignore repeats
                         all_params[key] = [units.first, units.last, desc] 
                         all_terms[key] = terms

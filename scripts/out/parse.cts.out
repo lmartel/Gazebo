@@ -1,3 +1,3 @@
-make([%q(UNDERGRADUATE RESEARCH), %q(199), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(MEDICAL SCHOLARS RESEARCH), %q(370), %q(4), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(GRADUATE RESEARCH), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Undergraduate Research), %q(199), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Medical Scholars Research), %q(370), %q(4), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Graduate Research), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]

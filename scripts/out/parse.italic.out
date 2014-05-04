@@ -1,4 +1,4 @@
-make([%q(IMMERSION IN THE ARTS: LIVING IN CULTURE), %q(91), %q(4), %q(4)]).includes ["AUT"]
-make([%q(IMMERSION IN THE ARTS: LIVING IN CULTURE), %q(92), %q(4), %q(4)]).includes ["WIN"]
-make([%q(IMMERSION IN THE ARTS: LIVING IN CULTURE), %q(93), %q(4), %q(4)]).includes ["SPR"]
-make([%q(IMMERSION IN THE ARTS: LIVING IN CULTURE, WRITING SECTION), %q(95W), %q(4), %q(4)]).includes ["AUT", "WIN", "SPR"]
+make([%q(Immersion in the Arts: Living in Culture), %q(91), %q(4), %q(4)]).includes ["AUT"]
+make([%q(Immersion in the Arts: Living in Culture), %q(92), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Immersion in the Arts: Living in Culture), %q(93), %q(4), %q(4)]).includes ["SPR"]
+make([%q(Immersion in the Arts: Living in Culture, Writing Section), %q(95W), %q(4), %q(4)]).includes ["AUT", "WIN", "SPR"]
