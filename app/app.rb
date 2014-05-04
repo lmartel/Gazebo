@@ -33,8 +33,14 @@ class TrackTracker < Sinatra::Base
 	end
 
     get '/courses.json' do
-        dept_id = params[:department]
-        (dept_id ? Department[dept_id].courses : Course.all).map { |c|
+        dept = params[:department]
+        if dept
+            dept = Department[abbreviation: dept] or Department.search(dept)
+            courses = dept.courses if dept
+        else
+            courses = Course.all
+        end
+        (courses or []).map { |c|
             { id: c.id, text: pp(c.summary) }
         }.compact.to_json
     end
