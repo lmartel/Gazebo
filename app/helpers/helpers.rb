@@ -31,6 +31,16 @@ module Helpers
         "active"
     end
 
+    def render_cell(course)
+        @unique_cell_id ||= 0
+        @unique_cell_id += 1
+        if course
+            '<span id="cell' + @unique_cell_id.to_s + '" class="path-cell filled" data-can-fill="' + @path.requirements(course).map{|r| r.id }.to_s + '">' + course.department.abbreviation + ' ' + course.number + '</span>'
+        else
+            '<span id="cell' + @unique_cell_id.to_s + '" class="path-cell unfilled" data-content="TODO"></span>'
+        end
+    end
+
     def logged_in?
         # !session[:user].nil?
         true

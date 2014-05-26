@@ -103,7 +103,7 @@ function initSearch(){
     // A bug in Select2 throws type errors once in a while, but everything still works.
     // This suppresses them.
     window.onerror = function(message, url, lineNumber) {
-        if(url.indexOf('select2') != -1 && message.indexOf("Cannot read property 'hasClass' of null") != -1){
+        if(url.indexOf('select2') != -1 && message.indexOf('Cannot read property "hasClass" of null') != -1){
             console.log('Suppressed[' + message + ' (' + url + ':' + lineNumber + ')]');
             return true;
         }
@@ -139,10 +139,10 @@ function initPaths(){
 
 function getSelectedPaths(){
     var nodes;
-    if($('input[name=addToAllTracks]:checked').val() === "1"){
+    if($('input[name=addToAllTracks]:checked').val() === '1'){
         nodes = $(PATH_NAV_ITEM);
     } else {
-        nodes = $(PATH_NAV_ITEM + ".active");
+        nodes = $(PATH_NAV_ITEM + '.active');
     };
     return nodes.map(function(i, e){
 
@@ -153,13 +153,104 @@ initPaths();
 
 // Path display (requirement mode):
 
-var FILLED_REQUIREMENT = ".path-cell.filled";
-var UNFILLED_REQUIREMENT = ".path-cell.unfilled";
+var FILLED_REQUIREMENT = '.path-cell.filled';
+var UNFILLED_REQUIREMENT = '.path-cell.unfilled';
+var CAN_FILL = UNFILLED_REQUIREMENT + '.fillable';
+var REQUIREMENT_ROW = '.path-row';
+var UNASSIGNED_CELLS_CLASS = 'extra-cells'
+var UNASSIGNED_CELLS = '.' + UNASSIGNED_CELLS_CLASS;
+
+function fillableCells(draggedCell){
+    var reqs = draggedCell.data('can-fill');
+    var fillable = $(REQUIREMENT_ROW).filter(function(){
+        return reqs.indexOf($(this).data('requirement')) !== -1;
+    }).toArray().reduce(function(rest, next){
+        return rest.concat($(next).find(UNFILLED_REQUIREMENT).first().toArray()); // this is a flat_map from rows to their first fillable cell
+    }, []);
+    return $(fillable);
+}
+
+
+var replacement;
+var isSnapping;
+
+function initDraggable(){
+    $(FILLED_REQUIREMENT).draggable({
+        snap: CAN_FILL,
+        snapMode: 'corner',
+        zIndex: 5,
+        revert: false,
+        cancel: UNFILLED_REQUIREMENT,
+        // refreshPositions: true,
+        stop: function (event, ui) {
+            console.log('watwat')
+            var snapTo = ui.helper.data("ui-draggable").snapElements.filter(function(elem){
+                return elem.snapping;
+            });
+            if(snapTo.length > 0){
+                isSnapping = $(snapTo[0].item);
+            } else {
+                isSnapping = false;
+            }
+
+            
+        }
+    });
+}
 
 function initPathDisplay(){
-    $(FILLED_REQUIREMENT).draggable({
-        snap: UNFILLED_REQUIREMENT
+    $(document).on('mousedown', FILLED_REQUIREMENT, function(event){
+        if(event.which !== 1) return; // ignore non-left clicks
+        var elem = $(this);
+        var draggingUnassignedCell = elem.closest('ul').hasClass(UNASSIGNED_CELLS_CLASS);
+
+        if(!draggingUnassignedCell){ // create no placeholder if currently unassigned
+            replacement = elem.clone();
+            replacement.removeClass('filled ui-draggable').addClass('unfilled fillable').attr('data-content', elem.text()).text('').css('margin-left', -elem.outerWidth() + 'px').attr('data-can-fill', '');
+            elem.after(replacement);
+        }
+        fillableCells(elem).addClass('fillable').attr('data-content', elem.text())
     });
+
+    $(document).on('mouseup', FILLED_REQUIREMENT, function(event){
+        if(event.which !== 1) return; // ignore non-left clicks
+        var elem = $(this);
+        var draggingUnassignedCell = elem.closest('ul').hasClass(UNASSIGNED_CELLS_CLASS);
+
+        setTimeout(function(){
+            if(isSnapping){ // We remove the replacement, put the original element back, and change the text of both elements to complete the swap
+                if(replacement) replacement.remove();
+                if(isSnapping.attr('id') !== elem.attr('id')){
+                    isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']');
+                    console.log('snappin')
+                    elem.css({'top': '', 'left': ''});
+                    if(draggingUnassignedCell){
+                        elem.closest('li').remove();
+                    } else {
+                        elem.css({'top': '', 'left': ''}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO');
+                    }
+                }
+
+            } else {
+                if(replacement) replacement.remove();
+
+                elem.css({'top': '', 'left': ''});
+                if(!draggingUnassignedCell){
+                    $('<li style="margin-right: 5px;">').append(elem.clone().attr('id', 'cloned' + elem.attr('id'))).append('</li>').appendTo(UNASSIGNED_CELLS); // Margin compensates for missing 'implicit margin' list item thing
+                    elem.css({'top': '', 'left': ''}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO');
+                }
+            }
+            $(CAN_FILL).removeClass('fillable').attr('data-content', 'TODO');
+            if(replacement) replacement.css('margin-left', '0');
+
+            initDraggable();
+
+            // $.post('/update_path')
+
+        }, 1);
+    });
+    initDraggable();
+    
 }
 
 initPathDisplay();

@@ -12,8 +12,9 @@ class Path < Sequel::Model
         }.to_h
     end
 
-    def requirements
-        requirements_by_track.values.flatten
+    def requirements(course=nil)
+        all = requirements_by_track.values.flatten
+        course ? all.select { |req| req.courses.include?(course) } : all
     end
 
     def requirements_by_priority

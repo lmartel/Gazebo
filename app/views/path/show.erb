@@ -7,15 +7,23 @@
             <% reqs.each do |req| %>
                 <dt><%= req.name %></dt>
                 <dd>
-                <div class="path-row">
+                <div class="path-row" data-requirement="<%= req.id %>">
                     <% courses = @path.enrollments(req).map {|e| e.course } %>
                     <% [req.min_count, courses.count].max.times do |i| %>
-                        <span class="path-cell <%= courses[i] ? 'filled' : 'unfilled' %>"><%= (courses[i] and courses[i].department.abbreviation + ' ' + courses[i].number) or "TODO" %></span>
+                        <%= render_cell courses[i] %> <%# Renders empty cells for unfilled requirements %>
                     <% end%>
                 </div>
                 </dd>
             <% end %>
         <% end %>
+
+
     </dl>
+    <h5>Unassigned classes</h5>
+    <ul class="extra-cells">
+        <% @path.unassigned_enrollments.map {|e| e.course }.each do |c| %>
+        <li><%= render_cell(c) %></li>
+        <% end %>
+    </ul>
     </p>
 </div>

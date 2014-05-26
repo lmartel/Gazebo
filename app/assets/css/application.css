@@ -8,6 +8,7 @@ html, body {
 .masthead {
     background: #333;
     border-bottom: 1px solid white;
+    z-index: 1;
 }
 
 header {
@@ -43,22 +44,45 @@ header {
     text-align: left;
 }
 
-.path-cell:first-child{
+.path-row {
+    display: inline-block;
+    /* margin: 2px 0 2px 50px; */
     margin-left: 50px;
 }
 
-.path-row {
-    display: inline-block;
+/* When using options::helper, dragged element is slightly taller by default
+.path-cell:not(.ui-draggable-dragging){
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
+*/
 
 .path-cell {
     border: 1px dashed #fff;
     padding: 0px 5px;
+    background: #333;
 }
 
 .path-cell.filled {
     border: 1px solid #999;
     color: #999;
+    cursor: move;
+}
+
+.path-cell.unfilled:before {
+    content: attr(data-content);
+}
+
+.path-cell.unfilled.fillable {
+    color: lightgreen;
+}
+
+.extra-cells {
+    list-style-type: none;
+}
+
+.extra-cells li {
+    display: inline-block;
 }
 
 /* Search box styling */
