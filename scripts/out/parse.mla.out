@@ -39,5 +39,6 @@ make([%q(Russia Encounters the Enlightenment: The Art, Culture, and Politics), %
 make([%q(The Young Romantics: Mythmaking, Monstrosity, and Representation), %q(306), %q(4), %q(4)]).includes ["SPR"]
 make([%q(What Do We Mean When We Speak of Evil?), %q(307), %q(4), %q(4)]).includes ["WIN"]
 make([%q(Martin Luther King, Jr.: The Man, the Movement, and the Legacy), %q(308), %q(4), %q(4)]).includes ["SUM"]
+make([%q(Fairly Tales: Culture's Underground Rivers), %q(309), %q(4), %q(4)]).includes ["SUM"]
 make([%q(MLA Thesis in Progress), %q(398), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(MLA Thesis Final Quarter), %q(399), %q(6), %q(6)]).includes ["AUT", "WIN", "SPR", "SUM"]

@@ -13,12 +13,16 @@ class Requirement < Sequel::Model
 
     class << self
 
+        def require_core
+            # create name: "Department Requirements", track_id: @within_model.id # TODO: improve this. Currently just reads name of track.
+        end
+
         # Make department <==> requirement junction when new requirement is made.
         # Also serves as a Model.within(dept), minus foreign key injection
         def core(d)
             dept = Department.search!(d)
             raise "[Requirement.core] Error: core already declared for department #{dept.name}" unless dept.core_requirements.empty?
-            # requirement = make "#{dept.name} core", *args
+            requirement = make "#{dept.abbreviation}"
             # make junctions
 
             mk = self.method(:make)

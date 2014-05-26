@@ -1,5 +1,4 @@
 make([%q(Measles and Sneezles and Things That Go Mumps in the Night), %q(19SC), %q(2), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Viruses in the News), %q(27Q), %q(2), %q(2)]).includes ["SUM"]
 make([%q(Viruses in the News), %q(27SC), %q(2), %q(2)]).includes ["SUM"]
 make([%q(Photographing Nature), %q(70Q), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Innate Immunology (IMMUNOL 204, MI 204)), %q(104), %q(3), %q(3)]).includes ["SPR"]

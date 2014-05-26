@@ -23,4 +23,29 @@ module Helpers
             model.name
         end
     end
+
+    def select_first(namespace)
+        @selected_dom_elements ||= {}
+        return "" if @selected_dom_elements[namespace] 
+        @selected_dom_elements[namespace] = true
+        "active"
+    end
+
+    def logged_in?
+        # !session[:user].nil?
+        true
+    end
+
+    def current_user
+        # session[:user]
+        User.first # TODO account system
+    end
+
+    def csrf_token
+        Rack::Csrf.csrf_token(env)
+    end
+
+    def csrf_tag
+        Rack::Csrf.csrf_tag(env)
+    end
 end

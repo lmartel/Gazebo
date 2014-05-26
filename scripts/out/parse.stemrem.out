@@ -1,5 +1,5 @@
 make([%q(Undergraduate Research), %q(199), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
-make([%q(Stem Cell Intensive), %q(200), %q(1), %q(1)]).includes ["AUT", "SPR", "SUM"]
+make([%q(Stem Cell Intensive), %q(200), %q(1), %q(1)]).includes ["AUT", "SUM"]
 make([%q(Stem Cells and Human Development: From Embryo to Cell Lineage Determination), %q(201A), %q(1), %q(2)]).includes ["AUT"]
 make([%q(Stem Cells and Human Development Laboratory), %q(201B), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Stem Cells and Translational Medicine), %q(202), %q(3), %q(5)]).includes ["WIN"]

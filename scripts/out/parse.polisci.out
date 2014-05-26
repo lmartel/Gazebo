@@ -217,7 +217,6 @@ make([%q(Political Economy of Reform in China), %q(443S), %q(5), %q(5)]).include
 make([%q(Comparative Political Economy: Advanced Industrial Societies), %q(444), %q(3), %q(5)]).includes ["AUT"]
 make([%q(Workshop: China Social Science (SOC 368W)), %q(448R), %q(1), %q(1)]).includes ["WIN", "SPR"]
 make([%q(Design and Analysis of Experiments), %q(451), %q(3), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Design and Analysis of Surveys (POLISCI 474)), %q(454), %q(1), %q(5)]).includes ["WIN"]
 make([%q(Design and Analysis of Surveys), %q(474), %q(1), %q(5)]).includes ["WIN"]
 make([%q(TGR Project), %q(801), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(TGR Dissertation), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

@@ -23,7 +23,7 @@ make([%q(Valuescience: Shedding Illusion to Live Better (PSYC 136A)), %q(236A), 
 make([%q(Valuescience: Shedding Illusion to Live Better (PSYC 136B)), %q(236B), %q(3), %q(4)]).includes ["SPR"]
 make([%q(Understanding Relationships: A Couples and Family Therapy Perspective (PSYC 139)), %q(239), %q(4), %q(4)]).includes ["SPR"]
 make([%q(Principles and Practices in Care of the Dying), %q(247), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Methodology of Research in Behavioral Sciences), %q(250), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR"]
+make([%q(Methodology of Research in Behavioral Sciences), %q(250), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Teaching in Psychiatry), %q(290), %q(1), %q(10)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Directed Reading in Psychiatry), %q(299), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Medical Scholars Research), %q(370), %q(4), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]

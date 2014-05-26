@@ -1,0 +1,109 @@
+/* Layout styling: template, header, nav, footer */
+
+html, body {
+    height: initial;
+    box-shadow: initial;
+}
+
+.masthead {
+    background: #333;
+    border-bottom: 1px solid white;
+}
+
+header {
+    color: red;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+}
+
+.cover-container {
+    margin-top: calc(76px + 10px);
+}
+
+.search-wrapper {
+    margin-bottom: calc(200px + 34px);
+}
+
+/* Path styling */
+
+.path-wrapper {
+    display: none;
+}
+
+.path-wrapper.active {
+    display: block;
+}
+
+.dl-horizontal dt {
+    width: 300px;
+}
+
+.dl-horizontal dd {
+    text-align: left;
+}
+
+.path-cell:first-child{
+    margin-left: 50px;
+}
+
+.path-row {
+    display: inline-block;
+}
+
+.path-cell {
+    border: 1px dashed #fff;
+    padding: 0px 5px;
+}
+
+.path-cell.filled {
+    border: 1px solid #999;
+    color: #999;
+}
+
+/* Search box styling */
+
+#course-search {
+    width: 100%; /* TODO media query: change width to max-width for responsiveness */
+}
+
+.select2-container, .select2-result-label, .department-choice {
+    text-shadow: none !important;
+}
+
+.select2-choice {
+    font-size: 18px !important;
+}
+
+.department-choice {
+    padding: 6px 8px;
+    margin: 3px -5px 3px 5px;
+    position: relative;
+
+    line-height: 13px;
+    color: #333;
+    cursor: default;
+    border: 1px solid #aaaaaa;
+
+    border-radius: 3px;
+
+    -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+
+    background-clip: padding-box;
+
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+
+    background-color: #e4e4e4;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+    background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+    background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+    background-image: linear-gradient(to top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+}
+
+/* End */

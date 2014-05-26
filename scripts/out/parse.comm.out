@@ -27,6 +27,7 @@ make([%q(Public Participation and Public Policy (COMM 234)), %q(134), %q(4), %q(
 make([%q(Deliberative Democracy and its Critics (AMSTUD 135, COMM 235, COMM 335, POLISCI 234P, POLISCI 334P)), %q(135), %q(3), %q(5)]).includes ["SPR"]
 make([%q(The Dialogue of Democracy (AMSTUD 137, COMM 237, POLISCI 232T, POLISCI 332T)), %q(137W), %q(4), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Digital Media Entrepreneurship (COMM 240)), %q(140), %q(3), %q(5)]).includes ["SPR"]
+make([%q(Media Economics (COMM 242)), %q(142), %q(4), %q(5)]).includes ["SPR"]
 make([%q(Communication Policy and Regulation (COMM 143W, COMM 243)), %q(143), %q(4), %q(5)]).includes ["SPR"]
 make([%q(Communication Policy and Regulation (COMM 143, COMM 243)), %q(143W), %q(4), %q(5)]).includes ["SPR"]
 make([%q(Modern History and Future of Journalism (COMM 247)), %q(147), %q(4), %q(5)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]

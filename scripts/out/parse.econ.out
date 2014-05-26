@@ -1,4 +1,5 @@
 make([%q(Principles of Economics), %q(1), %q(5), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Principles of Economics), %q(1V), %q(5), %q(5)]).includes ["SUM"]
 make([%q(Economics in the News), %q(5), %q(1), %q(1)]).includes ["SPR"]
 make([%q(Silicon Valley Meets Wall Street), %q(10), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Understanding the Welfare System), %q(11N), %q(3), %q(3)]).includes ["AUT"]

@@ -1,0 +1,21 @@
+<div class="inner cover path-wrapper <%= select_first(:path) %>">
+    <h1 class="cover-heading">Das Path: <%= @path.name %></h1>
+    <p class="lead">
+    <dl class="dl-horizontal">
+        <% @path.requirements_by_track.each do |tr, reqs| %>
+            <h5><%= pp tr %></h5>
+            <% reqs.each do |req| %>
+                <dt><%= req.name %></dt>
+                <dd>
+                <div class="path-row">
+                    <% courses = @path.enrollments(req).map {|e| e.course } %>
+                    <% [req.min_count, courses.count].max.times do |i| %>
+                        <span class="path-cell <%= courses[i] ? 'filled' : 'unfilled' %>"><%= (courses[i] and courses[i].department.abbreviation + ' ' + courses[i].number) or "TODO" %></span>
+                    <% end%>
+                </div>
+                </dd>
+            <% end %>
+        <% end %>
+    </dl>
+    </p>
+</div>

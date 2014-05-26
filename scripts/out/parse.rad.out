@@ -5,7 +5,7 @@ make([%q(Multimodality Molecular Imaging in Living Subjects I (BIOE 222A)), %q(2
 make([%q(Multimodality Molecular Imaging in Living Subjects II (BIOE 222B)), %q(222B), %q(4), %q(4)]).includes ["WIN"]
 make([%q(Multimodality Molecular Imaging in Living Subjects III (BIOE 222C)), %q(222C), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Physics and Engineering of X-Ray Computed Tomography (BIOE 223)), %q(223), %q(3), %q(3)]).includes ["AUT"]
-make([%q(Ultrasound Imaging and Therapeutic Applications (BIOE 325)), %q(225), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Ultrasound Imaging and Therapeutic Applications (BIOE 225, BIOE 325)), %q(225), %q(3), %q(3)]).includes ["AUT"]
 make([%q(In Vivo Magnetic Resonance Spectroscopy and Imaging), %q(226), %q(3), %q(3)]).includes ["WIN"]
 make([%q(In Vivo Magnetic Resonance Spectroscopy and Imaging (BIOE 226)), %q(226), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Functional MRI Methods (BIOPHYS 227)), %q(227), %q(3), %q(3)]).includes ["WIN"]

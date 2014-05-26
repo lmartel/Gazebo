@@ -18,19 +18,19 @@ namespace :db do
     `rm scripts/out/*`
     Term.seed unless Term.count > 0
     exec_ruby('scripts/scrape_and_seed.rb', 'scripts/out')
-    # `cp test.db test.db.bak`
     [Department, Track, Course, Requirement].each { |klass| klass.seed }
   end
 
   desc "Clear and re-seed requirements and tracks, without re-scraping departments and courses."
   task :reseed do
     Term.seed unless Term.count > 0
-    [Departments_Requirement, Requirements_Course, Requirement, Track].each do |klass| 
+    [Departments_Requirement, Requirements_Course, Paths_Track, Paths_Course, Requirement, Track, Path, User].each do |klass| 
         klass.each { |m| m.delete }
     end
     [Track, Requirement].each do |klass| 
         klass.seed
     end
+    exec_ruby('scripts/seed_test_data.rb')
   end
 
   desc "Prints current schema version"

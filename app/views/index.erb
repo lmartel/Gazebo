@@ -1,14 +1,46 @@
-<h1>HELLO WORLD</h1>
-<table>
-<% @tracks.each do |t| %>
-    <tr>
-        <td><%= pp t %></td>
-        <td><%= pp t.department %></td>
-    </tr>
-<% end %>
-</table>
-
 <ul class="course-selections">
 </ul>
 
-<input type="hidden" id="course-search" placeholder="Loading classes..." disabled>
+<div class="masthead clearfix">
+    <div class="inner">
+        <h3 class="masthead-brand">Pathfinder</h3>
+        <ul class="nav masthead-nav">
+            <% @paths.each do |path| %>
+            <li class="path-nav-item <%= select_first(:nav) %>" data-id="<%= path.id %>" data-name="<%= path.name %>">
+                <a href="#"><%= path.name %></a>
+            </li>
+            <% end %>
+            <li><button class="btn btn-sm btn-default" onclick="window.location='/embark'">Create path</button></li>
+        </ul>
+    </div>
+</div>
+
+<% if !logged_in? or current_user.paths.empty? %>
+<div class="inner cover">
+    <h1 class="cover-heading">You are pathless.</h1>
+    <p class="lead">Create a path to get started planning your courses.</p>
+    <p class="lead">
+        <input type="hidden" id="course-search" placeholder="Loading classes..." disabled>
+    </p>
+</div>
+<% else %>
+    <% current_user.paths.each do |path| %>
+    <% @path = path %>
+    <%= erb :"path/show" %>
+    <% end %>
+
+<div class="inner cover search-wrapper">
+    <h1 class="cover-heading">Add Classes</h1>
+    <p class="lead">
+        <input type="hidden" id="course-search" placeholder="Loading classes..." disabled>
+    </p>
+    <p class="lead">
+    <div class="radio">
+        <label><input type="radio" name="addToAllTracks" value=0 checked> Add classes to this path</label>
+        <br>
+        <label><input type="radio" name="addToAllTracks" value=1>Add classes to all paths</label>
+    </div>
+    </p>
+
+</div>
+<% end %>

@@ -3,6 +3,7 @@ module Seeds
     def self.seed_cs_track(track, a:[], b:[], c:[], e:[])
         make Requirement do
             within track do
+                require_core
                 make("Track Requirement A").includes a
                 make("Track Requirement B").includes b
                 make("Track Requirement C", 2).includes (b + c).uniq
@@ -28,7 +29,7 @@ module Seeds
                          a: [154],
                          b: [164, 167, 255, 258, 261, 265, 268, '361A', '361B'],
                          c: [143, 155, [157, PHIL[151]], 166, '205A', 228, 242, 254, 259, 262, 267, 354, 355, 
-                                357, 358, 359, '364A', '364B', 366, 367, 369, 374, 'MSNE 310'
+                                357, 358, 359, '364A', '364B', 366, 367, 369, 374, MSNE[310]
                             ],
                          e: [CME[302, 305], PHIL[152]]
 
@@ -47,7 +48,7 @@ module Seeds
                     make("Technology in Society").includes [ BIOE[131], CLASSART[113], COMM['120W'], CS[181, '181W'], ENGR[130, 131, 145],
                         HUMBIO[174], MSNE[181, 193, '193W', 197], POLISCI['114S'], PUBLPOL[122, 194]
                     ]
-                    make("Engineering Fundamentals Requirements", 2, 10).includes '106A', ENGR[40]
+                    make("Engineering Fundamentals Requirements", 2, 10).includes '106B', ENGR[40]
                     make("Engineering Fundamentals Elective", 1, 3).includes [ ENGR[10, 14, 15, 20, '25B', '25E', 30, 40, '40A', '40C', '40P',
                         50, '50E', '50M', 60, 62, '70A', '70B', '70X', 80, 90], MSNE[111]
                     ]
@@ -87,11 +88,10 @@ module Seeds
     # Remove after the block returns to avoid cluttering namespace.
     def self.with_helpers
         departments = Department.map do |dept_obj| 
-            abbr = dept_obj.abbreviation.upcase.to_sym 
+            dept_obj.abbreviation.upcase 
         end
         departments.each do |dept|
-            dept
-            Seeds.const_set dept, lambda { |*course_numbers|
+            Seeds.const_set dept.gsub('&', 'N'), lambda { |*course_numbers|
                 course_numbers.map { |num| "#{dept} #{num}" }
             }
         end
@@ -107,7 +107,10 @@ module Seeds
 
         Seeds.class_eval { remove_const :CS_ELECTIVES }
         departments.each do |dept|
-            Seeds.class_eval { remove_const dept }
+            Seeds.class_eval { remove_const dept.gsub('&', 'N') }
+            Department.search(dept).core_requirements.each do |r|
+                # r.delete # Department requirements no longer needed; have been copied to tracks where appropriate
+            end
         end
     end
 end

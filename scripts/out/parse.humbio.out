@@ -35,7 +35,7 @@ make([%q(Human Dimensions of Global Environmental Change: Resilence, Vulnerabili
 make([%q(Marine Resource Economics and Conservation (EARTHSYS 156M, ECON 156)), %q(111M), %q(5), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Conservation Biology: A Latin American Perspective (BIO 144, BIO 234)), %q(112), %q(3), %q(3)]).includes ["SPR"]
 make([%q(The Biologies of Humans and Plants), %q(113), %q(3), %q(3)]).includes ["SPR"]
-make([%q(Healthy/Sustainable Food Systems: Max. sustainability across health, economics and environment.), %q(113S), %q(4), %q(4)]).includes ["SPR"]
+make([%q(Healthy/Sustainable Food Systems: Maximum Sustainability across Health, Economics, and Environment), %q(113S), %q(4), %q(4)]).includes ["SPR"]
 make([%q(Environmental Change and Emerging Infectious Diseases (ANTHRO 177, ANTHRO 277)), %q(114), %q(3), %q(5)]).includes ["AUT"]
 make([%q(Controlling Climate Change in the 21st Century (BIO 147, BIO 247, EARTHSYS 247)), %q(116), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Human Behavioral Ecology (ANTHRO 161, ANTHRO 261)), %q(117H), %q(3), %q(5)]).includes ["NOT GIVEN THIS YEAR"]

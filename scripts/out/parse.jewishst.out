@@ -17,6 +17,7 @@ make([%q(Reflection on the Other: The Jew in Arabic Literature, the Arab in Hebr
 make([%q(Biblical Hebrew, First Quarter (AMELANG 170A, RELIGST 170A)), %q(107A), %q(2), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Biblical Hebrew, Second Quarter (AMELANG 170B)), %q(107B), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Lessons in Ecological Restoration: Israel and the Middle East (BIO 162)), %q(116), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Genesis and Gender: Male and Female in Judaism, Christianity, and Islam (RELIGST 130)), %q(120), %q(4), %q(4)]).includes ["WIN"]
 make([%q(Readings in Talmudic Literature (JEWISHST 227D, RELIGST 170D, RELIGST 270D)), %q(127D), %q(1), %q(1)]).includes ["WIN", "SPR"]
 make([%q(Modern Jewish Thought (RELIGST 129)), %q(129), %q(4), %q(4)]).includes ["AUT"]
 make([%q(Rereading Judaism in Light of Feminism (FEMGEN 139)), %q(139), %q(4), %q(4)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]

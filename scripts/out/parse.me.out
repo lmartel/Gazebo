@@ -6,7 +6,6 @@ make([%q(Hands-on Jet Engines), %q(12SC), %q(2), %q(2)]).includes ["NOT GIVEN TH
 make([%q(How Stuff Is Made), %q(14N), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Pre-field Course for Alternative Spring Break: Design for a Sustainable World), %q(15), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Alternative Spring Break - From Classroom to Community: Science Education and Environmental Literacy), %q(16), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(The Science of Flames), %q(16N), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Robotics Imitating Nature), %q(17N), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Teamology: Creative Teams and Individual Development), %q(18Q), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Pre-field Course for Alternative Spring Break: Design for Social Change), %q(19), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
