@@ -64,8 +64,8 @@ header {
 }
 
 .path-cell.filled {
-    border: 1px solid #999;
-    color: #999;
+    border: 1px solid lightblue;
+    color: lightblue;
     cursor: move;
 }
 
@@ -75,6 +75,15 @@ header {
 
 .path-cell.unfilled.fillable {
     color: lightgreen;
+    border-color: lightgreen;
+}
+
+.path-cell.unfilled:not(.fillable) {
+    opacity: 0.8;
+}
+
+.path-cell.unfilled.drag-is-active:not(.fillable){
+    opacity: 0.4;
 }
 
 .extra-cells {

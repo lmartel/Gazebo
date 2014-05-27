@@ -1,5 +1,5 @@
 <div class="inner cover path-wrapper <%= select_first(:path) %>">
-    <h1 class="cover-heading">Das Path: <%= @path.name %></h1>
+    <h1 class="cover-heading">Path Requirements: <%= @path.name %></h1>
     <p class="lead">
     <dl class="dl-horizontal">
         <% @path.requirements_by_track.each do |tr, reqs| %>
