@@ -1,14 +1,29 @@
 // Path display (requirement mode):
 
+var PATH_WRAPPER = '.path-wrapper';
+var REQUIREMENT_ROW = '.path-row';
+
 var FILLED_REQUIREMENT = '.path-cell.filled';
 var UNFILLED_REQUIREMENT = '.path-cell.unfilled';
 var CAN_FILL = UNFILLED_REQUIREMENT + '.fillable';
-var REQUIREMENT_ROW = '.path-row';
-var UNASSIGNED_CELLS_CLASS = 'extra-cells'
+var UNASSIGNED_CELLS_CLASS = 'extra-cells';
 var UNASSIGNED_CELLS = '.' + UNASSIGNED_CELLS_CLASS;
-var CLOSE_BUTTON = 'button.delete-enrollment';
+
+var CLOSE_BUTTON_CLASS = 'delete-enrollment';
+var CLOSE_BUTTON = 'button.' + CLOSE_BUTTON_CLASS;
+
+var REQUIREMENTS_MODAL = "#requirementsModal"
+var REQUIREMENTS_MODAL_FADE = REQUIREMENTS_MODAL + ".modal.fade.in";
+var REQUIREMENTS_DIALOG = REQUIREMENTS_MODAL_FADE + " .modal-dialog";
+var MODAL_TITLE = ".modal-title";
+var MODAL_BODY = ".modal-body";
+
+var AUTOLAYOUT_BUTTON = "button.autolayout";
+
 var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
-function UPDATE_ENROLLMENT_URL(enrollmentId) { return '/enrollments/' + enrollmentId; }
+
+function UPDATE_ENROLLMENT_URL(id) { return '/enrollments/' + id; }
+function REQUIREMENT_URL(id) { return '/requirements.json/' + id; }
 
 window.state = window.state || {}
 state.requirements = {
@@ -164,19 +179,14 @@ function handleCellDragEnd(elem){
 }
 
 function initPathDisplay(){
-    $(document).on('mousedown', FILLED_REQUIREMENT, function(event){
+    // Drag has started
+    $(document).on('mousedown', FILLED_REQUIREMENT + ':not(' + CLOSE_BUTTON + ')', function(event){
         if(event.which !== 1) return; // ignore non-left clicks
+        if($(event.target).hasClass(CLOSE_BUTTON_CLASS)) return; // forbid dragging by close button
         handleCellDragStart($(this));
-
     });
 
-    $(document).on('mousedown', CLOSE_BUTTON, function(event){
-        event.preventDefault();
-        event.stopPropagation();
-
-        deleteCell($(this).closest(FILLED_REQUIREMENT));
-    })
-
+    // Drag has ended
     $(document).on('mouseup', function(event){
         if(event.which !== 1) return; // ignore non-left clicks
 
@@ -187,6 +197,44 @@ function initPathDisplay(){
             handleCellDragEnd(elem);
         }, 1);
     });
+
+    // Other listeners
+
+    // Close buttons
+    $(document).on('click', CLOSE_BUTTON, function(event){
+        deleteCell($(this).closest(FILLED_REQUIREMENT));
+    });
+
+    // Open requirement description modals
+    $(document).on('click', UNFILLED_REQUIREMENT, function(event){
+        var row = $(this).closest(REQUIREMENT_ROW);
+        var title = row.closest('dd').prev('dt').text()
+        var modal = $(REQUIREMENTS_MODAL);
+        var body = modal.find(MODAL_BODY);
+
+        modal.find(MODAL_TITLE).text(title);
+        body.text('Loading requirement details...');
+        modal.modal();
+
+        $.get(REQUIREMENT_URL(row.data('requirement'))).done(function(data){
+            body.text('');
+            body.wrapInner('<ul class="requirements-list"></ul>');
+            var list = body.find(".requirements-list");
+            var courses = JSON.parse(data);
+            for(var i = 0; i < courses.length; i++){
+                $('<li></li>').text(courses[i]).appendTo(list);
+            }
+        }).fail(function(){
+            // TODO handle failure?
+        });
+    });
+
+    // Close modal by clicking outside the dialog
+    $(document).on('click', REQUIREMENTS_MODAL_FADE, function(event){
+        if($(e.target).hasClass(REQUIREMENTS_DIALOG)) return;
+        $(REQUIREMENTS_MODAL).modal('hide');
+    });
+
     initDraggable();
     
 }

@@ -9,6 +9,7 @@ class TrackTracker < Sinatra::Base
     set :root, File.dirname(__FILE__) # You must set app root
     register Sinatra::AssetPack
     register Sinatra::Flash
+    use Rack::MethodOverride
     use Rack::Session::Cookie, secret: ENV['SECRET_TOKEN']
     use Rack::Csrf, :raise => true
 
@@ -36,6 +37,7 @@ class TrackTracker < Sinatra::Base
     # Site routes
     get '/' do
         @paths = (logged_in? ? current_user.paths : [])
+        @selection_override = flash[:selection_override]
         erb :index
     end
 
@@ -55,6 +57,14 @@ class TrackTracker < Sinatra::Base
             flash[:error] = "Choose at least one major, minor, or track."
             redirect to('/embark')
         end
+    end
+
+    put '/paths/:id' do |pid|
+        halt 400 unless pid and (@path = Path[pid])
+        halt 403 unless @path.user == current_user
+        @path.layout!
+        flash[:selection_override] = @path.id
+        redirect to('/')
     end
 
     post '/enrollments' do
@@ -93,9 +103,14 @@ class TrackTracker < Sinatra::Base
         status (enrollment.destroy ? 200 : 500)
     end
 
+    get '/requirements.json/:id' do |req_id|
+        Requirement[req_id.to_i].courses.map { |c| 
+            "#{c.department.abbreviation}#{c.number}: #{pp c} [#{pp_units c} units]"
+        }.to_json
+    end
+
     # API routes
-    get '/courses.json' do
-        dept = params[:department]
+    get '/courses.json/?:dept?' do |dept|
         if dept
             dept = Department[abbreviation: dept] or Department.search(dept)
             courses = dept.courses if dept
@@ -112,9 +127,6 @@ class TrackTracker < Sinatra::Base
             { id: d.id, text: d.abbreviation }
         end).to_json
     end
-
-
-
 
 end
 

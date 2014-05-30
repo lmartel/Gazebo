@@ -24,11 +24,20 @@ module Helpers
         end
     end
 
-    def select_first(namespace)
+    def pp_units(c)
+        return c.units_min.to_s if c.units_min == c.units_max
+        "#{c.units_min}-#{c.units_max}"
+    end
+
+    def select_first(namespace, override: nil)
         @selected_dom_elements ||= {}
-        return "" if @selected_dom_elements[namespace] 
-        @selected_dom_elements[namespace] = true
-        "active"
+        if override && @selection_override
+            active = (override == @selection_override)
+        else
+            active = !@selected_dom_elements[namespace] 
+            @selected_dom_elements[namespace] = true
+        end
+        active ? "active" : ""
     end
 
     def render_cell(enrollment, path: @path, closable:false)

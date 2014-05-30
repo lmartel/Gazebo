@@ -4,8 +4,8 @@ var INPUT_EVENT = 'keydown.local';
 var SELECT_EVENT = 'select2-selecting.local';
 
 var DEPARTMENTS_URL = '/departments.json';
-var COURSES_URL = '/courses.json?department=';
 var ADD_ENROLLMENT_URL = '/enrollments';
+function COURSES_URL(dept) { return '/courses.json/' + dept; }
 
 window.state = window.state || {}
 state.search = {
@@ -41,7 +41,7 @@ function loadDepartmentSearch(){
 };
 
 function loadCourseSearchForDepartment(){
-    cachedGet(COURSES_URL + state.search.selectedDepartment, state.search.selectedDepartment).done(function(){
+    cachedGet(COURSES_URL(state.search.selectedDepartment), state.search.selectedDepartment).done(function(){
         var placeholder = 'Browse ' + state.search.selectedDepartment + ' classes';
 
         $(SEARCH).prop('placeholder', placeholder).select2({
@@ -77,7 +77,7 @@ function courseChosen(e){
     }).done(function(data){
         var htmls = JSON.parse(data)
         for(var i = 0; i < paths.length; i++){
-            $(htmls[i]).wrap("<li></li>").appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells'));
+            $(htmls[i]).appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells')).wrap("<li></li>");
         }
     }).fail(function(){
         // TODO handle failure?

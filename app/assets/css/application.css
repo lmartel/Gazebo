@@ -8,6 +8,10 @@ button.close {
     font-size: 12px;
 }
 
+.modal-content {
+    color: #333;
+}
+
 button.close:before {
     /* You have to use raw unicode for html entities here, because of course you do. */
     /* This is equivalent to "&nbsp;&times;" = " x" */
@@ -42,6 +46,11 @@ header {
     margin-bottom: calc(200px + 34px);
 }
 
+/* Modals styling */
+.requirements-list {
+    text-align: left;
+}
+
 /* Path styling */
 
 .path-wrapper {
@@ -69,6 +78,7 @@ header {
     border: 1px dashed #fff;
     padding: 0px 5px;
     background: #333;
+    cursor: help;
 }
 
 .path-cell.filled {

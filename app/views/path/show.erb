@@ -1,4 +1,4 @@
-<div class="inner cover path-wrapper <%= select_first(:path) %>" data-id="<%= @path.id %>">
+<div class="inner cover path-wrapper <%= select_first(:path, override: @path.id) %>" data-id="<%= @path.id %>">
     <h1 class="cover-heading">Path Requirements: <%= @path.name %></h1>
     <p class="lead">
     <dl class="dl-horizontal">
@@ -25,5 +25,11 @@
         <li><%= render_cell e, closable:true %></li>
         <% end %>
     </ul>
+    <br>
+    <form action="/paths/<%= @path.id %>" method="post">
+        <input type="hidden" name="_method" value="put">
+        <%= csrf_tag %>
+        <button type="submit" class="btn btn-lg btn-default autolayout">Autolayout all classes</button>
+    </form>
     </p>
 </div>
