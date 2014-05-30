@@ -44,7 +44,7 @@ function loadCourseSearchForDepartment(){
         var placeholder = 'Browse ' + state.search.selectedDepartment + ' classes';
 
         $(SEARCH).prop('placeholder', placeholder).select2({
-            data: state[state.search.selectedDepartment]
+            data: state.search[state.search.selectedDepartment]
         }).select2('open');
 
         var deptNode = $('<span class="department-choice">' + state.search.selectedDepartment + '</span>').insertBefore(INPUT);
