@@ -1,3 +1,19 @@
+/* Disagreements with Bootstrap */
+button.close {
+    float: none;
+    color: white;
+    opacity: 1;
+    font-weight: 100;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+button.close:before {
+    /* You have to use raw unicode for html entities here, because of course you do. */
+    /* This is equivalent to "&nbsp;&times;" = " x" */
+    content: "\a0 \D7"; 
+}
+
 /* Layout styling: template, header, nav, footer */
 
 html, body {
@@ -46,16 +62,8 @@ header {
 
 .path-row {
     display: inline-block;
-    /* margin: 2px 0 2px 50px; */
     margin-left: 50px;
 }
-
-/* When using options::helper, dragged element is slightly taller by default
-.path-cell:not(.ui-draggable-dragging){
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-*/
 
 .path-cell {
     border: 1px dashed #fff;

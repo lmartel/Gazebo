@@ -22,16 +22,4 @@ function initPaths(){
     })
 }
 
-function getSelectedPaths(){
-    var nodes;
-    if($('input[name=addToAllTracks]:checked').val() === '1'){
-        nodes = $(PATH_NAV_ITEM);
-    } else {
-        nodes = $(PATH_NAV_ITEM + '.active');
-    };
-    return nodes.map(function(i, e){
-
-    })
-}
-
 initPaths();

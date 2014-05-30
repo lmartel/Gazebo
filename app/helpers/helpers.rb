@@ -31,12 +31,16 @@ module Helpers
         "active"
     end
 
-    def render_cell(enrollment)
+    def render_cell(enrollment, path: @path, closable:false)
         @unique_cell_id ||= 0
         @unique_cell_id += 1
         if enrollment
             course = enrollment.course
-            return %Q(<span id="cell#{@unique_cell_id}" class="path-cell filled" data-enrollment="#{enrollment.id}" data-can-fill="#{@path.requirements(course).map{|r| r.id }}">#{course.department.abbreviation} #{course.number}</span>)
+            html = %Q{<span id="cell#{@unique_cell_id}" class="path-cell filled" data-enrollment="#{enrollment.id}" data-can-fill="#{path.requirements(course).map{|r| r.id }}">}
+            html << %Q{#{course.department.abbreviation} #{course.number}}
+            html << %Q{<button type="button" class="close delete-enrollment"></button>} if closable
+            html << %Q{</span>}
+            html
         else
             %Q(<span id="cell#{@unique_cell_id}" class="path-cell unfilled" data-content="TODO"></span>)
         end

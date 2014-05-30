@@ -29,7 +29,7 @@ class Paths_Course < Sequel::Model
 
     def validate
         super
-        errors.add(:term_id, 'must be a valid term') unless ["AUT", "WIN", "SPR", "SUM"].include?(term.abbreviation)
+        errors.add(:term_id, 'must be a valid term') unless term.nil? or ["AUT", "WIN", "SPR", "SUM"].include?(term.abbreviation)
         errors.add(:year, 'must be positive and reasonable') unless year > 0 && year < 9
     end
 end

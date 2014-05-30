@@ -5,6 +5,7 @@ var SELECT_EVENT = 'select2-selecting.local';
 
 var DEPARTMENTS_URL = '/departments.json';
 var COURSES_URL = '/courses.json?department=';
+var ADD_ENROLLMENT_URL = '/enrollments';
 
 window.state = window.state || {}
 state.search = {
@@ -54,10 +55,34 @@ function loadCourseSearchForDepartment(){
     });
 }
 
+function getSelectedPaths(){
+    var nodes;
+    if($('input[name=addToAllTracks]:checked').val() === '1'){
+        nodes = $(PATH_NAV_ITEM);
+    } else {
+        nodes = $(PATH_NAV_ITEM + '.active');
+    };
+    return nodes.map(function(){
+        return $(this).data('id');
+    }).get();
+}
+
 function courseChosen(e){
     e.preventDefault();
     var paths = getSelectedPaths();
-    $('.course-selections').append('<li>(' + e.object.id + ') ' + e.object.text + '</li>');
+    $.ajax({
+            url: ADD_ENROLLMENT_URL,
+            type: 'POST',
+            data: { paths: paths, course: e.object.id, _csrf: window.state.csrf }
+    }).done(function(data){
+        var htmls = JSON.parse(data)
+        for(var i = 0; i < paths.length; i++){
+            $(htmls[i]).wrap("<li></li>").appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells'));
+        }
+    }).fail(function(){
+        // TODO handle failure?
+        console.log("MOOP");
+    });
     $(INPUT).val('');
     $(SEARCH).select2('close').select2('open');
 }
@@ -105,7 +130,7 @@ function initSearch(){
     // A bug in Select2 throws type errors once in a while, but everything still works.
     // This suppresses them.
     window.onerror = function(message, url, lineNumber) {
-        if(url.indexOf('select2') != -1 && message.indexOf('Cannot read property "hasClass" of null') != -1){
+        if(url.indexOf('select2') != -1){ // && message.indexOf('Cannot read property "hasClass" of null') != -1){
             console.log('Suppressed[' + message + ' (' + url + ':' + lineNumber + ')]');
             return true;
         }

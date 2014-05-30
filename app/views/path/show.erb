@@ -1,4 +1,4 @@
-<div class="inner cover path-wrapper <%= select_first(:path) %>">
+<div class="inner cover path-wrapper <%= select_first(:path) %>" data-id="<%= @path.id %>">
     <h1 class="cover-heading">Path Requirements: <%= @path.name %></h1>
     <p class="lead">
     <dl class="dl-horizontal">
@@ -22,7 +22,7 @@
     <h5>Unassigned classes</h5>
     <ul class="extra-cells">
         <% sort(@path.unassigned_enrollments).each do |e| %>
-        <li><%= render_cell e %></li>
+        <li><%= render_cell e, closable:true %></li>
         <% end %>
     </ul>
     </p>

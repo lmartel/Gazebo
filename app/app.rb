@@ -57,6 +57,23 @@ class TrackTracker < Sinatra::Base
         end
     end
 
+    post '/enrollments' do
+        cid = params[:course]
+        halt 400 unless cid and (course = Course[cid])
+        paths = params[:paths]
+        half 400 unless paths and !paths.empty?
+        paths = paths.map {|pid| Path[pid.to_i] }
+        halt 403 unless paths.all? {|p| p.user == current_user }
+
+        # TODO: assign a term and year intelligently based on current enrollments
+        new_enrollments = paths.map do |p|
+            e = Enrollment.create(path_id: p.id, course_id: course.id, year: 4) or halt 500
+            render_cell(e, path:p, closable:true)
+        end
+        status 200
+        new_enrollments.to_json
+    end
+
     put '/enrollments/:id' do |id|
         halt 400 unless id and (enrollment = Enrollment[id.to_i])
         halt 403 unless enrollment.path.user == current_user
@@ -67,6 +84,13 @@ class TrackTracker < Sinatra::Base
 
         enrollment.requirement = requirement
         status (enrollment.save ? 200 : 500)
+    end
+
+    delete '/enrollments/:id' do |id|
+        halt 400 unless id and (enrollment = Enrollment[id.to_i])
+        halt 403 unless enrollment.path.user == current_user
+
+        status (enrollment.destroy ? 200 : 500)
     end
 
     # API routes

@@ -6,6 +6,7 @@ var CAN_FILL = UNFILLED_REQUIREMENT + '.fillable';
 var REQUIREMENT_ROW = '.path-row';
 var UNASSIGNED_CELLS_CLASS = 'extra-cells'
 var UNASSIGNED_CELLS = '.' + UNASSIGNED_CELLS_CLASS;
+var CLOSE_BUTTON = 'button.delete-enrollment';
 var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
 function UPDATE_ENROLLMENT_URL(enrollmentId) { return '/enrollments/' + enrollmentId; }
 
@@ -34,7 +35,7 @@ function initDraggable(){
         // snapTolerance: 20,
         zIndex: 5,
         revert: false,
-        cancel: UNFILLED_REQUIREMENT,
+        cancel: UNFILLED_REQUIREMENT + ',' + CLOSE_BUTTON,
         // refreshPositions: true,
         stop: function (event, ui) {
             var snapTo = ui.helper.data("ui-draggable").snapElements.filter(function(elem){
@@ -48,6 +49,7 @@ function initDraggable(){
 }
 
 function handleCellDragStart(elem){
+    elem.find(CLOSE_BUTTON).remove();
     var draggingUnassignedCell = elem.closest('ul').hasClass(UNASSIGNED_CELLS_CLASS);
 
     if(!draggingUnassignedCell){ // create no placeholder if currently unassigned
@@ -64,6 +66,18 @@ function handleCellDragStart(elem){
 
 function resetCellToEmpty(elem){
     elem.css({top: 0, left: 0}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO').attr('data-enrollment', '');
+}
+
+function deleteCell(elem){
+    $.ajax({
+        url: UPDATE_ENROLLMENT_URL(elem.data('enrollment')),
+        type: 'DELETE',
+        data: { _csrf: window.state.csrf }
+    }).done(function(data){
+        elem.closest('li').remove();
+    }).fail(function(){
+        // TODO handle failure?
+    });
 }
 
 function handleCellDragEnd(elem){
@@ -86,7 +100,8 @@ function handleCellDragEnd(elem){
 
     } else {
         if(replacement) replacement.remove();
-        
+
+        elem.append('<button type="button" class="close delete-enrollment"></button>');
         if(draggingUnassignedCell){
             elem.animate({top: 0, left: 0}, CELL_UNASSIGNMENT_ANIMATION_SPEED);
         } else {
@@ -124,7 +139,7 @@ function handleCellDragEnd(elem){
     var moved = false;
     var movedTo;
     if(isSnapping){
-        movedTo = isSnapping.closest('.path-row').data('requirement');
+        movedTo = isSnapping.closest(REQUIREMENT_ROW).data('requirement');
         moved = !!movedTo;
 
     } else {
@@ -136,7 +151,7 @@ function handleCellDragEnd(elem){
         $.ajax({
             url: UPDATE_ENROLLMENT_URL(enrollment),
             type: 'PUT',
-            data: { requirement: movedTo, _csrf: window.csrf }
+            data: { requirement: movedTo, _csrf: window.state.csrf }
         }).fail(function(){
             // TODO handle failure?
         });
@@ -154,6 +169,13 @@ function initPathDisplay(){
         handleCellDragStart($(this));
 
     });
+
+    $(document).on('mousedown', CLOSE_BUTTON, function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        deleteCell($(this).closest(FILLED_REQUIREMENT));
+    })
 
     $(document).on('mouseup', function(event){
         if(event.which !== 1) return; // ignore non-left clicks
