@@ -51,7 +51,6 @@ function handleCellDragStart(elem){
 
     if(!draggingUnassignedCell){ // create no placeholder if currently unassigned
         var replacement = elem.clone();
-        console.log(elem.text())
         replacement.removeClass('filled ui-draggable').addClass('unfilled fillable').attr('data-content', elem.text()).text('').css('margin-left', -elem.outerWidth() + 'px').attr('data-can-fill', '');
         elem.after(replacement);
         state.requirements.replacement = replacement;
@@ -72,7 +71,6 @@ function handleCellDragEnd(elem){
         if(replacement) replacement.remove();
         if(isSnapping.attr('id') !== elem.attr('id')){
             isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']');
-            console.log('snappin')
             elem.css({'top': '', 'left': ''});
             if(draggingUnassignedCell){
                 elem.closest('li').remove();
@@ -134,7 +132,6 @@ function initPathDisplay(){
 
     $(document).on('mouseup', function(event){
         if(event.which !== 1) return; // ignore non-left clicks
-        console.log(state)
 
         var elem = state.requirements.original;
         if(!elem) return; // ignore mouseups when not dragging an element
