@@ -35,9 +35,9 @@ module Helpers
         @unique_cell_id ||= 0
         @unique_cell_id += 1
         if course
-            '<span id="cell' + @unique_cell_id.to_s + '" class="path-cell filled" data-can-fill="' + @path.requirements(course).map{|r| r.id }.to_s + '">' + course.department.abbreviation + ' ' + course.number + '</span>'
+            %Q(<span id="cell#{@unique_cell_id}" class="path-cell filled" data-course="#{course.id}" data-can-fill="#{@path.requirements(course).map{|r| r.id }}">#{course.department.abbreviation} #{course.number}</span>)
         else
-            '<span id="cell' + @unique_cell_id.to_s + '" class="path-cell unfilled" data-content="TODO"></span>'
+            %Q(<span id="cell#{@unique_cell_id}" class="path-cell unfilled" data-content="TODO"></span>)
         end
     end
 

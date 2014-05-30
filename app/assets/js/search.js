@@ -6,7 +6,8 @@ var SELECT_EVENT = 'select2-selecting.local';
 var DEPARTMENTS_URL = '/departments.json';
 var COURSES_URL = '/courses.json?department=';
 
-var state = {
+window.state = window.state || {}
+state.search = {
     selectedDepartment: null,   // Stores the selected department, if any
     departments: null           // Caches fetched list of departments
     // dept_abbr: [...]         // Also caches course lists for each department once fetched
@@ -31,7 +32,7 @@ function loadDepartmentSearch(){
         $(SEARCH).select2({
             createSearchChoice: function() { return null; }, // Forbid custom tags
             matcher: function(term, text, opts) { return text.match('^' + term.toUpperCase()); }, // Force start-of-word matching
-            tags: state.departments
+            tags: state.search.departments
         });
 
         bindEvents(false);
@@ -39,14 +40,14 @@ function loadDepartmentSearch(){
 };
 
 function loadCourseSearchForDepartment(){
-    cachedGet(COURSES_URL + state.selectedDepartment, state.selectedDepartment).done(function(){
-        var placeholder = 'Browse ' + state.selectedDepartment + ' classes';
+    cachedGet(COURSES_URL + state.search.selectedDepartment, state.search.selectedDepartment).done(function(){
+        var placeholder = 'Browse ' + state.search.selectedDepartment + ' classes';
 
         $(SEARCH).prop('placeholder', placeholder).select2({
-            data: state[state.selectedDepartment]
+            data: state[state.search.selectedDepartment]
         }).select2('open');
 
-        var deptNode = $('<span class="department-choice">' + state.selectedDepartment + '</span>').insertBefore(INPUT);
+        var deptNode = $('<span class="department-choice">' + state.search.selectedDepartment + '</span>').insertBefore(INPUT);
         $(INPUT).css('width', 'calc(100% - ' + deptNode.outerWidth(true) + 'px)');
 
         bindEvents(true);
@@ -63,7 +64,7 @@ function courseChosen(e){
 
 function departmentChosen(e){
     e.preventDefault();
-    state.selectedDepartment = e.object.text;
+    state.search.selectedDepartment = e.object.text;
     $(SEARCH).select2({
         query: loadCourseSearchForDepartment
     }).select2('open'); // keep menu open while searching
