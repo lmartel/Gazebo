@@ -25,11 +25,11 @@ class Path < Sequel::Model
     end
 
     def enrollments(req=nil)
-        req ? Enrollment.where(path_id: id, requirement_id: req.id) : Enrollment.where(path_id: id)
+        (req ? Enrollment.where(path_id: id, requirement_id: req.id) : Enrollment.where(path_id: id)).to_a
     end
 
     def unassigned_enrollments
-        Enrollment.where(path_id: id, requirement_id: nil)
+        Enrollment.where(path_id: id, requirement_id: nil).to_a
     end
 
     def unassigned_requirements

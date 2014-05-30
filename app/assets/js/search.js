@@ -20,9 +20,9 @@ $(SEARCH).select2({
 });
 
 function cachedGet(url, key){
-    if(state[key]) return $.when(state[key]);
+    if(state.search[key]) return $.when(state.search[key]);
     return $.get(url).done(function(result){
-        state[key] = JSON.parse(result);
+        state.search[key] = JSON.parse(result);
     });
 }
 

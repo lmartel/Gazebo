@@ -3,7 +3,7 @@
     <p class="lead">A path is a vision of your Stanford career, whether you're just picking a major or planning out two concentrations, a minor, and a coterm.
     <br>You can explore many paths.
     <p class="lead">
-        <form class="form-signin form-signup" action="/embark" method="POST">
+        <form class="form-signin form-signup" action="/paths" method="POST">
             <%= csrf_tag %>
             <input class="form-control" type="text" name="name" placeholder="Name this path" required maxlength="20">
             <% @tracks.each do |track| %>

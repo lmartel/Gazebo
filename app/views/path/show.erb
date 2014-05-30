@@ -8,9 +8,9 @@
                 <dt><%= req.name %></dt>
                 <dd>
                 <div class="path-row" data-requirement="<%= req.id %>">
-                    <% courses = @path.enrollments(req).map {|e| e.course } %>
-                    <% [req.min_count, courses.count].max.times do |i| %>
-                        <%= render_cell courses[i] %> <%# Renders empty cells for unfilled requirements %>
+                    <% enrollments = sort(@path.enrollments(req)) %>
+                    <% [req.min_count, enrollments.count].max.times do |i| %>
+                        <%= render_cell enrollments[i] %> <%# Renders empty cells for unfilled requirements %>
                     <% end%>
                 </div>
                 </dd>
@@ -21,8 +21,8 @@
     </dl>
     <h5>Unassigned classes</h5>
     <ul class="extra-cells">
-        <% @path.unassigned_enrollments.map {|e| e.course }.each do |c| %>
-        <li><%= render_cell(c) %></li>
+        <% sort(@path.unassigned_enrollments).each do |e| %>
+        <li><%= render_cell e %></li>
         <% end %>
     </ul>
     </p>

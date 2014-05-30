@@ -7,6 +7,7 @@ var REQUIREMENT_ROW = '.path-row';
 var UNASSIGNED_CELLS_CLASS = 'extra-cells'
 var UNASSIGNED_CELLS = '.' + UNASSIGNED_CELLS_CLASS;
 var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
+function UPDATE_ENROLLMENT_URL(enrollmentId) { return '/enrollments/' + enrollmentId; }
 
 window.state = window.state || {}
 state.requirements = {
@@ -61,6 +62,10 @@ function handleCellDragStart(elem){
     state.requirements.original = elem;
 }
 
+function resetCellToEmpty(elem){
+    elem.css({top: 0, left: 0}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO').attr('data-enrollment', '');
+}
+
 function handleCellDragEnd(elem){
     var replacement = state.requirements.replacement;
     var isSnapping = state.requirements.isSnappingTo;
@@ -70,12 +75,12 @@ function handleCellDragEnd(elem){
     if(isSnapping){ // We remove the replacement, put the original element back, and change the text of both elements to complete the swap
         if(replacement) replacement.remove();
         if(isSnapping.attr('id') !== elem.attr('id')){
-            isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']');
+            isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']').attr('data-enrollment', elem.data('enrollment'));
             elem.css({'top': '', 'left': ''});
             if(draggingUnassignedCell){
                 elem.closest('li').remove();
             } else {
-                elem.css({'top': '', 'left': ''}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO');
+                resetCellToEmpty(elem);
             }
         }
 
@@ -91,7 +96,7 @@ function handleCellDragEnd(elem){
             var start = elem.position();
             var dest = clone.position();
 
-            elem.css({top: 0, left: 0}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO');
+            resetCellToEmpty(elem);
             clone.css({
                 position: 'absolute',
                 top: start.top, 
@@ -115,12 +120,32 @@ function handleCellDragEnd(elem){
 
     if(replacement) replacement.css('margin-left', '0');
 
+    var enrollment = (replacement || elem).data('enrollment');
+    var moved = false;
+    var movedTo;
+    if(isSnapping){
+        movedTo = isSnapping.closest('.path-row').data('requirement');
+        moved = !!movedTo;
+
+    } else {
+        movedTo = null;
+        moved = !draggingUnassignedCell;
+    }
+
+    if(moved){
+        $.ajax({
+            url: UPDATE_ENROLLMENT_URL(enrollment),
+            type: 'PUT',
+            data: { requirement: movedTo, _csrf: window.csrf }
+        }).fail(function(){
+            // TODO handle failure?
+        });
+    }
+
     initDraggable();
     state.requirements.original = null;
     state.requirements.replacement = null;
     state.requirements.isSnappingTo = null;
-
-    // $.post('/update_path')
 }
 
 function initPathDisplay(){

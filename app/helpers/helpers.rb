@@ -31,13 +31,24 @@ module Helpers
         "active"
     end
 
-    def render_cell(course)
+    def render_cell(enrollment)
         @unique_cell_id ||= 0
         @unique_cell_id += 1
-        if course
-            %Q(<span id="cell#{@unique_cell_id}" class="path-cell filled" data-course="#{course.id}" data-can-fill="#{@path.requirements(course).map{|r| r.id }}">#{course.department.abbreviation} #{course.number}</span>)
+        if enrollment
+            course = enrollment.course
+            return %Q(<span id="cell#{@unique_cell_id}" class="path-cell filled" data-enrollment="#{enrollment.id}" data-can-fill="#{@path.requirements(course).map{|r| r.id }}">#{course.department.abbreviation} #{course.number}</span>)
         else
             %Q(<span id="cell#{@unique_cell_id}" class="path-cell unfilled" data-content="TODO"></span>)
+        end
+    end
+
+    def sort(a)
+        return a if a.empty?
+        
+        if a.first.kind_of? Enrollment
+            a.sort_by {|e| [e.course.department.abbreviation, e.course.number.to_i] }
+        else
+            raise "[Sinatra::Helpers] sort() not yet implemented for this class"
         end
     end
 

@@ -33,6 +33,43 @@ class TrackTracker < Sinatra::Base
 
 	DB_URL = 'sqlite://test.db'
 
+    # Site routes
+    get '/' do
+        @paths = (logged_in? ? current_user.paths : [])
+        erb :index
+    end
+
+    get '/embark' do
+        @tracks = Track.all
+        erb :"path/new"
+    end
+
+    # Form/AJAX routes
+    post '/paths' do
+        if params[:tracks]
+            path = Path.new name: params[:name], user_id: current_user.id
+            path.tracks.concat params[:tracks].keys.map { |id| Track[id] }
+            path.save
+            redirect to('/')
+        else
+            flash[:error] = "Choose at least one major, minor, or track."
+            redirect to('/embark')
+        end
+    end
+
+    put '/enrollments/:id' do |id|
+        halt 400 unless id and (enrollment = Enrollment[id.to_i])
+        halt 403 unless enrollment.path.user == current_user
+
+        req_id = params[:requirement]
+        requirement = nil
+        halt 400 unless req_id.empty? or (requirement = Requirement[req_id.to_i])
+
+        enrollment.requirement = requirement
+        status (enrollment.save ? 200 : 500)
+    end
+
+    # API routes
     get '/courses.json' do
         dept = params[:department]
         if dept
@@ -52,27 +89,8 @@ class TrackTracker < Sinatra::Base
         end).to_json
     end
 
-    get '/' do
-        @paths = (logged_in? ? current_user.paths : [])
-        erb :index
-    end
 
-    get '/embark' do
-        @tracks = Track.all
-        erb :"path/new"
-    end
 
-    post '/embark' do
-        if params[:tracks]
-            path = Path.new name: params[:name], user_id: current_user.id
-            path.tracks.concat params[:tracks].keys.map { |id| Track[id] }
-            path.save
-            redirect to('/')
-        else
-            flash[:error] = "Choose at least one major, minor, or track."
-            redirect to('/embark')
-        end
-    end
 
 end
 
