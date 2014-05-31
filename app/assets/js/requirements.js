@@ -80,7 +80,7 @@ function handleCellDragStart(elem){
 }
 
 function resetCellToEmpty(elem){
-    elem.css({top: 0, left: 0}).removeClass('filled ui-draggable').addClass('unfilled').text('').attr('data-content', 'TODO').attr('data-enrollment', '');
+    elem.css({top: 0, left: 0}).removeClass('filled ui-draggable future').addClass('unfilled').text('').attr('data-content', 'TODO').attr('data-enrollment', '');
 }
 
 function deleteCell(elem){
@@ -104,7 +104,9 @@ function handleCellDragEnd(elem){
     if(isSnapping){ // We remove the replacement, put the original element back, and change the text of both elements to complete the swap
         if(replacement) replacement.remove();
         if(isSnapping.attr('id') !== elem.attr('id')){
+            console.log(elem.get())
             isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']').attr('data-enrollment', elem.data('enrollment'));
+            if(elem.hasClass('future')) isSnapping.addClass('future'); // TODO copy data and modifier classes wholesale somehow
             elem.css({'top': '', 'left': ''});
             if(draggingUnassignedCell){
                 elem.closest('li').remove();

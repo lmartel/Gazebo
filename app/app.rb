@@ -76,8 +76,13 @@ class TrackTracker < Sinatra::Base
         halt 403 unless paths.all? {|p| p.user == current_user }
 
         # TODO: assign a term and year intelligently based on current enrollments
+        possible_terms = Term.enrollable.select {|t| course.terms.include?(t) }
+        now = Quarter.new(current_user.year, current_user.term)
         new_enrollments = paths.map do |p|
-            e = Enrollment.create(path_id: p.id, course_id: course.id, year: 4) or halt 500
+            try_quarter = now.dup
+            try_quarter.next!(possible_terms) unless possible_terms.include?(try_quarter.term)
+            try_quarter.next!(possible_terms) until Enrollment.where(path_id: p.id, year: try_quarter.year, term_id: try_quarter.term.id).map {|e| e.course.units_max }.reduce(0, :+) <= 20
+            e = Enrollment.create(path_id: p.id, course_id: course.id, year: try_quarter.year, term_id: try_quarter.term.id) or halt 500
             render_cell(e, path:p, closable:true)
         end
         status 200

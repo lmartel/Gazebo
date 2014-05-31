@@ -87,6 +87,11 @@ header {
     cursor: move;
 }
 
+.path-cell.filled.future {
+    border: 1px solid lightsalmon;
+    color: lightsalmon;
+}
+
 .path-cell.unfilled:before {
     content: attr(data-content);
 }

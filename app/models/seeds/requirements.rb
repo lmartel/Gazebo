@@ -71,14 +71,16 @@ module Seeds
                     make("Significant Implementation").includes 140, 143, 144, 145, 148, '210B', 221, 243, 248, 347
 
                     a = [242, 243]
-                    b = [241, 258, 259]
-                    c = [244, 245, 295, 341, 343, 345]
-                    d = [255, 261, 268, 355, '361A', '361B', 365]
+                    b = [244, 245, 295, 341, 343, 345]
+                    c = [255, 261, 265, 267, 268, 355, '361A', '361B', 367]
                     make("Requirement A", 2).includes a
                     make("Requirement B").includes b
                     make("Requirement C").includes c
-                    make("Requirement D").includes d
-                    make("Requirement E", 2).includes (a+b+c+d+[346, 393, 395, 399])
+                    make("Requirement D", 5).includes (a+b+c+[241, 258, 259, 346, 362, 393, 395, 399])
+                    make("Electives", 6).includes lambda { |course| # TODO: "advisor approval" technical classes > 100?
+                        n = course.number.to_i
+                        course.department.abbreviation == 'CS' && n > 110 && ![196, 198].include?(n)
+                    }
                 end
             end
         end

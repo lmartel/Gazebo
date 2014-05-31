@@ -32,7 +32,7 @@ make([%q(Design I : Fundamental Visual Language), %q(160), %q(3), %q(4)]).includ
 make([%q(Catalysts for Design), %q(161), %q(3), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Design in Motion), %q(166), %q(3), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Introduction to Animation), %q(167), %q(3), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Introduction to Photography), %q(170), %q(4), %q(4)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Introduction to Photography), %q(170), %q(4), %q(4)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Introduction to Photo- Summer), %q(170S), %q(3), %q(3)]).includes ["SUM"]
 make([%q(Intro to Digital Photo), %q(171), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Cell Phone Photography), %q(173E), %q(4), %q(4)]).includes ["AUT", "WIN", "SPR"]

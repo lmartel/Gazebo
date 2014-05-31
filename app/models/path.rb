@@ -53,7 +53,10 @@ class Path < Sequel::Model
             break if count == nextCount
             count = nextCount
             unassigned_enrollments.map { |e| 
-                viable = reqs.select {|req| req.courses.include?(e.course) }
+                # We find requirements that can be filled by the course, and that do not already have a copy of the same course assigned
+                viable = reqs.select { |req| 
+                    req.courses.include?(e.course) && !enrollments(req).map{|old_e| old_e.course}.include?(e.course) 
+                }.sort_by { |req| req.min_count }
                 [e, viable]
             }.sort_by { |a|
                 a.last.count

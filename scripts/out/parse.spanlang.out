@@ -34,7 +34,7 @@ make([%q(Spanish for Medical Students (HRP 280)), %q(121M), %q(3), %q(3)]).inclu
 make([%q(Spanish for Medical Students (HRP 281)), %q(122M), %q(2), %q(2)]).includes ["WIN"]
 make([%q(Spanish for Medical Students (HRP 282)), %q(123M), %q(2), %q(3)]).includes ["SPR"]
 make([%q(Spanish for Heritage and Foreign Language Pre-Med and Public Health Students), %q(131M), %q(3), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Individual Reading), %q(199), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Individual Reading), %q(199), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Intensive First-Year Spanish for Stanford Grads, Part A), %q(205A), %q(3), %q(5)]).includes ["SUM"]
 make([%q(Intensive First-Year Spanish for Stanford Grads, Part B), %q(205B), %q(3), %q(5)]).includes ["SUM"]
 make([%q(Intensive First-Year Spanish for Stanford Grads, Part C), %q(205C), %q(3), %q(5)]).includes ["SUM"]

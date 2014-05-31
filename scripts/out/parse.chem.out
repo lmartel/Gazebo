@@ -72,5 +72,6 @@ make([%q(Bio-Inorganic Chemistry (BIOPHYS 297)), %q(297), %q(3), %q(3)]).include
 make([%q(Teaching of Chemistry), %q(299), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Department Colloquium), %q(300), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Research in Chemistry), %q(301), %q(2), %q(2)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Curricular Practical Training for Chemists), %q(390), %q(1), %q(1)]).includes ["SUM"]
 make([%q(Frontiers in Interdisciplinary Biosciences (BIO 459, BIOC 459, BIOE 459, CHEMENG 459, PSYCH 459)), %q(459), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(TGR Dissertation), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

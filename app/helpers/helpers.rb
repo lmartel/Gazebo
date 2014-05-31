@@ -1,5 +1,44 @@
 module Helpers
 
+    class Quarter
+        include Comparable
+        attr_accessor :year, :term
+
+        def initialize(year, term)
+            @year = year
+            @term = term
+        end
+
+        def next(terms = nil)
+            dup.next!(terms)
+        end
+
+        def next!(terms = nil)
+            terms = [terms] if terms and !terms.kind_of? Array
+            case @term.abbreviation
+            when 'AUT'
+                @term = Term[abbreviation: 'WIN']
+            when 'WIN'
+                @term = Term[abbreviation: 'SPR']
+            when 'SPR'
+                @term = Term[abbreviation: 'SUM']
+            when 'SUM'
+                @year += 1
+                @term = Term[abbreviation: 'AUT']
+            end
+            next!(terms) if terms and !terms.include?(@term)
+            self
+        end
+
+        def <=>(another_quarter)
+            return -1 if self.year < another_quarter.year
+            return 1 if self.year > another_quarter.year
+            terms = Term.enrollable
+            terms.index(self.term) <=> terms.index(another_quarter.term)
+        end
+
+    end
+
     def titleize(str)
         str.split(' ').map { |word| word.downcase.capitalize }.join(' ')
     end
@@ -45,7 +84,8 @@ module Helpers
         @unique_cell_id += 1
         if enrollment
             course = enrollment.course
-            html = %Q{<span id="cell#{@unique_cell_id}" class="path-cell filled" data-enrollment="#{enrollment.id}" data-can-fill="#{path.requirements(course).map{|r| r.id }}">}
+            future = enrollment.term.nil? || (Quarter.new(path.user.year, path.user.term) <= Quarter.new(enrollment.year, enrollment.term))
+            html = %Q{<span id="cell#{@unique_cell_id}" class="path-cell filled#{future ? ' future' : ' NOTFUTURE'}" data-enrollment="#{enrollment.id}" data-can-fill="#{path.requirements(course).map{|r| r.id }}">}
             html << %Q{#{course.department.abbreviation} #{course.number}}
             html << %Q{<button type="button" class="close delete-enrollment"></button>} if closable
             html << %Q{</span>}

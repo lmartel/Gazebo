@@ -140,6 +140,7 @@ make([%q(Topics in Computational Linguistics: History of Computational Linguisti
 make([%q(Linguistics and the Teaching of English as a Second/Foreign Language (LINGUIST 191)), %q(291), %q(4), %q(5)]).includes ["WIN"]
 make([%q(Linguistic Research Discussion Group), %q(294), %q(1), %q(1)]).includes ["AUT"]
 make([%q(M.A. Project), %q(390), %q(1), %q(6)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Research Activity in Sociolinguistics), %q(393A), %q(1), %q(2)]).includes ["SUM"]
 make([%q(TA Training Workshop), %q(394), %q(1), %q(1)]).includes ["AUT"]
 make([%q(Research Workshop), %q(395), %q(1), %q(2)]).includes ["SPR"]
 make([%q(Research Workshop III), %q(395C), %q(1), %q(2)]).includes ["SUM"]
