@@ -2,6 +2,8 @@
 
 var PATH_WRAPPER = '.path-wrapper';
 var REQUIREMENT_ROW = '.path-row';
+var REQUIREMENT_NAME_CLASS = "requirement-name"
+var REQUIREMENT_NAME = "." + REQUIREMENT_NAME_CLASS
 
 var FILLED_REQUIREMENT = '.path-cell.filled';
 var UNFILLED_REQUIREMENT = '.path-cell.unfilled';
@@ -208,8 +210,14 @@ function initPathDisplay(){
     });
 
     // Open requirement description modals
-    $(document).on('click', UNFILLED_REQUIREMENT, function(event){
-        var row = $(this).closest(REQUIREMENT_ROW);
+    $(document).on('click', UNFILLED_REQUIREMENT + "," + REQUIREMENT_NAME, function(event){
+        var row;
+        if($(event.target).hasClass(REQUIREMENT_NAME_CLASS)){
+            title = $(this).text();
+            row = $(this).next('dd').find(REQUIREMENT_ROW);
+        } else {
+            row = $(this).closest(REQUIREMENT_ROW);
+        }
         var title = row.closest('dd').prev('dt').text()
         var modal = $(REQUIREMENTS_MODAL);
         var body = modal.find(MODAL_BODY);
@@ -224,7 +232,7 @@ function initPathDisplay(){
             var list = body.find(".requirements-list");
             var courses = JSON.parse(data);
             for(var i = 0; i < courses.length; i++){
-                $('<li></li>').text(courses[i]).appendTo(list);
+                $('<li></li>').html(courses[i]).appendTo(list);
             }
         }).fail(function(){
             // TODO handle failure?

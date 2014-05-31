@@ -3,9 +3,14 @@
     <p class="lead">
     <dl class="dl-horizontal">
         <% @path.requirements_by_track.each do |tr, reqs| %>
-            <h5><%= pp tr %></h5>
+            <h5>
+                <%= pp tr %>
+                <% if tr.units_min %>
+                    (<%= @path.enrollments(tr).map {|e| e.course.units_max }.reduce(0, :+) %> of <%= tr.units_min %> units filled on last refresh)
+                <% end %>
+            </h5>
             <% reqs.each do |req| %>
-                <dt><%= req.name %></dt>
+                <dt class="requirement-name"><%= req.name %></dt>
                 <dd>
                 <div class="path-row" data-requirement="<%= req.id %>">
                     <% enrollments = sort(@path.enrollments(req)) %>

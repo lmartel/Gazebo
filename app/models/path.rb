@@ -12,20 +12,40 @@ class Path < Sequel::Model
         }.to_h
     end
 
-    def requirements(course=nil)
+    def requirements(model=nil)
         all = requirements_by_track.values.flatten
-        course ? all.select { |req| req.courses.include?(course) } : all
+        return all unless model
+        case model
+        when Course
+            all.select { |req| req.courses.include?(model) }
+        else
+            raise "[Path::requirements] unsupported class"
+        end
     end
 
     def requirements_by_priority
         requirements.sort_by do |req|
             possibilities = req.courses.count
-            [1 - (req.min_count.to_f / possibilities), possibilities]
+            ratio = req.min_count.to_f / possibilities
+            ratio = 0 if ratio.nan?
+            [1 - ratio, possibilities]
         end
     end
 
-    def enrollments(req=nil)
-        (req ? Enrollment.where(path_id: id, requirement_id: req.id) : Enrollment.where(path_id: id)).to_a
+    def enrollments(model=nil)
+        all = Enrollment.where(path_id: id)
+        return all.to_a unless model
+        case model
+        when Requirement
+            all.where(requirement_id: model.id).to_a
+        when Track
+            all.to_a.select do |enr| 
+                req = enr.requirement
+                req && req.track_id == model.id
+            end
+        else
+            raise "[Path::enrollments] unsupported class"
+        end
     end
 
     def unassigned_enrollments
@@ -35,7 +55,7 @@ class Path < Sequel::Model
     def unassigned_requirements
         requirements_by_priority.select do |req|
             existing_enrollments = Enrollment.where(path_id: id, requirement_id: req.id) 
-            units_enrolled = existing_enrollments.map {|enr| enr.course.units_max }.reduce(:+)
+            units_enrolled = existing_enrollments.map {|enr| enr.course.units_max }.reduce(0, :+)
             existing_enrollments.count < req.min_count || units_enrolled < req.min_units
         end
     end

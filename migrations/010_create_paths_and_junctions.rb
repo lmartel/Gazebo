@@ -10,8 +10,8 @@ Sequel.migration do
         create_table :paths_tracks do
             primary_key :id
 
-            foreign_key :path_id, :paths
-            foreign_key :track_id, :tracks
+            foreign_key :path_id, :paths, null: false
+            foreign_key :track_id, :tracks, null: false
         end
 
         create_table :paths_courses do

@@ -44,7 +44,6 @@ make([%q(Wrestling with Modernity: German Literature and Thought from 1900 to th
 make([%q(Introduction to Graduate Studies: Criticism as Profession (COMPLIT 369, DLCL 369, FRENCH 369, ITALIAN 369)), %q(369), %q(5), %q(5)]).includes ["AUT"]
 make([%q(Martin Heidegger (COMPLIT 213A, COMPLIT 313A, GERMAN 282)), %q(382), %q(3), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(German Capstone: Reading Franz Kafka (COMPLIT 111, COMPLIT 311C, GERMAN 190, JEWISHST 147, JEWISHST 349)), %q(390), %q(3), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Graduate Studies Colloquium), %q(397), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Dissertation Prospectus Colloquium), %q(398), %q(1), %q(12)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Individual Work), %q(399), %q(1), %q(12)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(TGR Dissertation), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

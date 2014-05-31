@@ -1,4 +1,13 @@
 /* Disagreements with Bootstrap */
+
+@media (min-width: 992px) {
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 940px;
+  }
+}
+
 button.close {
     float: none;
     color: white;
@@ -51,6 +60,10 @@ header {
     text-align: left;
 }
 
+.requirements-list a {
+    color: darkblue;
+}
+
 /* Path styling */
 
 .path-wrapper {
@@ -78,6 +91,9 @@ header {
     border: 1px dashed #fff;
     padding: 0px 5px;
     background: #333;
+}
+
+.path-cell, .requirement-name {
     cursor: help;
 }
 

@@ -1,13 +1,10 @@
 require_relative '../app/models/init'
 
-exit(1) if Path.count > 0
-
-U = User.create email:"lmartel@stanford.edu", password:"test", password_confirmation:"test", year: 3, term_id: Term.search(:spr).id
-P = Path.create name:"Test", user_id: U.id
-P2 = Path.create name:"Test2", user_id: U.id
-
-def track(path, name)
-    Paths_Track.create track_id: Track.search(name).id, path_id: path.id
+def tracks(path, *names)
+    names.each do |name|
+        Paths_Track.create track_id: Track.search(name).id, path_id: path.id
+    end
+    path
 end
 
 def enroll(term_abbr, year)
@@ -18,21 +15,24 @@ def enroll(term_abbr, year)
     @term = nil
 end
 
+exit(1) if Path.count > 0
+
+U = User.create email:"lmartel@stanford.edu", password:"test", password_confirmation:"test", year: 3, term_id: Term.search(:spr).id
+PATHS = [
+    tracks(Path.create(name:"Systems | Pure Theory", user_id: U.id), "CS_UNDERGRAD_SYSTEMS", "CS_GRADUATE_THEORETICAL_COMPUTER_SCIENCE_SINGLE", "MATH_UNDERGRAD_MINOR"),
+    tracks(Path.create(name:"Systems | Theory", user_id: U.id), "CS_UNDERGRAD_SYSTEMS", "CS_GRADUATE_SOFTWARE_THEORY_SINGLE", "MATH_UNDERGRAD_MINOR"),
+    tracks(Path.create(name:"Theory | Systems", user_id: U.id), "CS_UNDERGRAD_THEORY", "CS_GRADUATE_SYSTEMS_SINGLE", "MATH_UNDERGRAD_MINOR")
+]
+
 [:cs, :math, :engr, :physics, :chem].each do |dept|
     define_method dept do |*args|
         args.map {|n| Course.search("#{dept.to_s.upcase} #{n}") }.each do |c|
-            Enrollment.create path_id: P.id, course_id: c.id, term_id: @term.id, year: @year
-            Enrollment.create path_id: P2.id, course_id: c.id, term_id: @term.id, year: @year
+            PATHS.each do |path|
+                Enrollment.create path_id: path.id, course_id: c.id, term_id: @term.id, year: @year
+            end
         end
     end
 end
-
-track P, "CS_UNDERGRAD_SYSTEMS"
-track P, "CS_GRADUATE_SOFTWARE_THEORY_SINGLE"
-track P, "MATH_UNDERGRAD_MINOR"
-
-track P2, "CS_UNDERGRAD_SYSTEMS"
-track P2, "MATH_UNDERGRAD_MINOR"
 
 enroll :aut, 1 do
     cs '106A'
@@ -49,7 +49,6 @@ end
 
 enroll :spr, 1 do
     cs 107
-    cs 107
 end
 
 enroll :aut, 2 do
@@ -58,17 +57,14 @@ end
 
 enroll :win, 2 do
     cs 103, 108
-    cs 103
 end
 
 enroll :spr, 2 do
     cs 109, 110, 143
-    cs 109, 110
 end
 
 enroll :aut, 3 do
     cs 161, 221, '249A'
-    cs 161
     math 113
 end
 
@@ -79,4 +75,27 @@ end
 enroll :spr, 3 do
     cs 166, 167, '193p'
     math 110
+end
+
+enroll :aut, 4 do
+    cs 144, 229
+end
+
+enroll :win, 4 do
+    cs 140, 154
+end
+
+enroll :spr, 4 do
+    cs 155
+    
+    cs '181W', '181W'
+    engr 62 # msne 111
+end
+
+enroll :aut, 5 do
+    cs 242
+end
+
+enroll :win, 5 do
+    cs 243
 end

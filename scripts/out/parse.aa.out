@@ -45,7 +45,6 @@ make([%q(Aircraft and Rocket Propulsion), %q(283), %q(3), %q(3)]).includes ["WIN
 make([%q(Advanced Rocket Propulsion), %q(284A), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Propulsion System Design Laboratory), %q(284B), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Propulsion System Design Laboratory), %q(284C), %q(3), %q(3)]).includes ["SPR"]
-make([%q(Problems in Aero/Astro), %q(290), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Practical Training), %q(291), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Case Studies in Aircraft Design), %q(294), %q(1), %q(1)]).includes ["SPR"]
 make([%q(Aerospace Structures and Materials), %q(295), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]

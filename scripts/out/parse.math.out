@@ -145,7 +145,6 @@ make([%q(Computation and Algorithms in Mathematics), %q(295), %q(3), %q(3)]).inc
 make([%q(Advanced Topics in Convex Optimization), %q(301), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Top Ten Algorithms of the 20th Century (CME 329)), %q(310), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Graduate Teaching Seminar), %q(355), %q(1), %q(1)]).includes ["SPR"]
-make([%q(Advanced Reading and Research), %q(360), %q(1), %q(10)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Research Seminar Participation), %q(361), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Seminar in Analysis), %q(381), %q(1), %q(3)]).includes ["BY ARRANGEMENT"]
 make([%q(Qualifying Examination Seminar), %q(382), %q(1), %q(3)]).includes ["SUM"]

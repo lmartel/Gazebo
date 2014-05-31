@@ -46,12 +46,21 @@ class TrackTracker < Sinatra::Base
         erb :"path/new"
     end
 
+    get '/courses/:dept/:num' do |dept_abbr, number|
+        dept = Department[abbreviation: dept_abbr]
+        halt 404 unless dept
+        @course = Course[department_id: dept.id, number: number]
+        halt 404 unless @course
+        erb :"course/show"
+    end
+
     # Form/AJAX routes
     post '/paths' do
         if params[:tracks]
-            path = Path.new name: params[:name], user_id: current_user.id
-            path.tracks.concat params[:tracks].keys.map { |id| Track[id] }
-            path.save
+            path = Path.create name: params[:name], user_id: current_user.id
+            params[:tracks].keys.each { |tid| Paths_Track.create track_id: tid, path_id: path.id }
+            
+            flash[:selection_override] = path.id
             redirect to('/')
         else
             flash[:error] = "Choose at least one major, minor, or track."
@@ -71,12 +80,13 @@ class TrackTracker < Sinatra::Base
         cid = params[:course]
         halt 400 unless cid and (course = Course[cid])
         paths = params[:paths]
-        half 400 unless paths and !paths.empty?
+        halt 400 unless paths and !paths.empty?
         paths = paths.map {|pid| Path[pid.to_i] }
         halt 403 unless paths.all? {|p| p.user == current_user }
 
         # TODO: assign a term and year intelligently based on current enrollments
         possible_terms = Term.enrollable.select {|t| course.terms.include?(t) }
+        halt 406 if possible_terms.empty?
         now = Quarter.new(current_user.year, current_user.term)
         new_enrollments = paths.map do |p|
             try_quarter = now.dup
@@ -110,7 +120,9 @@ class TrackTracker < Sinatra::Base
 
     get '/requirements.json/:id' do |req_id|
         Requirement[req_id.to_i].courses.map { |c| 
-            "#{c.department.abbreviation}#{c.number}: #{pp c} [#{pp_units c} units]"
+            dept = c.department.abbreviation
+            num = c.number
+            %Q(#{dept}#{num}: <a href="/courses/#{dept.downcase}/#{num.downcase}">#{pp c}</a> [#{pp_units c} units])
         }.to_json
     end
 
