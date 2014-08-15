@@ -84,8 +84,13 @@ module Helpers
         @unique_cell_id += 1
         if enrollment
             course = enrollment.course
-            future = enrollment.term.nil? || (Quarter.new(path.user.year, path.user.term) <= Quarter.new(enrollment.year, enrollment.term))
-            html = %Q{<span id="cell#{@unique_cell_id}" class="path-cell filled#{future ? ' future' : ' NOTFUTURE'}" data-enrollment="#{enrollment.id}" data-can-fill="#{path.requirements(course).map{|r| r.id }}">}
+            future = path.user.future?(enrollment)
+            html = %Q{<span id="cell#{@unique_cell_id}" 
+                class="path-cell filled#{future ? ' future' : ' NOTFUTURE'}" 
+                data-enrollment="#{enrollment.id}" 
+                data-can-fill="#{path.requirements(course).map {|r| r.id }}" 
+                data-offered="#{course.offered.map { |t| Term.enrollable.find_index(t) + 1 }}"
+            >}
             html << %Q{#{course.department.abbreviation} #{course.number}}
             html << %Q{<button type="button" class="close delete-enrollment"></button>} if closable
             html << %Q{</span>}
@@ -103,6 +108,10 @@ module Helpers
         else
             raise "[Sinatra::Helpers] sort() not yet implemented for this class"
         end
+    end
+
+    def calendar?
+        !!session[:calendar]
     end
 
     def logged_in?

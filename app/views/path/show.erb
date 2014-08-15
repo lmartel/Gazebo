@@ -1,13 +1,34 @@
 <div class="inner cover path-wrapper <%= select_first(:path, override: @path.id) %>" data-id="<%= @path.id %>">
+<% if calendar? %>
+    <h1 class="cover-heading">Path Calendar: <%= @path.name %></h1>
+    <p class="lead">
+    <table class="table table-bordered calendar">
+        <tr>
+            <% Term.enrollable.each do |t| %>
+            <th><%= t.name %></th>
+            <% end %>
+        </tr>
+        <% (1..6).each do |y| %>
+            <tr class="calendar-row" data-year=<%= y %>>
+                <% (1..4).each do |t| %>
+                    <td class="calendar-cell" data-term=<%= t %>>
+                        <% @path.enrollments_within_term(y, t).each do |enr| %>
+                            <%= render_cell enr %>
+                        <% end %>
+                    </td>
+                <% end %>
+            </tr>
+        <% end %>
+
+    </table>
+    </p>
+<% else %>
     <h1 class="cover-heading">Path Requirements: <%= @path.name %></h1>
     <p class="lead">
     <dl class="dl-horizontal">
         <% @path.requirements_by_track.each do |tr, reqs| %>
             <h5>
-                <%= pp tr %>
-                <% if tr.units_min %>
-                    (<%= @path.enrollments(tr).map {|e| e.course.units_max }.reduce(0, :+) %> of <%= tr.units_min %> units filled on last refresh)
-                <% end %>
+                <%= pp tr %> (<%= @path.units_within_track(tr) %> <% if tr.units_min %> of <%= tr.units_min %> <% end %> units filled on last refresh)
             </h5>
             <% reqs.each do |req| %>
                 <dt class="requirement-name"><%= req.name %></dt>
@@ -37,4 +58,5 @@
         <button type="submit" class="btn btn-lg btn-default autolayout">Autolayout all classes</button>
     </form>
     </p>
+<% end %>
 </div>

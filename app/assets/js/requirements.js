@@ -24,8 +24,8 @@ var AUTOLAYOUT_BUTTON = "button.autolayout";
 
 var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
 
-function UPDATE_ENROLLMENT_URL(id) { return '/enrollments/' + id; }
-function REQUIREMENT_URL(id) { return '/requirements.json/' + id; }
+var UPDATE_REQUIREMENT_URL = function(id) { return '/enrollments/' + id + '/requirement'; }
+var REQUIREMENT_URL = function(id) { return '/requirements.json/' + id; }
 
 window.state = window.state || {}
 state.requirements = {
@@ -87,7 +87,7 @@ function resetCellToEmpty(elem){
 
 function deleteCell(elem){
     $.ajax({
-        url: UPDATE_ENROLLMENT_URL(elem.data('enrollment')),
+        url: UPDATE_REQUIREMENT_URL(elem.data('enrollment')),
         type: 'DELETE',
         data: { _csrf: window.state.csrf }
     }).done(function(data){
@@ -168,7 +168,7 @@ function handleCellDragEnd(elem){
 
     if(moved){
         $.ajax({
-            url: UPDATE_ENROLLMENT_URL(enrollment),
+            url: UPDATE_REQUIREMENT_URL(enrollment),
             type: 'PUT',
             data: { requirement: movedTo, _csrf: window.state.csrf }
         }).fail(function(){
@@ -182,7 +182,7 @@ function handleCellDragEnd(elem){
     state.requirements.isSnappingTo = null;
 }
 
-function initPathDisplay(){
+function initRequirements(){
     // Drag has started
     $(document).on('mousedown', FILLED_REQUIREMENT + ':not(' + CLOSE_BUTTON + ')', function(event){
         if(event.which !== 1) return; // ignore non-left clicks
@@ -249,4 +249,3 @@ function initPathDisplay(){
     
 }
 
-initPathDisplay();

@@ -9,7 +9,12 @@
 <body>
 <header>
 <% if logged_in? %>
-    Logout of <%= current_user.email %>
+    Logout of <%= current_user.email %><br><br>
+    <% if calendar? %>
+        <button class="btn btn-sm btn-default" onclick="window.location='/requirements'">Requirements mode</button>
+    <% else %>
+        <button class="btn btn-sm btn-default" onclick="window.location='/calendar'")>Calendar mode</button>
+    <% end %>
 <% else %>
     Login
 <% end %>
@@ -37,6 +42,9 @@ window.state = window.state || {}
 window.state.csrf = "<%= csrf_token %>"
 </script> <%# TODO find better way to embed this in JS files %>
 <%= js :app %>
+<script>
+<%= if calendar? then "initCalendar();" else "initRequirements();" end %>
+</script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -54,6 +54,17 @@ class TrackTracker < Sinatra::Base
         erb :"course/show"
     end
 
+    get '/calendar' do
+        session[:calendar] = true
+        redirect back
+    end
+
+    get '/requirements' do
+        session[:calendar] = false
+        redirect back
+    end
+
+
     # Form/AJAX routes
     post '/paths' do
         if params[:tracks]
@@ -99,7 +110,7 @@ class TrackTracker < Sinatra::Base
         new_enrollments.to_json
     end
 
-    put '/enrollments/:id' do |id|
+    put '/enrollments/:id/requirement' do |id|
         halt 400 unless id and (enrollment = Enrollment[id.to_i])
         halt 403 unless enrollment.path.user == current_user
 
@@ -108,7 +119,19 @@ class TrackTracker < Sinatra::Base
         halt 400 unless req_id.empty? or (requirement = Requirement[req_id.to_i])
 
         enrollment.requirement = requirement
-        status (enrollment.save ? 200 : 500)
+        status(enrollment.save ? 200 : 500)
+    end
+
+    put '/enrollments/:id/term' do |id|
+        halt 400 unless id and (enrollment = Enrollment[id.to_i])
+        halt 403 unless enrollment.path.user == current_user
+
+        halt 400 unless (term = Term.enrollable[params[:term].to_i - 1]) and (year = params[:year].to_i)
+
+        enrollment.term = term
+        enrollment.year = year
+        status(enrollment.save ? 200 : 500)
+        body 'future' if current_user.future?(enrollment)
     end
 
     delete '/enrollments/:id' do |id|

@@ -6,7 +6,7 @@ class Path < Sequel::Model
     def requirements_by_track
         tracks.map {|tr|
             reqs = []
-            reqs.concat tr.department.core_requirements if tr.name.include?('UNDERGRAD')
+            reqs.concat tr.department.core_requirements if tr.has_core?
             reqs.concat tr.requirements
             [tr, reqs]
         }.to_h
@@ -32,6 +32,12 @@ class Path < Sequel::Model
         end
     end
 
+    def units_within_track(tr)
+        base = enrollments(tr)
+        base.concat tr.department.core_requirements.flat_map { |req| enrollments(req) } if tr.has_core?
+        base.uniq.map {|e| e.course.units_max }.reduce(0, :+)
+    end
+
     def enrollments(model=nil)
         all = Enrollment.where(path_id: id)
         return all.to_a unless model
@@ -46,6 +52,16 @@ class Path < Sequel::Model
         else
             raise "[Path::enrollments] unsupported class"
         end
+    end
+
+    def enrollments_within_term(year, term)
+        case term
+        when Term
+            tid = term.id
+        else
+            tid = term
+        end
+        Enrollment.where(path_id: id, year: year, term_id: tid).to_a
     end
 
     def unassigned_enrollments

@@ -91,6 +91,8 @@ header {
     border: 1px dashed #fff;
     padding: 0px 5px;
     background: #333;
+    white-space: nowrap;
+    outline: 1px solid transparent; /* Fixes anti-aliasing bug in chrome */
 }
 
 .path-cell, .requirement-name {
@@ -131,6 +133,17 @@ header {
 
 .extra-cells li {
     display: inline-block;
+}
+
+/* Calendar styling */
+
+.calendar-cell {
+    height: 100px;
+}
+
+.calendar-cell-highlight {
+    /* lightgreen */
+    background: rgba(144,238,144, 0.33)
 }
 
 /* Search box styling */
