@@ -4,6 +4,17 @@ module Helpers
         include Comparable
         attr_accessor :year, :term
 
+        def self.css_class(q1, q2)
+            case q1 <=> q2
+            when -1
+                "past"
+            when 0
+                "present"
+            when 1
+                "future"
+            end
+        end
+
         def initialize(year, term)
             @year = year
             @term = term
@@ -84,9 +95,14 @@ module Helpers
         @unique_cell_id += 1
         if enrollment
             course = enrollment.course
-            future = path.user.future?(enrollment)
+            if enrollment.term.nil?
+                term_klass = 'future'
+            else
+                term_klass = Quarter.css_class(Quarter.new(enrollment.year, enrollment.term), Quarter.new(current_user.year, current_user.term))
+            end
+
             html = %Q{<span id="cell#{@unique_cell_id}" 
-                class="path-cell filled#{future ? ' future' : ' NOTFUTURE'}" 
+                class="path-cell filled #{term_klass}" 
                 data-enrollment="#{enrollment.id}" 
                 data-can-fill="#{path.requirements(course).map {|r| r.id }}" 
                 data-offered="#{course.offered.map { |t| Term.enrollable.find_index(t) + 1 }}"

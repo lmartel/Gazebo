@@ -3,19 +3,25 @@
 var PATH_CELL = ".path-cell";
 var CALENDAR_CELL = ".calendar-cell";
 var HIGHLIGHT_CLASS = "calendar-cell-highlight";
+var PAST = ".past";
 
 function UPDATE_TERM_URL(id) { return '/enrollments/' + id + '/term'; }
 
 function initCalendar(){
     $(PATH_CELL).draggable({
         revert: "invalid",
-        revertDuration: 400
+        revertDuration: 400,
+        distance: 0
     });
 
     $(CALENDAR_CELL).each(function(){
         var term = $(this).data('term');
+        var accept = PATH_CELL;
+        if($(this).hasClass("future")){
+            accept += "[data-offered*='" + term + "']";
+        }
         $(this).droppable({
-            accept: PATH_CELL + "[data-offered*='" + term + "']",
+            accept: accept,
             activeClass: HIGHLIGHT_CLASS,
             drop: function(e, ui){
                 var elem = ui.draggable
@@ -26,11 +32,8 @@ function initCalendar(){
                     type: 'PUT',
                     data: { year: year, term: term, _csrf: window.state.csrf }
                 }).done(function(data){
-                    if(data.match(/future/)){
-                        elem.addClass('future');
-                    } else {
-                        elem.removeClass('future');
-                    }
+                    elem.removeClass('past present future');
+                    elem.addClass(data);
                 }).fail(function(){
                     // TODO handle failure?
                 });

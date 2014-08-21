@@ -5,7 +5,7 @@ class User < Sequel::Model
     plugin :secure_password
 
     def future?(enrollment)
-        enrollment.term.nil? || (Helpers::Quarter.new(year, term) <= Helpers::Quarter.new(enrollment.year, enrollment.term))
+        enrollment.term.nil? || (Helpers::Quarter.new(year, term) < Helpers::Quarter.new(enrollment.year, enrollment.term))
     end
 
 end

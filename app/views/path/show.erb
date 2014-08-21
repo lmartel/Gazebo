@@ -11,7 +11,7 @@
         <% (1..6).each do |y| %>
             <tr class="calendar-row" data-year=<%= y %>>
                 <% (1..4).each do |t| %>
-                    <td class="calendar-cell" data-term=<%= t %>>
+                    <td class="calendar-cell <%= Quarter.css_class(Quarter.new(y, Term.enrollable[t-1]), Quarter.new(current_user.year, current_user.term)) %>" data-term=<%= t %> >
                         <% @path.enrollments_within_term(y, t).each do |enr| %>
                             <%= render_cell enr %>
                         <% end %>

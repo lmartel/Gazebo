@@ -131,7 +131,7 @@ class TrackTracker < Sinatra::Base
         enrollment.term = term
         enrollment.year = year
         status(enrollment.save ? 200 : 500)
-        body 'future' if current_user.future?(enrollment)
+        body Quarter.css_class(Quarter.new(enrollment.year, enrollment.term), Quarter.new(current_user.year, current_user.term))
     end
 
     delete '/enrollments/:id' do |id|
