@@ -1,0 +1,4 @@
+make([%q(Science In the Making an Integrated Learning Environment), %q(91), %q(4), %q(4)]).includes ["AUT"]
+make([%q(Science in the Making Integrated Learning Environment), %q(92), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Science in the Making Integrated Learning Environment), %q(93), %q(4), %q(4)]).includes ["SPR"]
+make([%q(Science In the Making an Integrated Learning Environment, Writing Section), %q(95W), %q(4), %q(4)]).includes ["AUT", "WIN"]

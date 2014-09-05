@@ -20,6 +20,7 @@ class Course < Sequel::Model
         Term.enrollable & terms
     end
 
+
     class << self
 
         def search(value, **args)

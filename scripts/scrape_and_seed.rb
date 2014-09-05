@@ -18,10 +18,6 @@ end
 def main
     ExploreCoursesParser.scrape_departments_from "http://explorecourses.stanford.edu/browse"
     Department.each { |dept| fetch url_for_department(dept) }
-    
-    msne = Department.search('MSNE')
-    msne.abbreviation = 'MS&E'
-    msne.save
 end
 
 main

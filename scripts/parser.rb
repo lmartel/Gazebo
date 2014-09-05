@@ -7,10 +7,6 @@ module ExploreCoursesParser
 
         ABBR = /\([A-Z&]+\)/
 
-        def escape_ampersands!(abbr)
-            abbr.sub! '&', 'N' # Damn you MS&E
-        end
-
         def scrape_departments_from(url)
             doc = Nokogiri::HTML(open(url))
             params = {}
@@ -18,7 +14,6 @@ module ExploreCoursesParser
                 content = item.content
                 next unless content =~ ABBR # Filter out non-departments. All departments have abbreviations.
                 name, abbr = content.split(' (').map { |s| s.strip.chomp ')' }
-                escape_ampersands!(abbr)
 
                 abbr = abbr.downcase.to_sym
                 params[name] = abbr unless params.has_key?(name) || params.has_value?(abbr)
@@ -26,7 +21,8 @@ module ExploreCoursesParser
 
             Seeds.seed_department do
                 params.each do |name, abbr|
-                    make name.dup, abbr
+                    puts abbr
+                    make name.dup, abbr unless Department[abbreviation: abbr.to_s]
                 end
             end
         end
@@ -34,7 +30,7 @@ module ExploreCoursesParser
         def seed_from(url, output:".")
             doc = Nokogiri::HTML(open(url))
             dept = doc.css('#title > h1').first.content.split.last # HTML doc => "Results for CS" => "CS"
-            escape_ampersands!(dept)
+            dept = 'MS&E' if dept == 'MS' # bandaid
             File.open "#{output.chomp('/')}/parse.#{dept.downcase}.out", 'w' do |out|
                 all_params = {}
                 all_terms = {}
@@ -56,14 +52,15 @@ module ExploreCoursesParser
                 end
                 Seeds.seed_course dept do
                     all_params.each do |uniqs, extras|
+                        puts uniqs.first
                         terms = all_terms[uniqs]
-                        params = uniqs.concat extras
+                        params = uniqs + extras
 
-                        course = make *params
+                        course = upmake(uniqs, extras)
                         course.includes terms if terms
 
                         # Output for reference. Omit description for length
-                        params.pop 
+                        params.pop
                         params = params.map { |p| "%q(#{p})" }.to_s.gsub('"', '')
                         out.puts "make(#{params}).includes #{terms or []}"
                     end

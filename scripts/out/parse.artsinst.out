@@ -1,6 +1,6 @@
 make([%q(Art is My Occupation: Professional Development for Creatives (ARTSTUDI 6P, MUSIC 6P, TAPS 6P)), %q(5), %q(1), %q(1)]).includes ["WIN"]
 make([%q(Art in the Metropolis (MUSIC 11Q)), %q(11), %q(3), %q(3)]).includes ["SPR"]
-make([%q(Independent Study), %q(199), %q(1), %q(5)]).includes ["SPR"]
+make([%q(Independent Study), %q(199), %q(1), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Honors in the Arts Workshop), %q(200A), %q(2), %q(2)]).includes ["AUT"]
 make([%q(Honors in the Arts Workshop), %q(200B), %q(2), %q(2)]).includes ["WIN"]
 make([%q(Honors in the Arts Workshop), %q(200C), %q(2), %q(2)]).includes ["SPR"]

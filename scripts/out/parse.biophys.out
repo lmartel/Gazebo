@@ -6,6 +6,7 @@ make([%q(Methods in Molecular Biophysics (SBIO 242)), %q(242), %q(3), %q(3)]).in
 make([%q(Seminar in Biophysics), %q(250), %q(1), %q(1)]).includes ["AUT"]
 make([%q(Bio-Inorganic Chemistry (CHEM 297)), %q(297), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Graduate Research), %q(300), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Biophysics of Multi-cellular Systems and Amorphous Computing (BIOE 211, BIOE 311, DBIO 211)), %q(311), %q(2), %q(3)]).includes ["WIN"]
 make([%q(Directed Reading in Biophysics), %q(399), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(TGR Project), %q(801), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(TGR Dissertation), %q(802), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

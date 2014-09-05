@@ -70,6 +70,20 @@ module Seedable
             create columns[1..-1].zip(args.flatten).to_h # [1..-1] to remove :id attribute
         end
 
+        def upmake(primary_key, update_params)
+            cols_without_id = columns[1..-1]
+            key_hash = primary_key.map(&:to_s).zip(cols_without_id).map(&:reverse).to_h # [value1, ...] => { colname1: value1, ... }
+            if existing_model = self[key_hash]
+                update_params.zip(cols_without_id.drop primary_key.length).each do |value, colname|
+                    existing_model.send "#{colname}=", value
+                end
+                existing_model.save
+            else
+                all_params = primary_key.concat update_params
+                make(*all_params)
+            end
+        end
+
         # Automatically injects foreign key into 'make' arguments.
         # Also sets Model.includes to search for related models before searching other models.
         # Ex: within(:math_undergrad_minor) searches for math classes before looking at other departments' classes.

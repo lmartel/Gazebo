@@ -17,6 +17,6 @@ make([%q(Korean Culture), %q(120A), %q(1), %q(3)]).includes ["NOT GIVEN THIS YEA
 make([%q(Korean Culture), %q(120B), %q(1), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Korean Culture), %q(120C), %q(1), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Korean Language and Culture through Drama and Film), %q(120K), %q(2), %q(3)]).includes ["AUT"]
-make([%q(Reading Korean), %q(130), %q(2), %q(3)]).includes ["WIN"]
+make([%q(Reading Korean), %q(130), %q(2), %q(3)]).includes ["SPR"]
 make([%q(Directed Reading in Korean), %q(200), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Graduate Studies in Korean), %q(395), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR"]

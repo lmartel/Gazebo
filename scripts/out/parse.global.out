@@ -1,0 +1,5 @@
+make([%q(American Foreign Policy: Interests, Values, and Process (IPS 242, POLISCI 217A)), %q(220), %q(5), %q(5)]).includes ["SPR"]
+make([%q(The Iranian Cinema: Image and Meaning (COMPLIT 249A)), %q(249A), %q(1), %q(3)]).includes ["AUT"]
+make([%q(Iranian Cinema in Diaspora (COMPLIT 249B)), %q(249B), %q(1), %q(3)]).includes ["WIN"]
+make([%q(Contemporary Iranian Theater (COMPLIT 249C)), %q(249C), %q(1), %q(3)]).includes ["SPR"]
+make([%q(Bollywood and Beyond: An Introduction to Indian Film (COMPLIT 247, FILMSTUD 250B)), %q(250), %q(3), %q(5)]).includes ["SPR"]

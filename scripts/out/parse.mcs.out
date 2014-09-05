@@ -1,0 +1,1 @@
+make([%q(Mathematics of Sports (STATS 50)), %q(100), %q(3), %q(3)]).includes ["AUT"]

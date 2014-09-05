@@ -1,0 +1,5 @@
+make([%q(State and Society in the Middle East), %q(61), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Business Policy and Strategy in a Global Environment), %q(62), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Listening to Istanbul: Music in Context), %q(63), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Travels in the Ottoman History with Evliya Çelebi), %q(64), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Turkish Economy), %q(65), %q(4), %q(4)]).includes ["WIN"]

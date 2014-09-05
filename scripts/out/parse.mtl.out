@@ -1,6 +1,6 @@
 make([%q(Edgework: New Directions in the Study of Culture), %q(299), %q(1), %q(3)]).includes ["SPR"]
-make([%q(Concepts of Modernity I: Philosophical Foundations (ENGLISH 334A)), %q(334A), %q(5), %q(5)]).includes ["AUT"]
-make([%q(Concepts of Modernity II: The Study of Culture in the Age of Globalization (COMPLIT 334B, ENGLISH 334B)), %q(334B), %q(5), %q(5)]).includes ["WIN"]
+make([%q(Concepts of Modernity I: Philosophical Foundations (ENGLISH 334A, GERMAN 300)), %q(334A), %q(5), %q(5)]).includes ["AUT"]
+make([%q(Concepts of Modernity II: Culture, Aesthetics, and Society in the Age of Globalization (COMPLIT 334B, ENGLISH 334B)), %q(334B), %q(5), %q(5)]).includes ["WIN"]
 make([%q(Qualifying Paper), %q(390), %q(1), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Graduate Independent Study), %q(398), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Reading for Orals), %q(399), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]

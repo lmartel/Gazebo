@@ -33,6 +33,13 @@ namespace :db do
     exec_ruby('scripts/seed_test_data.rb')
   end
 
+  desc "Update departments and courses, refreshing terms offered"
+  task :rescrape do
+    `rm scripts/out/*`
+    Courses_Term.each { |m| m.delete }
+    exec_ruby('scripts/scrape_and_seed.rb', 'scripts/out')
+  end
+
   desc "Prints current schema version"
   task :version do    
     version = if DB.tables.include?(:schema_info)

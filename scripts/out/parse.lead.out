@@ -1,0 +1,2 @@
+make([%q(Leadership Intensive), %q(10), %q(2), %q(2)]).includes ["SUM"]
+make([%q(Leadership Seminar, Autumn), %q(11A), %q(1), %q(1)]).includes ["AUT"]
