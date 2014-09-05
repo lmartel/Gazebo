@@ -17,7 +17,7 @@ function initCalendar(){
     $(CALENDAR_CELL).each(function(){
         var term = $(this).data('term');
         var accept = PATH_CELL;
-        if($(this).hasClass("future")){
+        if(!$(this).hasClass("past")){
             accept += "[data-offered*='" + term + "']";
         }
         $(this).droppable({
