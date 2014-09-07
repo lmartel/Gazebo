@@ -11,7 +11,11 @@ function initCalendar(){
     $(PATH_CELL).draggable({
         revert: "invalid",
         revertDuration: 400,
-        distance: 0
+        distance: 0,
+        helper: "clone",
+        appendTo: "body",
+        start: function() { $(this).css({ opacity: 0.5 }); },
+        stop: function() { $(this).css({ opacity: 1 }); }
     });
 
     $(CALENDAR_CELL).each(function(){
@@ -25,6 +29,7 @@ function initCalendar(){
             activeClass: HIGHLIGHT_CLASS,
             drop: function(e, ui){
                 var elem = ui.draggable
+                $(this).append(elem);
                 var year = $(this).closest('tr').data('year');
                 var term = $(this).data('term');
                 $.ajax({
