@@ -24,7 +24,7 @@ var AUTOLAYOUT_BUTTON = "button.autolayout";
 
 var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
 
-var UPDATE_REQUIREMENT_URL = function(id) { return '/enrollments/' + id + '/requirement'; }
+var UPDATE_ENROLLMENT_URL = function(id) { return '/enrollments/' + id; }
 var REQUIREMENT_URL = function(id) { return '/requirements.json/' + id; }
 
 window.state = window.state || {}
@@ -87,7 +87,7 @@ function resetCellToEmpty(elem){
 
 function deleteCell(elem){
     $.ajax({
-        url: UPDATE_REQUIREMENT_URL(elem.data('enrollment')),
+        url: UPDATE_ENROLLMENT_URL(elem.data('enrollment')),
         type: 'DELETE',
         data: { _csrf: window.state.csrf }
     }).done(function(data){
@@ -168,7 +168,7 @@ function handleCellDragEnd(elem){
 
     if(moved){
         $.ajax({
-            url: UPDATE_REQUIREMENT_URL(enrollment),
+            url: UPDATE_ENROLLMENT_URL(enrollment),
             type: 'PUT',
             data: { requirement: movedTo, _csrf: window.state.csrf }
         }).fail(function(){

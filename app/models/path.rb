@@ -3,6 +3,11 @@ class Path < Sequel::Model
     many_to_many :tracks
     many_to_many :courses, join_table: :paths_courses
 
+    def before_destroy
+        Paths_Course.where(path_id: id).destroy
+        Paths_Track.where(path_id: id).destroy
+    end
+
     def requirements_by_track
         tracks.map {|tr|
             reqs = []
