@@ -1,0 +1,30 @@
+<div class="inner cover">
+    <h1 class="cover-heading"></h1>
+    <p class="lead">
+        <div class="col-lg-6">
+            <form class="form-signin form-signup" action="/signup" method="POST">
+                <h2 class="form-signin-heading">Sign up</h2>
+                <%= csrf_tag %>
+                <input type="text" name="email" class="form-control" placeholder="* Email address" required="" autofocus="">
+                <h5>Class year:</h5>
+                <% ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Super-Senior', 'Super-Duper-Senior'].each_with_index do |year_name, i| %>
+                    <% year = i + 1%>
+                    <input type="radio" name="year" value=<%= year %> id="year<%= year %>"> <label for="year<%= year %>"><%= year %> (<%= year_name %>)</label><br>
+                <% end %>
+                <br>
+                <input type="password" name="password" class="form-control" placeholder="* Password" required="">
+                <input type="password" name="password_confirmation" class="form-control" placeholder="* Confirm password" required="">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return validateSignup()">Sign up</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form class="form-signin form-login" action="/login" method="POST">
+                <h2 class="form-signin-heading">Log in</h2>
+                <%= csrf_tag %>
+                <input type="text" name="email" class="form-control" placeholder="Email address" required="">
+                <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return validateLogin()">Log in</button>
+            </form>
+        </div>
+</div>
+

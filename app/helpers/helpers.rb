@@ -131,13 +131,19 @@ module Helpers
     end
 
     def logged_in?
-        # !session[:user].nil?
-        true
+        !session[:user].nil?
     end
 
     def current_user
-        # session[:user]
-        User.first # TODO account system
+        if logged_in?
+            User.find(id: session[:user])
+        else
+            User.find(email: 'DEMO')
+        end
+    end
+
+    def current_term
+        Term.find(abbreviation: 'AUT') # TODO THIS IS BAD FIX IT
     end
 
     def csrf_token

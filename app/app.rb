@@ -51,7 +51,7 @@ class TrackTracker < Sinatra::Base
         halt 404 unless dept
         @course = Course[department_id: dept.id, number: number]
         halt 404 unless @course
-        erb :"course/show"
+        erb :'course/show'
     end
 
     get '/calendar' do
@@ -64,8 +64,39 @@ class TrackTracker < Sinatra::Base
         redirect back
     end
 
+    get '/login' do
+        erb :'user/new'
+    end
+
+    get '/logout' do
+        session[:user] = nil
+        redirect to('/')
+    end
+
 
     # Form/AJAX routes
+
+    post '/login' do
+        user = User[email: params[:email]]
+        redirect '/?err=email_not_found' if user.nil?
+        if user.authenticate(params[:password])
+            session[:user] = user.id
+            redirect '/'
+        else 
+            redirect '/login?err=invalid_password'
+        end
+    end
+
+    post '/signup' do
+        begin
+            user = User.create email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], year: params[:year].to_i, term_id: current_term.id
+        rescue Sequel::ValidationFailed
+            redirect '/?err=email_taken'
+        end
+        session[:user] = user.id
+        redirect '/'
+    end
+
     post '/paths' do
         if params[:tracks]
             path = Path.create name: params[:name], user_id: current_user.id

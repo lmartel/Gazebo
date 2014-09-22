@@ -48,11 +48,33 @@ header {
 }
 
 .cover-container {
-    margin-top: calc(76px + 10px);
+    margin-top: calc(104px + 10px);
 }
 
 .search-wrapper {
     margin-bottom: calc(200px + 34px);
+}
+
+.account-wrapper {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.account-wrapper a {
+    color: red;
+}
+
+.mode-switch {
+    color: red;
+}
+
+.mode-switch:hover {
+    color: white;
+}
+
+input.error {
+    border-color: red;
 }
 
 /* Modals styling */

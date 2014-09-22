@@ -3,7 +3,14 @@
 
 <div class="masthead clearfix">
     <div class="inner">
-        <h3 class="masthead-brand">Pathfinder</h3>
+        <h3 class="masthead-brand">
+            Pathfinder<br>
+            <% if calendar? %>
+                <button class="btn btn-xs btn-link mode-switch" onclick="window.location='/requirements'">Requirements mode</button>
+            <% else %>
+                <button class="btn btn-xs btn-link mode-switch" onclick="window.location='/calendar'")>Calendar mode</button>
+            <% end %>
+        </h3>
         <ul class="nav masthead-nav">
             <% @paths.each do |path| %>
             <li class="path-nav-item <%= select_first(:nav, override:path.id) %>" data-id="<%= path.id %>" data-name="<%= path.name %>">
@@ -12,6 +19,14 @@
             <% end %>
             <li><button class="btn btn-sm btn-default" onclick="window.location='/embark'">Create path</button></li>
         </ul>
+        <div class="account-wrapper">
+        <% if logged_in? %>
+            <a href="/logout">Logout of <%= current_user.email %></a>
+        <% else %>
+            <a href="/login">Exit DEMO - sign up or log in</a>
+        <% end %>
+        </div>
+
     </div>
 </div>
 
