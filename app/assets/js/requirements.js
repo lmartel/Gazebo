@@ -1,5 +1,3 @@
-// Path display (requirement mode):
-
 var PATH_WRAPPER = '.path-wrapper';
 var REQUIREMENT_ROW = '.path-row';
 var REQUIREMENT_NAME_CLASS = "requirement-name"
@@ -7,9 +5,9 @@ var REQUIREMENT_NAME = "." + REQUIREMENT_NAME_CLASS
 
 var FILLED_REQUIREMENT = '.path-cell.filled';
 var UNFILLED_REQUIREMENT = '.path-cell.unfilled';
-var CAN_FILL = UNFILLED_REQUIREMENT + '.fillable';
-var UNASSIGNED_CELLS_CLASS = 'extra-cells';
-var UNASSIGNED_CELLS = '.' + UNASSIGNED_CELLS_CLASS;
+var FILLABLE = 'fillable';
+var CAN_FILL = UNFILLED_REQUIREMENT + '.' + FILLABLE;
+var UNASSIGNED_BOX = '.extra-cells-wrapper'
 
 var CLOSE_BUTTON_CLASS = 'delete-enrollment';
 var CLOSE_BUTTON = 'button.' + CLOSE_BUTTON_CLASS;
@@ -20,186 +18,21 @@ var REQUIREMENTS_DIALOG = REQUIREMENTS_MODAL_FADE + " .modal-dialog";
 var MODAL_TITLE = ".modal-title";
 var MODAL_BODY = ".modal-body";
 
-var AUTOLAYOUT_BUTTON = "button.autolayout";
-
-var CELL_UNASSIGNMENT_ANIMATION_SPEED = 400;
-
-var UPDATE_ENROLLMENT_URL = function(id) { return '/enrollments/' + id; }
+var UPDATE_ENROLLMENT_URL = function(id) { return '/enrollments/' + id + '/requirement'; }
+var DELETE_ENROLLMENT_URL = function(id) { return '/enrollments/' + id; }
 var REQUIREMENT_URL = function(id) { return '/requirements.json/' + id; }
 
 window.state = window.state || {}
 state.requirements = {
-    original: null,
-    replacement: null,
-    isSnappingTo: null,
-    clone: 1 // unique indentifier for ids of cloned cells
-}
-
-function fillableCells(draggedCell){
-    var reqs = draggedCell.data('can-fill');
-    var fillable = $(REQUIREMENT_ROW).filter(function(){
-        return reqs.indexOf($(this).data('requirement')) !== -1;
-    }).toArray().reduce(function(rest, next){
-        return rest.concat($(next).find(UNFILLED_REQUIREMENT).first().toArray()); // this is a flat_map from rows to their first fillable cell
-    }, []);
-    return $(fillable);
-}
-
-function initDraggable(){
-    $(FILLED_REQUIREMENT).draggable({
-        snap: CAN_FILL,
-        snapMode: 'corner',
-        // snapTolerance: 20,
-        zIndex: 5,
-        revert: false,
-        cancel: UNFILLED_REQUIREMENT + ',' + CLOSE_BUTTON,
-        // refreshPositions: true,
-        stop: function (event, ui) {
-            var snapTo = ui.helper.data("ui-draggable").snapElements.filter(function(elem){
-                return elem.snapping;
-            });
-            if(snapTo.length > 0){
-                state.requirements.isSnappingTo = $(snapTo[0].item);
-            }
-        }
-    });
-}
-
-function handleCellDragStart(elem){
-    elem.find(CLOSE_BUTTON).remove();
-    var draggingUnassignedCell = elem.closest('ul').hasClass(UNASSIGNED_CELLS_CLASS);
-
-    if(!draggingUnassignedCell){ // create no placeholder if currently unassigned
-        var replacement = elem.clone();
-        replacement.removeClass('filled ui-draggable').addClass('unfilled fillable').attr('data-content', elem.text()).text('').css('margin-left', -elem.outerWidth() + 'px').attr('data-can-fill', '');
-        elem.after(replacement);
-        state.requirements.replacement = replacement;
-    }
-    fillableCells(elem).addClass('fillable').attr('data-content', elem.text());
-    $(UNFILLED_REQUIREMENT).addClass('drag-is-active');
-
-    state.requirements.original = elem;
-}
-
-function resetCellToEmpty(elem){
-    elem.css({top: 0, left: 0}).removeClass('filled ui-draggable future').addClass('unfilled').text('').attr('data-content', 'TODO').attr('data-enrollment', '');
-}
-
-function deleteCell(elem){
-    $.ajax({
-        url: UPDATE_ENROLLMENT_URL(elem.data('enrollment')),
-        type: 'DELETE',
-        data: { _csrf: window.state.csrf }
-    }).done(function(data){
-        elem.closest('li').remove();
-    }).fail(function(){
-        // TODO handle failure?
-    });
-}
-
-function handleCellDragEnd(elem){
-    var replacement = state.requirements.replacement;
-    var isSnapping = state.requirements.isSnappingTo;
-
-    var draggingUnassignedCell = elem.closest('ul').hasClass(UNASSIGNED_CELLS_CLASS);
-
-    if(isSnapping){ // We remove the replacement, put the original element back, and change the text of both elements to complete the swap
-        if(replacement) replacement.remove();
-        if(isSnapping.attr('id') !== elem.attr('id')){
-            console.log(elem.get())
-            isSnapping.removeClass('fillable unfilled').addClass('filled ui-draggable').text(elem.text()).attr('data-can-fill', '[' + elem.data('can-fill') + ']').attr('data-enrollment', elem.data('enrollment'));
-            if(elem.hasClass('future')) isSnapping.addClass('future'); // TODO copy data and modifier classes wholesale somehow
-            elem.css({'top': '', 'left': ''});
-            if(draggingUnassignedCell){
-                elem.closest('li').remove();
-            } else {
-                resetCellToEmpty(elem);
-            }
-        }
-
-    } else {
-        if(replacement) replacement.remove();
-
-        elem.append('<button type="button" class="close delete-enrollment"></button>');
-        if(draggingUnassignedCell){
-            elem.animate({top: 0, left: 0}, CELL_UNASSIGNMENT_ANIMATION_SPEED);
-        } else {
-            var cloneId = 'clone' + state.requirements.clone++;
-            elem.clone().attr('id', cloneId).css({top: 0, left: 0}).appendTo(UNASSIGNED_CELLS + ':visible'); // TODO: properly scope all selectors within path-wrappers via id
-            var clone = $('#' + cloneId);
-            var start = elem.position();
-            var dest = clone.position();
-
-            resetCellToEmpty(elem);
-            clone.css({
-                position: 'absolute',
-                top: start.top, 
-                left: start.left
-            }).animate({
-                top: dest.top,
-                left: dest.left
-            }, CELL_UNASSIGNMENT_ANIMATION_SPEED, function(){
-                clone.css({
-                    position: 'relative',
-                    top: 0,
-                    left: 0
-                }).wrap('<li style="margin-right: 5px;"></li>'); // Margin compensates for missing 'implicit margin' list item thing
-            });
-
-        }
-    }
-
-    $(CAN_FILL).removeClass('fillable').attr('data-content', 'TODO');
-    $(UNFILLED_REQUIREMENT).removeClass('drag-is-active');
-
-    if(replacement) replacement.css('margin-left', '0');
-
-    var enrollment = (replacement || elem).data('enrollment');
-    var moved = false;
-    var movedTo;
-    if(isSnapping){
-        movedTo = isSnapping.closest(REQUIREMENT_ROW).data('requirement');
-        moved = !!movedTo;
-
-    } else {
-        movedTo = null;
-        moved = !draggingUnassignedCell;
-    }
-
-    if(moved){
-        $.ajax({
-            url: UPDATE_ENROLLMENT_URL(enrollment),
-            type: 'PUT',
-            data: { requirement: movedTo, _csrf: window.state.csrf }
-        }).fail(function(){
-            // TODO handle failure?
-        });
-    }
-
-    initDraggable();
-    state.requirements.original = null;
-    state.requirements.replacement = null;
-    state.requirements.isSnappingTo = null;
+    activeCell: null
 }
 
 function initRequirements(){
-    // Drag has started
-    $(document).on('mousedown', FILLED_REQUIREMENT + ':not(' + CLOSE_BUTTON + ')', function(event){
+    $(document).on('mousedown', FILLED_REQUIREMENT, function(event){
         if(event.which !== 1) return; // ignore non-left clicks
         if($(event.target).hasClass(CLOSE_BUTTON_CLASS)) return; // forbid dragging by close button
-        handleCellDragStart($(this));
-    });
-
-    // Drag has ended
-    $(document).on('mouseup', function(event){
-        if(event.which !== 1) return; // ignore non-left clicks
-
-        var elem = state.requirements.original;
-        if(!elem) return; // ignore mouseups when not dragging an element
-
-        setTimeout(function(){ // Ensure this happens AFTER the stop() callback in $.draggable is called
-            handleCellDragEnd(elem);
-        }, 1);
+        state.activeCell = this;
+        initRequirementsDraggable();
     });
 
     // Other listeners
@@ -245,7 +78,114 @@ function initRequirements(){
         $(REQUIREMENTS_MODAL).modal('hide');
     });
 
-    initDraggable();
-    
+
+    initRequirementsDraggable();
 }
 
+function initRequirementsDraggable(){
+    $(FILLED_REQUIREMENT).draggable({
+        revert: 'invalid',
+        reverDuration: 400,
+        snap: computeValidDroppables(state.activeCell),
+        snapMode: 'inner',
+        start: function() {
+            $(UNFILLED_REQUIREMENT + ', ' + UNASSIGNED_BOX).addClass('drag-is-active');
+            initRequirementsDroppable(state.activeCell);
+            $(CAN_FILL).attr('data-content', $(this).text());
+
+            $(this).find('button.close').hide()
+        },
+        stop: requirementsdragStop
+    });
+
+}
+
+function computeValidDroppables(draggedCell){
+    // $(CAN_FILL).removeClass(FILLABLE);
+    var fillableRows = $(draggedCell).data('can-fill') || [];
+    var fillableCells = $(REQUIREMENT_ROW).filter(function() {
+        return fillableRows.indexOf($(this).data('requirement')) !== -1;
+    }).toArray().reduce(function(rest, next){
+        return rest.concat($(next).find(UNFILLED_REQUIREMENT).first().toArray()); // this is a flat_map from rows to their first fillable cell
+    }, []);
+    if(draggedCell) $(fillableCells).addClass(FILLABLE).width(draggedCell.offsetWidth);
+    return '.' + FILLABLE;
+
+}
+
+function requirementsdragStop(){
+    $(UNFILLED_REQUIREMENT + ', ' + UNASSIGNED_BOX).removeClass('drag-is-active');
+    $(CAN_FILL).removeClass(FILLABLE).attr('data-content', 'TODO');
+    $(this).find('button.close').show();
+    state.activeCell = null;
+    initRequirementsDraggable();
+}
+
+function initRequirementsDroppable(draggedCell){
+    $(CAN_FILL).droppable({
+        drop: function(e, ui){
+            var dest = $(this).clone();
+            var src = ui.draggable.css('position', 'initial').css('left', 0).css('top', 0);
+            var movedTo = $(this).closest(REQUIREMENT_ROW).data('requirement');
+
+            $(this).replaceWith(src.clone());
+            if(src.closest(REQUIREMENT_ROW).length) {
+                ui.draggable.replaceWith(dest)
+                src.replaceWith('<span id=' + src.attr('id') + ' class="path-cell unfilled" data-content="TODO"></span>');
+            } else {
+                src.closest('li').remove()
+            }
+
+            requirementsdragStop();
+
+            var enrollment = $(src).data('enrollment');
+            $.ajax({
+                url: UPDATE_ENROLLMENT_URL(enrollment),
+                type: 'PUT',
+                data: { requirement: movedTo, _csrf: window.state.csrf }
+            }).fail(function(){
+                // TODO handle failure?
+            });
+        }
+    });
+
+    $(UNASSIGNED_BOX).droppable({
+        drop: function(e, ui){
+            var src = ui.draggable.css('position', 'initial').css('left', 0).css('top', 0);
+            var cpy = src.clone()
+            cpy.not(':has(button)')
+               .append('<button type="button" class="close delete-enrollment"></button>');
+
+            cpy.appendTo($(this).find('ul')).wrap('<li></li>');
+            if(src.closest(REQUIREMENT_ROW).length) {
+                src.replaceWith('<span id=' + src.attr('id') + ' class="path-cell unfilled" data-content="TODO"></span>');
+            } else {
+                src.closest('li').remove()
+            }
+            requirementsdragStop();
+
+            var enrollment = $(src).data('enrollment');
+            $.ajax({
+                url: UPDATE_ENROLLMENT_URL(enrollment),
+                type: 'PUT',
+                data: { requirement: null, _csrf: window.state.csrf }
+            }).fail(function(){
+                // TODO handle failure?
+            });
+
+        }
+    });
+
+}
+
+function deleteCell(elem){
+    $.ajax({
+        url: DELETE_ENROLLMENT_URL(elem.data('enrollment')),
+        type: 'DELETE',
+        data: { _csrf: window.state.csrf }
+    }).done(function(data){
+        elem.closest('li').remove();
+    }).fail(function(){
+        // TODO handle failure?
+    });
+}

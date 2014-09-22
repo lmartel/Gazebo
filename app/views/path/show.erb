@@ -44,13 +44,15 @@
         <% end %>
 
 
+        <h5>Unassigned classes</h5>
+        <div class="extra-cells-wrapper">
+            <ul class="extra-cells">
+                <% sort(@path.unassigned_enrollments).each do |e| %>
+                <li><%= render_cell e, closable:true %></li>
+                <% end %>
+            </ul>
+        </div>
     </dl>
-    <h5>Unassigned classes</h5>
-    <ul class="extra-cells">
-        <% sort(@path.unassigned_enrollments).each do |e| %>
-        <li><%= render_cell e, closable:true %></li>
-        <% end %>
-    </ul>
     <br>
     <form action="/paths/<%= @path.id %>" method="post">
         <input type="hidden" name="_method" value="put">

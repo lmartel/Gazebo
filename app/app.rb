@@ -70,7 +70,7 @@ class TrackTracker < Sinatra::Base
         if params[:tracks]
             path = Path.create name: params[:name], user_id: current_user.id
             params[:tracks].keys.each { |tid| Paths_Track.create track_id: tid, path_id: path.id }
-            
+
             flash[:selection_override] = path.id
             redirect to('/')
         else

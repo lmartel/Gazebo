@@ -141,6 +141,17 @@ header {
     display: inline-block;
 }
 
+.extra-cells-wrapper {
+    border: 1px solid #fff;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.extra-cells-wrapper.drag-is-active {
+    /* lightgreen */
+    background: rgba(144,238,144,0.33)
+}
+
 /* Calendar styling */
 
 .calendar-cell {
