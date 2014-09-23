@@ -135,7 +135,7 @@ class TrackTracker < Sinatra::Base
             try_quarter.next!(possible_terms) unless possible_terms.include?(try_quarter.term)
             try_quarter.next!(possible_terms) until Enrollment.where(path_id: p.id, year: try_quarter.year, term_id: try_quarter.term.id).map {|e| e.course.units_max }.reduce(0, :+) <= 20
             e = Enrollment.create(path_id: p.id, course_id: course.id, year: try_quarter.year, term_id: try_quarter.term.id) or halt 500
-            render_cell(e, path:p, closable:true)
+            [render_cell(e, path:p, closable:true), e.year, e.term.id]
         end
         status 200
         new_enrollments.to_json

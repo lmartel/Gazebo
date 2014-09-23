@@ -75,13 +75,15 @@ function courseChosen(e){
             type: 'POST',
             data: { paths: paths, course: e.object.id, _csrf: window.state.csrf }
     }).done(function(data){
-        var htmls = JSON.parse(data)
+        var htmls = JSON.parse(data);
         for(var i = 0; i < paths.length; i++){
-            $(htmls[i]).appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells')).wrap("<li></li>");
+            console.log(htmls)
+            $(htmls[i][0]).appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells')).wrap("<li></li>");
+            $(htmls[i][0]).appendTo($('.calendar-row[data-year=' + htmls[i][1] + '] .calendar-cell[data-term=' + htmls[i][2] + ']')).find('button.close').remove();
         }
     }).fail(function(){
-        // TODO handle failure?
-        console.log("MOOP");
+        // TODO handle failure better
+        alert("That class isn't offered this year. Sorry =[");
     });
     $(INPUT).val('');
     $(SEARCH).select2('close').select2('open');
