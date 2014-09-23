@@ -57,7 +57,10 @@ function initRequirements(){
 
         modal.find(MODAL_TITLE).text(title);
         body.text('Loading requirement details...');
-        modal.modal();
+        modal.modal({
+            show: 1,
+            hide: 1
+        });
 
         $.get(REQUIREMENT_URL(row.data('requirement'))).done(function(data){
             body.text('');

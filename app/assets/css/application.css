@@ -77,6 +77,10 @@ input.error {
     border-color: red;
 }
 
+.dropdown-menu .nav-header {
+    color: #333;
+}
+
 /* Modals styling */
 
 .requirements-list {

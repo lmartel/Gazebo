@@ -3,4 +3,7 @@
     <p class="lead">
         <%= @course.description %>
     </p>
+    <p class="lead">
+    Offered: <%= @course.offered.map { |t| t.name.downcase }.join ', ' %>
+    </p>
 </div>
