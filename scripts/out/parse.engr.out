@@ -38,7 +38,7 @@ make([%q(Leadership of Technology Ventures), %q(140B), %q(1), %q(2)]).includes [
 make([%q(Leadership of Technology Ventures), %q(140C), %q(2), %q(3)]).includes ["AUT"]
 make([%q(Technology Entrepreneurship), %q(145), %q(4), %q(4)]).includes ["AUT", "WIN", "SUM"]
 make([%q(Data Challenge Lab), %q(150), %q(1), %q(6)]).includes ["WIN", "SPR", "SUM"]
-make([%q(Vector Calculus for Engineers (CME 100)), %q(154), %q(5), %q(5)]).includes ["AUT"]
+make([%q(Vector Calculus for Engineers (CME 100)), %q(154), %q(5), %q(5)]).includes ["AUT", "SPR"]
 make([%q(Ordinary Differential Equations for Engineers (CME 102)), %q(155A), %q(5), %q(5)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Linear Algebra and Partial Differential Equations for Engineers (CME 104)), %q(155B), %q(5), %q(5)]).includes ["SPR"]
 make([%q(Introduction to Probability and Statistics for Engineers (CME 106)), %q(155C), %q(3), %q(4)]).includes ["WIN", "SUM"]

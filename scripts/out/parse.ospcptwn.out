@@ -5,7 +5,6 @@ make([%q(Preparation for Community-Based Research in Community Health and Develo
 make([%q(Targeted Research Project in Community Health and Development), %q(24A), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Targeted Research Project in Community Health and Development), %q(24B), %q(5), %q(5)]).includes ["SPR", "SUM"]
 make([%q(Political Economy of Foreign Aid), %q(31), %q(3), %q(3)]).includes ["WIN"]
-make([%q(Service, Citizenship and Social Change: Service Learning in the Contemporary South African Contex-), %q(32), %q(5), %q(5)]).includes ["WIN", "SPR", "SUM"]
 make([%q(Southern Africa: from Liberation Struggles to Region-Building), %q(33), %q(4), %q(4)]).includes ["SPR"]
 make([%q(The Archaeology of Southern African Hunter Gatherers), %q(36), %q(4), %q(4)]).includes ["SPR", "SUM"]
 make([%q(Genocide: African Experiences), %q(38), %q(3), %q(5)]).includes ["WIN"]

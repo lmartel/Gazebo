@@ -85,7 +85,7 @@ make([%q(Advanced Extragalactic Astrophysics and Cosmology), %q(362), %q(3), %q(
 make([%q(Advanced Gravitation), %q(364), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Condensed Matter Theory I), %q(372), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Condensed Matter Theory II), %q(373), %q(3), %q(3)]).includes ["SPR"]
-make([%q(Lattice Gauge Theory), %q(450), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Conformal Field Theory), %q(450), %q(3), %q(3)]).includes ["AUT"]
 make([%q(TOPICS IN STRING THEORY), %q(451), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Research), %q(490), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(TGR Project), %q(801), %q(0), %q(0)]).includes ["AUT", "WIN", "SPR", "SUM"]

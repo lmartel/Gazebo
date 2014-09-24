@@ -71,7 +71,7 @@ make([%q(Methods for Applied Statistics: Unsupervised Learning), %q(306B), %q(2)
 make([%q(Theory of Probability (MATH 230A)), %q(310A), %q(2), %q(4)]).includes ["AUT"]
 make([%q(Theory of Probability (MATH 230B)), %q(310B), %q(2), %q(3)]).includes ["WIN"]
 make([%q(Theory of Probability (MATH 230C)), %q(310C), %q(2), %q(4)]).includes ["SPR"]
-make([%q(Information Theory and Statistics), %q(311), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Information Theory and Statistics (EE 377)), %q(311), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Statistical Methods in Neuroscience), %q(312), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Introduction to Graphical Models (STATS 213)), %q(313), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Advanced Statistical Methods), %q(314), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]

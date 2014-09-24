@@ -1,4 +1,4 @@
-make([%q(Making Sense of Strategy), %q(110Q), %q(3), %q(3)]).includes ["WIN"]
+make([%q(Making Sense of Strategy), %q(110Q), %q(3), %q(3)]).includes []
 make([%q(Strategic Leadership), %q(207), %q(3), %q(3)]).includes []
 make([%q(Leadership Laboratory), %q(209), %q(1), %q(1)]).includes []
 make([%q(Managerial Skills), %q(210), %q(1), %q(1)]).includes []

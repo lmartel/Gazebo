@@ -113,7 +113,7 @@ make([%q(Approximation Algorithms), %q(319), %q(3), %q(3)]).includes ["NOT GIVEN
 make([%q(Stochastic Systems), %q(321), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Stochastic Calculus and Control), %q(322), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Introduction to Computational Social Science), %q(331), %q(3), %q(3)]).includes ["AUT"]
-make([%q(Queueing and Scheduling in Processing Networks), %q(335), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Queueing and Scheduling in Processing Networks), %q(335), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Platform and Marketplace Design), %q(336), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Information Networks), %q(337), %q(3), %q(3)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]
 make([%q(Advanced Topics in Information Science and Technology), %q(338), %q(3), %q(3)]).includes ["WIN"]

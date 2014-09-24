@@ -76,7 +76,7 @@ make([%q(Theater and Legal Regulation), %q(154S), %q(4), %q(4)]).includes ["NOT 
 make([%q(Dance and at the African Diaspora (DANCE 26)), %q(155M), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Theatre of War), %q(155T), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Performing History: Race, Politics, and Staging the Plays of August Wilson (AFRICAAM 156, TAPS 356)), %q(156), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Hybrid Action: Physical Intelligence in a Digital Culture (DANCE 156T)), %q(156T), %q(4), %q(4)]).includes ["AUT"]
+make([%q(Movement and Digital Culture (DANCE 156T)), %q(156T), %q(4), %q(4)]).includes ["AUT"]
 make([%q(World Drama and Performance (TAPS 357)), %q(157), %q(4), %q(4)]).includes ["AUT"]
 make([%q(Proximity and Temporality in Performance (TAPS 358H)), %q(158H), %q(4), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(The Ethics of Storytelling: The Autobiographical Monologue in Theory, in Practice, and in the World (ETHICSOC 201R, TAPS 358L)), %q(158L), %q(4), %q(4)]).includes ["AUT"]

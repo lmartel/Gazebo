@@ -12,7 +12,7 @@ make([%q(Communicating Science), %q(218), %q(3), %q(3)]).includes ["ALTERNATE YE
 make([%q(OPINION WRITING IN THE SCIENCES), %q(219), %q(1), %q(1)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]
 make([%q(Negotiation (CEE 151, CEE 251)), %q(251), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Earth Sciences Seminar), %q(300), %q(1), %q(1)]).includes ["AUT"]
-make([%q(Computational Geosciences Seminar), %q(310), %q(1), %q(1)]).includes ["AUT"]
+make([%q(Computational Geosciences Seminar), %q(310), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Methods of High-Performance Computing in GeoSciences), %q(320), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Directed Research), %q(400), %q(3), %q(3)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Curricular Practical Training), %q(401), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR", "SUM"]

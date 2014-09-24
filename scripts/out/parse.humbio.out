@@ -15,7 +15,7 @@ make([%q(Parks and Peoples: Dilemmas of Protected Area Conservation in East Afri
 make([%q(Introduction to Brain and Behavior (BIO 20)), %q(21), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Designing Research-Based Interventions to Solve Global Health Problems (AFRICAST 135, AFRICAST 235, EDUC 135X, EDUC 335X, MED 235)), %q(26), %q(3), %q(4)]).includes ["SPR"]
 make([%q(Traditional Chinese Medicine), %q(27), %q(1), %q(1)]).includes ["SPR"]
-make([%q(Well-Being in Immigrant Children & Youth: A Service Learning Course (EDUC 177A)), %q(29A), %q(3), %q(3)]).includes ["AUT"]
+make([%q(Well-Being in Immigrant Children & Youth: A Service Learning Course (CHILATST 177A, CSRE 177E, EDUC 177A)), %q(29A), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Ethics in a Human Life (PHIL 74A)), %q(74), %q(4), %q(4)]).includes ["AUT"]
 make([%q(Sexuality and Society), %q(79Q), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Introduction to Child Nutrition), %q(81Q), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]

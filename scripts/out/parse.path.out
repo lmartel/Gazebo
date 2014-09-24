@@ -1,4 +1,4 @@
-make([%q(Cancer Biology (CBIO 101)), %q(101), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Cancer Biology (CBIO 101)), %q(101), %q(4), %q(4)]).includes ["NOT GIVEN NEXT YEAR"]
 make([%q(Lymphocyte  Migration), %q(103Q), %q(1), %q(1)]).includes ["AUT"]
 make([%q(Undergraduate Research), %q(199), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Medical Etymology), %q(204SI), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]

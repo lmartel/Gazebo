@@ -31,7 +31,7 @@ make([%q(Community Health Psychology (HUMBIO 128)), %q(101), %q(4), %q(4)]).incl
 make([%q(Longevity (HUMBIO 149L, NENS 202)), %q(102), %q(4), %q(4)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]
 make([%q(Uniquely Human), %q(104), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Affective Science), %q(104S), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Social Neuroscience), %q(105), %q(3), %q(3)]).includes ["SPR"]
+make([%q(Social Neuroscience), %q(105), %q(4), %q(4)]).includes ["SPR"]
 make([%q(General Psychology), %q(105S), %q(3), %q(3)]).includes ["SUM"]
 make([%q(Seminar on Visual Development), %q(106), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Visual Processing of Faces), %q(107), %q(2), %q(3)]).includes ["NOT GIVEN THIS YEAR"]

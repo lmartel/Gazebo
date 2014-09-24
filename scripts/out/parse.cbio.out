@@ -1,4 +1,4 @@
-make([%q(Cancer Biology (PATH 101)), %q(101), %q(4), %q(4)]).includes ["WIN"]
+make([%q(Cancer Biology (PATH 101)), %q(101), %q(4), %q(4)]).includes ["NOT GIVEN NEXT YEAR"]
 make([%q(Molecular, Cellular, and Genetic Basis of Cancer), %q(241), %q(4), %q(4)]).includes ["AUT"]
 make([%q(Scientific and Translational Basis for Clinical Cancer Therapy), %q(242), %q(3), %q(3)]).includes ["SPR"]
 make([%q(Principles of Cancer Systems Biology), %q(243), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]

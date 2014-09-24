@@ -28,7 +28,7 @@ make([%q(Economy and Economics of Ancient Greece (CLASSICS 183)), %q(114), %q(5)
 make([%q(American Economic History (AMSTUD 116, HISTORY 156)), %q(116), %q(5), %q(5)]).includes ["SPR"]
 make([%q(Development Economics), %q(118), %q(5), %q(5)]).includes ["WIN"]
 make([%q(The Russian Economy (REES 219)), %q(119), %q(4), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
-make([%q(Social Science Field Research Methods and Applications), %q(121), %q(5), %q(5)]).includes ["WIN"]
+make([%q(Social Science Field Research Methods and Applications), %q(121), %q(5), %q(5)]).includes ["SPR"]
 make([%q(Economic Development, Microfinance, and Social Networks), %q(125), %q(5), %q(5)]).includes ["SPR"]
 make([%q(Economics of Health and Medical Care (BIOMEDIN 156, BIOMEDIN 256, HRP 256)), %q(126), %q(5), %q(5)]).includes ["AUT", "WIN"]
 make([%q(Economics of Health Improvement in Developing Countries (MED 262)), %q(127), %q(5), %q(5)]).includes ["SPR"]

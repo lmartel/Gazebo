@@ -1,1 +1,0 @@
-make([%q(Intensive Beginning Latin (CLASSICS 4L)), %q(210), %q(12), %q(12)]).includes ["SUM"]

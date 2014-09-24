@@ -6,7 +6,7 @@ make([%q(South African Encounters (AFRICAAM 115)), %q(115), %q(1), %q(1)]).inclu
 make([%q(African Art and Politics, c. 1900 - Present (ARTHIST 127A)), %q(127), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Designing Research-Based Interventions to Solve Global Health Problems (AFRICAST 235, EDUC 135X, EDUC 335X, HUMBIO 26, MED 235)), %q(135), %q(3), %q(4)]).includes ["SPR"]
 make([%q(Conflict and Reconciliation in Africa: International Intervention (AFRICAST 238, ANTHRO 138A, ANTHRO 238A)), %q(138), %q(3), %q(5)]).includes ["SPR", "SUM"]
-make([%q(Forgotten Africa: An Introduction to the Archaeology of Africa (ANTHRO 139A, ARCHLGY 139A)), %q(139A), %q(5), %q(5)]).includes ["SPR"]
+make([%q(Forgotten Africa: An Introduction to the Archaeology of Africa (ANTHRO 139A, ARCHLGY 139A)), %q(139A), %q(5), %q(5)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Science, Technology, and Medicine in Africa (ANTHRO 141A)), %q(141A), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Challenging the Status Quo: Social Entrepreneurs Advancing Democracy, Development and Justice (INTNLREL 142)), %q(142), %q(3), %q(5)]).includes ["WIN"]
 make([%q(AIDS in Africa), %q(151), %q(3), %q(3)]).includes ["NOT GIVEN THIS YEAR"]

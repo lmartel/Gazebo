@@ -38,7 +38,7 @@ make([%q(Workshop in Biostatistics (STATS 260B)), %q(260B), %q(1), %q(2)]).inclu
 make([%q(Workshop in Biostatistics (STATS 260C)), %q(260C), %q(1), %q(2)]).includes ["SPR"]
 make([%q(Intermediate Biostatistics: Analysis of Discrete Data (BIOMEDIN 233, STATS 261)), %q(261), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Intermediate Biostatistics: Regression, Prediction, Survival Analysis (STATS 262)), %q(262), %q(3), %q(3)]).includes ["SPR"]
-make([%q(Advanced Decision Science Methods and Modeling in Health), %q(263), %q(3), %q(3)]).includes ["SPR"]
+make([%q(Advanced Decision Science Methods and Modeling in Health (MED 263)), %q(263), %q(3), %q(3)]).includes ["WIN"]
 make([%q(Genetics and Reproductive Technologies), %q(268), %q(2), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Design for Service Innovation (BIOE 372, MED 274)), %q(274), %q(4), %q(4)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Spanish for Medical Students (SPANLANG 121M)), %q(280), %q(3), %q(3)]).includes ["AUT"]

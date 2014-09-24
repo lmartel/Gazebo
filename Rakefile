@@ -19,6 +19,7 @@ namespace :db do
     Term.seed unless Term.count > 0
     exec_ruby('scripts/scrape_and_seed.rb', 'scripts/out')
     [Department, Track, Course, Requirement].each { |klass| klass.seed }
+    exec_ruby('scripts/seed_test_data.rb')
   end
 
   desc "Clear and re-seed requirements and tracks, without re-scraping departments and courses."

@@ -21,4 +21,5 @@ make([%q(Symbolic Systems Research Seminar), %q(280), %q(1), %q(1)]).includes ["
 make([%q(Master's Degree Project), %q(290), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Master's Program Seminar), %q(291), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Independent Study), %q(296), %q(1), %q(15)]).includes ["AUT", "WIN", "SPR", "SUM"]
+make([%q(Peer Advising in Symbolic Systems: Practicum), %q(298), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Curricular Practical Training), %q(299), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR", "SUM"]

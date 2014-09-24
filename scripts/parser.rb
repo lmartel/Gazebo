@@ -27,7 +27,7 @@ module ExploreCoursesParser
             end
         end
 
-        def seed_from(url, output:".")
+        def seed_from(url, output:".", with_offerings:false)
             doc = Nokogiri::HTML(open(url))
             dept = doc.css('#title > h1').first.content.split.last # HTML doc => "Results for CS" => "CS"
             dept = 'MS&E' if dept == 'MS' # bandaid
@@ -57,12 +57,12 @@ module ExploreCoursesParser
                         params = uniqs + extras
 
                         course = upmake(uniqs, extras)
-                        course.includes terms if terms
+                        course.includes terms if terms && with_offerings
 
                         # Output for reference. Omit description for length
                         params.pop
                         params = params.map { |p| "%q(#{p})" }.to_s.gsub('"', '')
-                        out.puts "make(#{params}).includes #{terms or []}"
+                        out.puts "make(#{params}).includes #{(with_offerings and terms) or []}"
                     end
                 end
             end

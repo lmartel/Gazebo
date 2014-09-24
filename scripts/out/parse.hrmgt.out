@@ -1,5 +1,6 @@
 make([%q(Human Resource Management), %q(280), %q(2), %q(2)]).includes []
 make([%q(HR for Startups), %q(282), %q(2), %q(2)]).includes []
+make([%q(Organizational Strategy), %q(284), %q(2), %q(2)]).includes []
 make([%q(Sloan: Talent Management Strategy), %q(289), %q(4), %q(4)]).includes []
 make([%q(Incentives and Productivity), %q(302), %q(4), %q(4)]).includes []
 make([%q(Changing How We Manage People), %q(512), %q(1), %q(1)]).includes []

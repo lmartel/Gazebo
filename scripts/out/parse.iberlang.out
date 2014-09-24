@@ -1,1 +1,0 @@
-make([%q(First-Year Basque Language and Culture, Second Quarter), %q(8), %q(5), %q(5)]).includes ["NOT GIVEN THIS YEAR"]

@@ -10,7 +10,7 @@ make([%q(Frontiers in Translational Medicine), %q(221), %q(1), %q(1)]).includes 
 make([%q(Understanding Techniques in Neuroscience), %q(227), %q(2), %q(2)]).includes ["AUT"]
 make([%q(Mathematical Tools for Neuroscience), %q(228), %q(1), %q(3)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Molecular and Cellular Neurobiology (BIO 254)), %q(254), %q(3), %q(5)]).includes ["SPR"]
-make([%q(Information and Signaling Mechanisms in Neurons and Circuits), %q(258), %q(4), %q(4)]).includes ["AUT"]
+make([%q(Information and Signaling Mechanisms in Neurons and Circuits), %q(258), %q(4), %q(4)]).includes ["ALTERNATE YEARS", "GIVEN NEXT YEAR"]
 make([%q(Directed Reading in Neurobiology), %q(299), %q(1), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Professional Development and Integrity in Neuroscience), %q(300), %q(1), %q(2)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Medical Scholars Research), %q(370), %q(4), %q(18)]).includes ["AUT", "WIN", "SPR", "SUM"]

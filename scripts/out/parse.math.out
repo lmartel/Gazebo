@@ -64,7 +64,7 @@ make([%q(Introduction to Financial Mathematics), %q(180), %q(3), %q(3)]).include
 make([%q(Polya Problem Solving Seminar), %q(193), %q(1), %q(1)]).includes ["AUT"]
 make([%q(Undergraduate Colloquium), %q(196), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR"]
 make([%q(Senior Honors Thesis), %q(197), %q(1), %q(6)]).includes ["AUT", "WIN", "SPR"]
-make([%q(Practical Training), %q(198), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
+make([%q(Practical Training), %q(198), %q(1), %q(1)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Independent Work), %q(199), %q(1), %q(3)]).includes ["AUT", "WIN", "SPR", "SUM"]
 make([%q(Real Analysis), %q(205A), %q(3), %q(3)]).includes ["AUT"]
 make([%q(Real Analysis), %q(205B), %q(3), %q(3)]).includes ["WIN"]

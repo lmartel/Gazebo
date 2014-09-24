@@ -30,7 +30,7 @@ make([%q(University of Florence Courses), %q(56), %q(1), %q(5)]).includes ["AUT"
 make([%q(Space as History: Social Vision and Urban Change), %q(58), %q(4), %q(4)]).includes ["SPR"]
 make([%q(The Celluloid Gaze: Gender, Identity and Sexuality in Cinema), %q(67), %q(4), %q(4)]).includes ["SPR"]
 make([%q(Abstract Art: Creativity, Self-Expression and Depicting the Unimaginable), %q(69), %q(4), %q(4)]).includes ["WIN"]
-make([%q(A Studio with a View: Drawing, Painting and Informing your Aesthetic in Florence), %q(71), %q(3), %q(5)]).includes ["SPR"]
+make([%q(A Studio with a View: Drawing, Painting and Informing your Aesthetic in Florence), %q(71), %q(4), %q(4)]).includes ["SPR"]
 make([%q(Florence in the Renaissance: Family, Youth and Marriage in the Fourteenth and Fifteenth Centuries), %q(75), %q(5), %q(5)]).includes ["WIN"]
 make([%q(The Impossible Experiment: Politics and Policies of the New European Union), %q(78), %q(5), %q(5)]).includes ["WIN"]
 make([%q(Life in the Balance: Knowing how nutrient intake can match energy expenditure), %q(84), %q(4), %q(4)]).includes ["AUT"]

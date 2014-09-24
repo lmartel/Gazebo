@@ -8,7 +8,7 @@ make([%q(Stem Cells and Regeneration:  Transitioning from Basic Research to Clin
 make([%q(Interdisciplinary Approaches to Biochemistry: Single Molecule Biophysics to Clinical Outcomes), %q(207), %q(1), %q(1)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Computational Macromolecule Structure Modeling), %q(208), %q(2), %q(2)]).includes ["SPR"]
 make([%q(Practical Protein NMR Structure Determination), %q(209), %q(2), %q(2)]).includes ["WIN"]
-make([%q(Axonal Transport and Neurodegenerative Diseases), %q(210), %q(1), %q(2)]).includes ["SPR"]
+make([%q(Axonal Transport and Neurodegenerative Diseases), %q(210), %q(1), %q(2)]).includes ["NOT GIVEN THIS YEAR"]
 make([%q(Histology for Biosciences), %q(211), %q(1), %q(1)]).includes ["SPR"]
 make([%q(Plant Genetics: Large Scale Experiments and Clonal Analysis), %q(212), %q(2), %q(2)]).includes ["SUM"]
 make([%q(Scientific Illustration and Animation), %q(213), %q(1), %q(1)]).includes ["SPR"]
