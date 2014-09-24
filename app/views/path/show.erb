@@ -28,7 +28,7 @@
     <dl class="dl-horizontal">
         <% @path.requirements_by_track.each do |tr, reqs| %>
             <h5>
-                <%= pp tr %> (<%= @path.units_within_track(tr) %> <% if tr.units_min %> of <%= tr.units_min %> <% end %> units filled on last refresh)
+                <a href="<%= tr.url %>"><%= pp tr %></a> (<%= @path.units_within_track(tr) %> <% if tr.units_min %> of <%= tr.units_min %> <% end %> units filled on last refresh)
             </h5>
             <% reqs.each do |req| %>
                 <dt class="requirement-name"><%= req.name %></dt>

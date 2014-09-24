@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<% if !logged_in? or current_user.paths.empty? %>
+<% if !current_user || current_user.paths.empty? %>
 <div class="inner cover">
     <h1 class="cover-heading">You are pathless.</h1>
     <p class="lead">Create a path to get started planning your courses.</p>
