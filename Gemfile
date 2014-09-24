@@ -10,4 +10,5 @@ gem 'sequel'
 gem 'sequel_secure_password'
 gem 'rack_csrf'
 
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
