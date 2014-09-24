@@ -8,7 +8,7 @@ else
 
     # Enables DB access from ruby console without loading entire app.
     # use 'require_relative app/models/init'
-    DB = Sequel.connect(ENV['HEROKU_POSTGRESQL_???_URL'] || ENV['DATABASE_URL'] || "sqlite://debug.db")
+    DB = Sequel.connect(ENV['DATABASE_URL'] || "sqlite://debug.db")
 end
 
 # Apply Sequel monkey patches

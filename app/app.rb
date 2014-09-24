@@ -32,11 +32,11 @@ class TrackTracker < Sinatra::Base
         css_compression :simple   # :simple | :sass | :yui | :sqwish
     end
 
-	DB_URL = 'sqlite://test.db'
+	DB_URL = ENV['DATABASE_URL'] or 'sqlite://test.db'
 
     # Site routes
     get '/' do
-        @paths = (logged_in? ? current_user.paths : [])
+        @paths = (current_user ? current_user.paths : [])
         @selection_override = flash[:selection_override]
         erb :index
     end

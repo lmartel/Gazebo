@@ -25,6 +25,10 @@ a, .btn-link {
     font-style: italic;
 }
 
+.path-nav-item a {
+    font-style: normal;
+}
+
 button.close:before {
     /* You have to use raw unicode for html entities here, because of course you do.
      * This is equivalent to "&nbsp;&times;" = " x" 
