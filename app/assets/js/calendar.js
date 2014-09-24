@@ -9,6 +9,7 @@ function UPDATE_TERM_URL(id) { return '/enrollments/' + id + '/term'; }
 
 function initCalendar(){
     $(PATH_CELL).draggable({
+        zIndex: 1000,
         revert: "invalid",
         revertDuration: 400,
         distance: 0,

@@ -22,9 +22,18 @@ button.close {
 }
 
 button.close:before {
-    /* You have to use raw unicode for html entities here, because of course you do. */
-    /* This is equivalent to "&nbsp;&times;" = " x" */
+    /* You have to use raw unicode for html entities here, because of course you do.
+     * This is equivalent to "&nbsp;&times;" = " x" 
+     */
     content: "\a0 \D7"; 
+}
+
+.draggable-bugfix {
+    /* Relative positioning inside definition lists is borked in chrome (imo); the boundary
+     * is considered to be the last <dt><dd> pair instead of the actual end of the contents.
+     * I use a 1px-high row at the bottom to fix this for now.
+     */
+    height: 1px;
 }
 
 /* Layout styling: template, header, nav, footer */

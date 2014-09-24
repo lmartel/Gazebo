@@ -87,6 +87,7 @@ function initRequirements(){
 
 function initRequirementsDraggable(){
     $(FILLED_REQUIREMENT).draggable({
+        zIndex: 1000,
         revert: 'invalid',
         reverDuration: 400,
         snap: computeValidDroppables(state.activeCell),
@@ -155,7 +156,8 @@ function initRequirementsDroppable(draggedCell){
     $(UNASSIGNED_BOX).droppable({
         drop: function(e, ui){
             var src = ui.draggable.css('position', 'initial').css('left', 0).css('top', 0);
-            var cpy = src.clone()
+            var cpy = src.clone();
+            cpy.find('button').show();
             cpy.not(':has(button)')
                .append('<button type="button" class="close delete-enrollment"></button>');
 
