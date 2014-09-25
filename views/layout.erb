@@ -29,10 +29,10 @@
 window.state = window.state || {}
 window.state.csrf = "<%= csrf_token %>"
 </script> <%# TODO find better way to embed this in JS files %>
+<script src="js/lib/deps/jquery-2.1.0.js"></script>
 <%= js :app %>
 <script>
 <%= if calendar? then "initCalendar();" else "initRequirements();" end %>
 </script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
