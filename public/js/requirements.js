@@ -1,18 +1,18 @@
 var PATH_WRAPPER = '.path-wrapper';
 var REQUIREMENT_ROW = '.path-row';
-var REQUIREMENT_NAME_CLASS = "requirement-name"
-var REQUIREMENT_NAME = "." + REQUIREMENT_NAME_CLASS
+var REQUIREMENT_NAME_CLASS = "requirement-name";
+var REQUIREMENT_NAME = "." + REQUIREMENT_NAME_CLASS;
 
 var FILLED_REQUIREMENT = '.path-cell.filled';
 var UNFILLED_REQUIREMENT = '.path-cell.unfilled';
 var FILLABLE = 'fillable';
 var CAN_FILL = UNFILLED_REQUIREMENT + '.' + FILLABLE;
-var UNASSIGNED_BOX = '.extra-cells-wrapper'
+var UNASSIGNED_BOX = '.extra-cells-wrapper';
 
 var CLOSE_BUTTON_CLASS = 'delete-enrollment';
 var CLOSE_BUTTON = 'button.' + CLOSE_BUTTON_CLASS;
 
-var REQUIREMENTS_MODAL = "#requirementsModal"
+var REQUIREMENTS_MODAL = "#requirementsModal";
 var REQUIREMENTS_MODAL_FADE = REQUIREMENTS_MODAL + ".modal.fade.in";
 var REQUIREMENTS_DIALOG = REQUIREMENTS_MODAL_FADE + " .modal-dialog";
 var MODAL_TITLE = ".modal-title";
