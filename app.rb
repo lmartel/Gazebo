@@ -14,21 +14,21 @@ class TrackTracker < Sinatra::Base
     use Rack::Csrf, :raise => true
 
     assets do
-        serve '/js',     from: 'public/js'
+        # serve '/js',     from: 'public/js'
         serve '/css',    from: 'public/css'
         # serve '/images', from: 'public/images'
 
-        js :app, '/js/app.js', [
-          '/js/lib/*.js',
-          '/js/*.js'
-        ]
+        # js :app, '/js/app.js', [
+        #   '/js/lib/*.js',
+        #   '/js/*.js'
+        # ]
 
         css :app, '/css/app.css', [
           '/css/lib/*.css',
           '/css/*.css'
         ]
 
-        js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
+        # js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
         css_compression :simple   # :simple | :sass | :yui | :sqwish
     end
 

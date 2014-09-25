@@ -30,7 +30,16 @@ window.state = window.state || {}
 window.state.csrf = "<%= csrf_token %>"
 </script> <%# TODO find better way to embed this in JS files %>
 <script src="js/lib/deps/jquery-2.1.0.js"></script>
-<%= js :app %>
+<script src="js/lib/bootstrap.js"></script>
+<script src="js/lib/context.js"></script>
+<script src="js/lib/jquery-ui-1.10.4.custom.js"></script>
+<script src="js/lib/jquery.caret.js"></script>
+<script src="js/lib/select2.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/search.js"></script>
+<script src="js/requirements.js"></script>
+<script src="js/user.js"></script>
 <script>
 <%= if calendar? then "initCalendar();" else "initRequirements();" end %>
 </script>
