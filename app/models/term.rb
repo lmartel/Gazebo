@@ -10,6 +10,10 @@ class Term < Sequel::Model
 
     class << self
 
+        def columns
+            [:id, :name, :abbreviation]
+        end
+
         def enrollable
             ["AUT", "WIN", "SPR", "SUM"].map {|abbr| self[abbreviation: abbr] }
         end

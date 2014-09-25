@@ -115,4 +115,8 @@ class Path < Sequel::Model
         # end
 
     end
+
+    def self.columns
+        [:id, :name, :user_id]
+    end
 end

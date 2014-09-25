@@ -13,6 +13,10 @@ class Requirement < Sequel::Model
 
     class << self
 
+        def columns
+            [:id, :name, :min_count, :min_units, :track_id]
+        end
+
         def require_core
             # create name: "Department Requirements", track_id: @within_model.id # TODO: improve this. Currently just reads name of track.
         end

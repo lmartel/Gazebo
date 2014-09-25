@@ -8,4 +8,8 @@ class User < Sequel::Model
         enrollment.term.nil? || (Helpers::Quarter.new(year, term) < Helpers::Quarter.new(enrollment.year, enrollment.term))
     end
 
+    def self.columns
+        [:id, :year, :term_id, :email, :password_digest]
+    end
+
 end

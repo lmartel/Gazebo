@@ -32,5 +32,9 @@ class Paths_Course < Sequel::Model
         errors.add(:term_id, 'must be a valid term') unless term.nil? or term.can_enroll?
         errors.add(:year, 'must be positive and reasonable') unless year > 0 && year < 9
     end
+
+    def self.columns
+        [:id, :year, :term_id, :requirement_id, :path_id, :course_id]
+    end
 end
 Enrollment = Paths_Course

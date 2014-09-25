@@ -23,6 +23,10 @@ class Course < Sequel::Model
 
     class << self
 
+        def columns
+            [:id, :name, :number, :units_min, :units_max, :description, :department_id]
+        end
+
         def search(value, **args)
             if value.kind_of?(String) && value.include?(' ')
                 dept, number = value.split 

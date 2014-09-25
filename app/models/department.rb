@@ -9,4 +9,8 @@ class Department < Sequel::Model
     def core_courses
         core_requirements.flat_map { |req| req.courses }
     end
+
+    def self.columns
+        [:id, :name, :abbreviation]
+    end
 end
