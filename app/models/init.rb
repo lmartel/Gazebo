@@ -39,8 +39,9 @@ class Sequel::Model
         def search(value, try_with:nil)
 
             # Don't search ids (primary and foreign keys), just semantic columns
+            # Don't try to search in non-string columns either; this causes issues in some DBs
             col_names = self.columns.select do |col_name|
-                !col_name.to_s.end_with? "id"
+                !col_name.to_s.end_with?('id') && self.db_schema[col_name][:type] == :string
             end
 
             try_with_params = Proc.new do |params|
