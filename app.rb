@@ -14,9 +14,9 @@ class TrackTracker < Sinatra::Base
     use Rack::Csrf, :raise => true
 
     assets do
-        serve '/js',     from: 'assets/js'        # Default
-        serve '/css',    from: 'assets/css'       # Default
-        # serve '/images', from: 'app/images'    # Default
+        serve '/js',     from: 'public/js'
+        serve '/css',    from: 'public/css'
+        # serve '/images', from: 'public/images'
 
         js :app, '/js/app.js', [
           '/js/lib/*.js',

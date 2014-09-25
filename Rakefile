@@ -3,7 +3,7 @@ def exec_ruby(script, *args) # Execute ruby script with live stdout
 end
 
 namespace :db do
-  require_relative 'app/models/init' # opens DB connection, loads Sequel models
+  require_relative 'models/init' # opens DB connection, loads Sequel models
   Sequel.extension :migration
 
   desc "Opens ruby console with database connection"
