@@ -19,6 +19,7 @@ class TrackTracker < Sinatra::Base
         # serve '/images', from: 'public/images'
 
         js :app, '/js/app.js', [
+          '/js/lib/deps/*.js',
           '/js/lib/*.js',
           '/js/*.js'
         ]
