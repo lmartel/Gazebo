@@ -8,17 +8,7 @@ var PAST = ".past";
 function UPDATE_TERM_URL(id) { return '/enrollments/' + id + '/term'; }
 
 function initCalendar(){
-    $(PATH_CELL).draggable({
-        zIndex: 1000,
-        revert: "invalid",
-        revertDuration: 400,
-        distance: 0,
-        helper: "clone",
-        appendTo: "body",
-        start: function() { $(this).css({ opacity: 0.5 }); },
-        stop: function() { $(this).css({ opacity: 1 }); }
-    });
-
+    initCalendarDraggable();
     $(CALENDAR_CELL).each(function(){
         var term = $(this).data('term');
         var accept = PATH_CELL;
@@ -48,4 +38,17 @@ function initCalendar(){
         });
     });
 
+}
+
+function initCalendarDraggable(){
+    $(PATH_CELL).draggable({
+        zIndex: 1000,
+        revert: "invalid",
+        revertDuration: 400,
+        distance: 0,
+        helper: "clone",
+        appendTo: "body",
+        start: function() { $(this).css({ opacity: 0.5 }); },
+        stop: function() { $(this).css({ opacity: 1 }); }
+    });
 }
