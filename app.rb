@@ -188,7 +188,7 @@ class TrackTracker < Sinatra::Base
         else
             courses = Course.all
         end
-        (courses or []).map { |c|
+        (courses or []).sort_by { |c| c.number.to_i }.map { |c|
             { id: c.id, text: pp(c.summary) }
         }.compact.to_json
     end
