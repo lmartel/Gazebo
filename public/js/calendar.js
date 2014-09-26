@@ -1,6 +1,6 @@
 // Path display (calendar mode):
 
-var PATH_CELL = ".path-cell";
+var PATH_CELL = ".path-cell.filled";
 var CALENDAR_CELL = ".calendar-cell";
 var HIGHLIGHT_CLASS = "calendar-cell-highlight";
 var PAST = ".past";
