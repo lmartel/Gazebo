@@ -81,7 +81,7 @@ function courseChosen(e){
             $(htmls[i][0]).appendTo($('.path-wrapper[data-id=' + paths[i] + '] .extra-cells')).wrap("<li></li>");
             $(htmls[i][0]).appendTo($('.calendar-row[data-year=' + htmls[i][1] + '] .calendar-cell[data-term=' + htmls[i][2] + ']')).find('button.close').remove();
         }
-        initCalendarDraggable();
+        if(state.calendar) initCalendarDraggable();
     }).fail(function(){
         // TODO handle failure better
         alert("That class isn't offered this year. Sorry =[");

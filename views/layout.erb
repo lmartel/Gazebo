@@ -26,8 +26,9 @@
 </div>
 
 <script type="text/javascript">
-window.state = window.state || {}
-window.state.csrf = "<%= csrf_token %>"
+window.state = window.state || {};
+window.state.csrf = "<%= csrf_token %>";
+<% if calendar? %>window.state.calendar = true;<% end %>
 </script> <%# TODO find better way to embed this in JS files %>
 <script src="js/lib/deps/jquery-2.1.0.js"></script>
 <script src="js/lib/bootstrap.js"></script>
