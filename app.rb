@@ -173,7 +173,7 @@ class TrackTracker < Sinatra::Base
     end
 
     get '/requirements.json/:id' do |req_id|
-        Requirement[req_id.to_i].courses.map { |c| 
+        Requirement[req_id.to_i].courses.sort_by { |c| c.number.to_i }.map { |c|
             dept = c.department.abbreviation
             num = c.number
             %Q(#{dept}#{num}: <a href="/courses/#{dept.downcase}/#{num.downcase}">#{pp c}</a> [#{pp_units c} units])
@@ -194,7 +194,7 @@ class TrackTracker < Sinatra::Base
     end
 
     get '/departments.json' do
-        (Department.all.map do |d|
+        (Department.all.sort_by { |d| d.abbreviation }.map do |d|
             { id: d.id, text: d.abbreviation }
         end).to_json
     end
